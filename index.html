@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>TA PARFUME · warna putih total</title>
+    <title>TA PARFUME · elegan total</title>
     <!-- Font Awesome 5 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <style>
@@ -14,6 +14,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        body {
         body {
             background-image: url('walpa3.jpg');
             height: 100vh;
@@ -28,19 +29,20 @@
         }
 
         .phone-frame {
-            max-width: 1600px;
+            max-width: 1200px;
             width: 100%;
             background-color: #ffffff;
             box-shadow: 0 20px 35px -8px rgba(0,0,0,0.25);
             border-radius: 36px 36px 28px 28px;
             overflow: hidden;
-            border: 1px solid #f0eae2;
+            border: 3px solid #f0eae2;
             display: flex;
             flex-direction: column;
             height: 100vh;
             max-height: 100vh;
         }
 
+        /* HEADER STICKY */
         .sticky-header {
             position: sticky;
             top: 0;
@@ -79,6 +81,7 @@
             border: 2px solid #0f4d25;
         }
 
+        /* Search bar */
         .search-container {
             padding: 0 0 10px 0;
         }
@@ -103,7 +106,12 @@
             font-size: 16px;
             background: transparent;
         }
+        .search-box input::placeholder {
+            color: #888;
+            font-style: italic;
+        }
 
+         /* Konten utama - SCROLLABLE */
         .main-content {
             flex: 1;
             overflow-y: auto;
@@ -114,6 +122,8 @@
             scroll-behavior: smooth;
         }
 
+
+        /* ========== AUTH ========== */
         #auth-container {
             display: block;
             height: 100%;
@@ -140,7 +150,7 @@
             display: flex;
         }
 
-        .login-container, .register-container, .forgot-container {
+        .login-container, .register-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
             padding: 30px 25px;
@@ -149,12 +159,12 @@
             border: 3px solid #c7ea46;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        .login-container h2, .register-container h2, .forgot-container h2 {
+        .login-container h2, .register-container h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #046307;
         }
-        .login-container input, .register-container input, .forgot-container input, .register-container textarea {
+        .login-container input, .register-container input, .register-container textarea {
             width: 100%;
             padding: 15px 20px;
             margin-bottom: 15px;
@@ -162,7 +172,7 @@
             border: 2px solid #c7ea46;
             font-size: 16px;
         }
-        .login-container button, .register-container button, .forgot-container button {
+        .login-container button, .register-container button {
             width: 100%;
             padding: 16px;
             background: #046307;
@@ -172,7 +182,7 @@
             font-weight: 600;
             cursor: pointer;
         }
-        .register-link, .forgot-link, .back-to-login {
+        .register-link {
             text-align: center;
             color: #046307;
             cursor: pointer;
@@ -180,6 +190,7 @@
             margin-top: 10px;
         }
 
+        /* ========== APP PAGES ========== */
         .app-page {
             display: none;
         }
@@ -187,33 +198,21 @@
             display: block;
         }
 
-        /* PRODUCT GRID */
+        /* ========== PRODUK GRID ========== */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
-            margin-top: 5px;
-            padding-bottom: 20px;
+            gap: 18px;
+            margin-top: 10px;
         }
-        
-        @media screen and (min-width: 480px) {
+        @media screen and (min-width: 600px) {
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
             }
         }
-        
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 900px) {
             .product-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 18px;
-            }
-        }
-        
-        @media screen and (min-width: 1024px) {
-            .product-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 20px;
             }
         }
 
@@ -229,12 +228,10 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            position: relative;
             transition: transform 0.2s;
         }
 
-        .product-item:hover {
-            transform: translateY(-2px);
-        }
 
         .product-image {
             width: 100%;
@@ -248,58 +245,51 @@
             overflow: hidden;
             border: 2px solid #c7ea46;
         }
-
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .product-image i {
             font-size: 40px;
             color: #ecf0f1;
         }
 
         .product-info h3 {
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 700;
             color: white;
-            margin: 0 auto 15px auto;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px black;
             text-align: center;
-            background: linear-gradient(135deg, #2c3e50, #1a2634);
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 30px;
-            width: fit-content;
-            max-width: 90%;
-            border: 1px solid #c7ea46;
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+            padding: 0 5px;
         }
 
         .size-selector {
-            margin: 10px 0 15px 0;
+            margin: 15px 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
             justify-content: center;
         }
-
         .size-btn {
             background: #8e44ad;
             color: white;
-            border: 1px solid #c7ea46;
-            padding: 6px 10px;
-            border-radius: 25px;
-            font-size: 12px;
+            border: 2px solid #c7ea46;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
         }
-
         .size-btn.selected {
             background: #c7ea46;
             color: #1e3b2a;
             border-color: #046307;
         }
-
         .size-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -309,30 +299,22 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 10px 5px 15px 5px;
-            background: rgba(0,0,0,0.7);
-            padding: 12px 15px;
-            border-radius: 40px;
-            border: 1px solid #c7ea46;
+            margin: 10px 0 18px;
         }
-
         .product-price {
-            font-weight: 800;
-            color: #ffffff;
-            font-size: 18px;
-            background: rgba(0,0,0,0.8);
-            padding: 6px 16px;
-            border-radius: 30px;
-            border: 1px solid #c7ea46;
-        }
-
-        .product-stock {
-            background: linear-gradient(135deg, #b13e3e, #8b2e2e);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 25px;
-            font-size: 12px;
             font-weight: 700;
+            color: #ffffff;
+            font-size: 22px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
+        }
+        .product-stock {
+            background: #b13e3e;
+            color: white;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .buy-button {
@@ -340,16 +322,23 @@
             color: #000000;
             font-weight: 800;
             border: 2px solid #B8860B;
-            padding: 14px 12px;
-            border-radius: 50px;
+            padding: 14px 16px;
+            border-radius: 60px;
             cursor: pointer;
             width: 100%;
             font-size: 15px;
             text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.2s;
             margin-top: auto;
         }
+        .buy-button:hover {
+            background: linear-gradient(145deg, #F0E68C, #CDAA5A);
+            transform: scale(0.98);
+        }
 
-        /* PROFIL PAGE */
+        /* ========== PROFIL PAGE ========== */
         .profile-card {
             background: #3e0455;
             border-radius: 32px;
@@ -369,6 +358,7 @@
             color: #ffffff;
             display: block;
             margin-bottom: 6px;
+            font-size: 15px;
         }
         .profile-field input, .profile-field textarea {
             width: 100%;
@@ -376,9 +366,14 @@
             border-radius: 30px;
             border: 2px solid #c7ea46;
             background: white;
+            font-size: 15px;
+            font-weight: 800;
+            color: #000000;
         }
         .profile-field input:read-only, .profile-field textarea:read-only {
             background: #e0e0e0;
+            color: #000000;
+            font-weight: 800;
         }
         .profile-actions {
             display: flex;
@@ -397,70 +392,27 @@
             align-items: center;
             gap: 10px;
             justify-content: center;
+            color: #000000;
+            font-size: 15px;
         }
         .action-btn.logout {
             background: #fdeded;
+            color: #000000;
             border-color: #aa4a4a;
         }
         .save-btn {
             background: #046307;
             color: white;
+            border: 2px solid #c7ea46;
             padding: 14px;
             border-radius: 40px;
             font-weight: 800;
             cursor: pointer;
             width: 100%;
-        }
-
-        .modal-password {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-password.active {
-            display: flex;
-        }
-        .modal-password-content {
-            background: #3e0455;
-            border-radius: 40px;
-            padding: 25px;
-            max-width: 400px;
-            width: 90%;
-            border: 3px solid #c7ea46;
-            color: white;
-        }
-        .modal-password-content input {
-            width: 100%;
-            padding: 12px 16px;
-            margin-bottom: 15px;
-            border-radius: 30px;
-            border: 2px solid #c7ea46;
-        }
-        .modal-password-content button {
-            width: 100%;
-            padding: 12px;
             margin-top: 10px;
-            border-radius: 40px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .btn-save-pass {
-            background: #046307;
-            color: white;
-        }
-        .btn-cancel-pass {
-            background: #f8d7da;
-            color: #721c24;
         }
 
+        /* ========== KERANJANG ========== */
         .cart-items {
             max-height: 400px;
             overflow-y: auto;
@@ -476,7 +428,17 @@
             border: 2px solid #c7ea46;
         }
         .cart-item h4 {
-            color: white;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 16px;
+        }
+        .cart-item div {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .cart-item .item-price {
+            color: #ffffff;
+            font-weight: 700;
         }
         .cart-item-controls {
             display: flex;
@@ -492,7 +454,14 @@
             border: none;
             background: white;
             cursor: pointer;
+            color: #000000;
             font-weight: 700;
+        }
+        .cart-item-controls span {
+            color: #000000;
+            font-weight: 700;
+            min-width: 28px;
+            text-align: center;
         }
         .cart-summary {
             border-top: 2px dashed #c7ea46;
@@ -501,7 +470,11 @@
             justify-content: space-between;
             font-weight: 800;
             font-size: 18px;
-            color: white;
+            color: #ffffff;
+        }
+        .cart-summary span {
+            color: #ffffff;
+            font-weight: 800;
         }
         .delete-item {
             background: #ff4444;
@@ -510,72 +483,174 @@
             border-radius: 50%;
             width: 36px;
             height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
         }
+        .delete-item:hover {
+            background: #cc0000;
+        }
+        
+        /* Tombol Lanjut ke Pembayaran - ELEGAN */
         .checkout-btn {
-            background: #c7ea46;
-            color: #000000;
-            font-weight: 800;
-            border: 2px solid #046307;
-            padding: 14px;
-            border-radius: 40px;
+            background: linear-gradient(145deg, #2c3e50, #1a2632);
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            border: 2px solid #c7ea46;
+            padding: 16px;
+            border-radius: 60px;
             width: 100%;
             margin-top: 16px;
             cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 0 0 1px rgba(199, 234, 70, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        .checkout-btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4), 0 0 0 2px rgba(199, 234, 70, 0.6);
+            background: linear-gradient(145deg, #34495e, #2c3e50);
+        }
+        .checkout-btn:hover:before {
+            left: 100%;
+        }
+        .checkout-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 0 0 1px #c7ea46;
         }
 
+        /* ========== PESANAN ========== */
         .order-item {
             background: #3e0455;
             border-radius: 20px;
             padding: 16px;
             margin-bottom: 12px;
             border: 2px solid #c7ea46;
-            color: white;
         }
-        .order-status {
+        .order-item div {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .order-item span {
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .order-item strong {
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .order-item .order-status {
             background: #fff3cd;
             color: #000000;
+            font-weight: 700;
             padding: 4px 12px;
             border-radius: 30px;
         }
 
+        /* ========== KONTAK ========== */
         .contact-container {
             background: #3e0455;
             border-radius: 32px;
             padding: 22px;
             border: 3px solid #c7ea46;
         }
+        .contact-section {
+            margin-bottom: 30px;
+        }
+        
+        /* Judul Sosial Media dan Rekening Bank - ELEGAN */
+        .contact-section h4 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .contact-section h4:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c7ea46, #ffffff, #c7ea46, transparent);
+            border-radius: 3px;
+            animation: glowLine 2s infinite;
+        }
+        @keyframes glowLine {
+            0% { opacity: 0.5; width: 30%; left: 35%; }
+            50% { opacity: 1; width: 70%; left: 15%; }
+            100% { opacity: 0.5; width: 30%; left: 35%; }
+        }
+        
+        .contact-description {
+            color: white;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
+            border-radius: 40px;
+            border: 1px solid #c7ea46;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 15px;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
         .social-item {
-            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 20px;
             padding: 15px 10px;
             text-align: center;
             border: 2px solid #c7ea46;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         .social-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 0 2px #c7ea46;
         }
         .social-item i {
             font-size: 40px;
             color: white;
+            margin-bottom: 8px;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
         }
         .social-item span {
             display: block;
             color: white;
             font-weight: 600;
             font-size: 12px;
-            margin-top: 8px;
+            text-shadow: 1px 1px 2px black;
         }
         .bank-item {
-            background: #8e44ad;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 20px;
             padding: 16px;
             margin-bottom: 12px;
@@ -583,19 +658,47 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .bank-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4), 0 0 0 2px #c7ea46;
+        }
+        .bank-info {
+            color: white;
+        }
+        .bank-info strong {
+            color: #c7ea46;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px black;
+        }
+        .bank-actions {
+            display: flex;
+            gap: 10px;
         }
         .copy-btn {
             background: #c7ea46;
+            color: #000000;
+            font-weight: 700;
+            border: none;
             padding: 8px 16px;
             border-radius: 30px;
             cursor: pointer;
-            border: none;
-            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .copy-btn:hover {
+            transform: scale(1.05);
+            background: #d4f25c;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
+        /* ========== ADMIN ========== */
         .admin-tabs {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
             justify-content: center;
@@ -603,10 +706,15 @@
         .admin-tab {
             background: #c7ea46;
             border: 2px solid #046307;
-            padding: 8px 16px;
+            padding: 12px 24px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .admin-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .admin-tab.active {
             background: #046307;
@@ -618,6 +726,7 @@
         .admin-panel.active {
             display: block;
         }
+
         .form-produk {
             background: #3e0455;
             border-radius: 32px;
@@ -625,6 +734,37 @@
             margin-bottom: 30px;
             border: 2px solid #c7ea46;
             color: white;
+        }
+        .form-produk h4 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-produk label {
+            color: #c7ea46;
+        }
+        .form-produk input {
+            border: 2px solid #c7ea46;
+            border-radius: 30px;
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+        .upload-area {
+            border: 2px dashed #c7ea46;
+            border-radius: 30px;
+            padding: 25px;
+            text-align: center;
+            background: #8e44ad;
+            cursor: pointer;
+            color: white;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+        .upload-area:hover {
+            background: #9b59b6;
+            transform: scale(1.02);
         }
         .ukuran-grid {
             display: grid;
@@ -636,6 +776,17 @@
             background: #8e44ad;
             padding: 15px;
             border-radius: 20px;
+            border: 1px solid #c7ea46;
+        }
+        .ukuran-item label {
+            color: #c7ea46;
+        }
+        .ukuran-item input {
+            margin-top: 5px;
+        }
+
+        .admin-product-list {
+            margin-top: 20px;
         }
         .admin-product-item {
             background: #8e44ad;
@@ -643,21 +794,83 @@
             padding: 16px;
             margin-bottom: 16px;
             border: 2px solid #c7ea46;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s ease;
+        }
+        .admin-product-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .admin-product-info {
+            flex: 2;
+        }
+        .admin-product-info h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
             color: white;
         }
-        .btn-edit, .btn-delete {
+        .admin-product-info .product-range {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+        .admin-product-info .total-stock {
+            font-size: 14px;
+            color: white;
+        }
+        .admin-product-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .admin-product-actions button {
             padding: 8px 16px;
             border-radius: 30px;
             border: none;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .btn-edit { background: #c7ea46; }
-        .btn-delete { background: #ff4444; color: white; }
+        .admin-product-actions button:hover {
+            transform: scale(1.05);
+        }
+        .btn-edit {
+            background: #c7ea46;
+            color: #1e3b2a;
+        }
+        .btn-delete {
+            background: #ff4444;
+            color: white;
+        }
+        .btn-delete:hover {
+            background: #ff6666;
+        }
 
+        .whitelist-container {
+            background: #8e44ad;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #c7ea46;
+            color: white;
+        }
+        .whitelist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #c7ea46;
+            color: white;
+        }
+        .whitelist-item span {
+            color: white;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -679,39 +892,88 @@
             padding: 25px;
             max-width: 500px;
             width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
             border: 3px solid #c7ea46;
             color: white;
         }
+        .modal-content h3 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+        }
+        .modal-content input, .modal-content select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 30px;
+            border: 2px solid #c7ea46;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .modal-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .btn-save {
+            background: #046307;
+            color: white;
+        }
+        .btn-cancel {
+            background: #f8d7da;
+            color: #721c24;
+        }
 
+        /* BOTTOM NAV - STICKY */
         .sticky-footer {
             position: sticky;
             bottom: 0;
+            z-index: 20;
             background: #c7ea46;
             border-top: 3px solid #046307;
-            padding: 6px 8px;
+            padding: 8px 10px;
             flex-shrink: 0;
         }
         .bottom-nav {
             display: flex;
             justify-content: space-around;
             align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 10px;
+            font-size: 11px;
             color: #1e3b2a;
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 6px 8px;
             border-radius: 30px;
             background: none;
             border: none;
             font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .nav-item:hover {
+            background: rgba(4, 99, 7, 0.2);
         }
         .nav-item i {
-            font-size: 18px;
+            font-size: 20px;
             color: #046307;
+            transition: all 0.2s ease;
         }
         .nav-item.active {
             background: #046307;
@@ -720,61 +982,18 @@
         .nav-item.active i {
             color: white;
         }
-
-        .error-msg { color: #ff4444; text-align: center; margin-bottom: 10px; }
-        .success-msg { color: #046307; text-align: center; margin-bottom: 10px; }
-        
-        .toast-notification {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #046307;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 40px;
-            z-index: 1001;
-            font-weight: 600;
-            animation: fadeInOut 2s ease;
-        }
-        
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-        }
-        
-        .refresh-btn {
-            background: #c7ea46;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 10px;
-        }
-        .refresh-btn i {
-            color: #046307;
-            font-size: 18px;
-        }
-        .header-row {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
     </style>
 </head>
 <body>
 <div class="phone-frame">
+    <!-- HEADER STICKY -->
     <div class="sticky-header">
         <div class="top-header">
             <div class="store-name">TA PARFUME</div>
             <div class="produk-badge" id="currentPageBadge">฿</div>
         </div>
+        
+        <!-- Search Container -->
         <div class="search-container" id="searchContainer" style="display: none;">
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -783,7 +1002,9 @@
         </div>
     </div>
 
+    <!-- KONTEN UTAMA - SCROLLABLE -->
     <div class="main-content" id="mainContent">
+        <!-- AUTH CONTAINER -->
         <div id="auth-container">
             <div id="auth-login" class="auth-page active">
                 <div class="login-container">
@@ -793,7 +1014,6 @@
                     <input type="password" id="loginPassword" placeholder="Password">
                     <button onclick="handleLogin()">Masuk</button>
                     <div class="register-link" onclick="showRegisterPage()">Belum punya akun? Daftar</div>
-                    <div class="forgot-link" onclick="showForgotPage()">Lupa Password?</div>
                 </div>
             </div>
             <div id="auth-register" class="auth-page">
@@ -809,83 +1029,83 @@
                     <div class="register-link" onclick="showLoginPage()">Sudah punya akun? Login</div>
                 </div>
             </div>
-            <div id="auth-forgot" class="auth-page">
-                <div class="forgot-container">
-                    <h2>Lupa Password</h2>
-                    <div id="forgotMessage" class="error-msg"></div>
-                    <input type="email" id="forgotEmail" placeholder="Email Anda">
-                    <button onclick="sendVerificationCode()">Kirim Kode Verifikasi</button>
-                    <div class="back-to-login" onclick="showLoginPage()">Kembali ke Login</div>
-                </div>
-            </div>
-            <div id="auth-verify" class="auth-page">
-                <div class="forgot-container">
-                    <h2>Verifikasi</h2>
-                    <div id="verifyMessage" class="error-msg"></div>
-                    <input type="text" id="verifyCode" placeholder="Kode Verifikasi">
-                    <input type="password" id="newPassword" placeholder="Password Baru">
-                    <input type="password" id="confirmPassword" placeholder="Konfirmasi Password">
-                    <button onclick="resetPassword()">Reset Password</button>
-                    <div class="back-to-login" onclick="showLoginPage()">Kembali ke Login</div>
-                </div>
-            </div>
         </div>
 
+        <!-- APP CONTAINER -->
         <div id="app-container">
+            <!-- PROFIL PAGE -->
             <div id="page-profil" class="app-page">
                 <div class="profile-card">
                     <h3>Profil Saya</h3>
-                    <div class="profile-field"><label>Nama</label><input type="text" id="profilNama" readonly></div>
-                    <div class="profile-field"><label>Gmail</label><input type="email" id="profilEmail" readonly></div>
-                    <div class="profile-field"><label>ID Line</label><input type="text" id="profilLine" readonly></div>
-                    <div class="profile-field"><label>Telepon</label><input type="text" id="profilTelp" readonly></div>
-                    <div class="profile-field"><label>Alamat</label><textarea id="profilAlamat" rows="2" readonly></textarea></div>
+                    <div class="profile-field">
+                        <label>Nama</label>
+                        <input type="text" id="profilNama" readonly>
+                    </div>
+                    <div class="profile-field">
+                        <label>Gmail</label>
+                        <input type="email" id="profilEmail" readonly>
+                    </div>
+                    <div class="profile-field">
+                        <label>ID Line</label>
+                        <input type="text" id="profilLine" readonly>
+                    </div>
+                    <div class="profile-field">
+                        <label>Telepon</label>
+                        <input type="text" id="profilTelp" readonly>
+                    </div>
+                    <div class="profile-field">
+                        <label>Alamat</label>
+                        <textarea id="profilAlamat" rows="2" readonly></textarea>
+                    </div>
                     <div class="profile-actions">
-                        <button class="action-btn" onclick="editProfil()" id="editProfilBtn">✏️ Edit Profil</button>
-                        <button class="action-btn" onclick="showGantiPassword()">🔑 Ganti Password</button>
-                        <button class="action-btn logout" onclick="logout()">🚪 Keluar</button>
+                        <button class="action-btn" onclick="editProfil()" id="editProfilBtn">Edit Profil</button>
+                        <button class="action-btn" onclick="gantiPassword()">Ganti Password</button>
+                        <button class="action-btn logout" onclick="logout()">Keluar</button>
                     </div>
                     <div id="saveProfileContainer" style="display: none;">
-                        <button class="save-btn" onclick="simpanProfil()">💾 Simpan Perubahan</button>
+                        <button class="save-btn" onclick="simpanProfil()">Simpan Perubahan</button>
                     </div>
                 </div>
             </div>
 
+            <!-- PRODUK PAGE -->
             <div id="page-produk" class="app-page active">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-                    <button class="refresh-btn" onclick="manualRefresh()" title="Refresh data">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </div>
                 <div class="product-grid" id="publicProductGrid"></div>
                 <div id="noProductMessage" style="display: none; text-align: center; padding: 30px; color: white; background: #3e0455; border-radius: 28px;">Produk tidak ditemukan</div>
             </div>
 
+            <!-- KERANJANG PAGE -->
             <div id="page-keranjang" class="app-page">
                 <div class="cart-items" id="cartItemsContainer"></div>
                 <div class="cart-summary"><span>Total:</span> <span id="totalPrice">฿ 0</span></div>
                 <button class="checkout-btn" onclick="checkout()">Lanjut ke Pembayaran</button>
             </div>
 
+            <!-- PESANAN PAGE -->
             <div id="page-pesanan" class="app-page">
                 <div style="color:white; margin-bottom:16px; font-weight:800; text-align:center;">Riwayat Pesanan</div>
                 <div id="orderHistory"></div>
                 <div style="text-align:center; color:#ccc;" id="emptyOrders">Belum ada pesanan</div>
             </div>
 
+            <!-- KONTAK PAGE -->
             <div id="page-kontak" class="app-page">
-                <div class="contact-container">
+                <div class="contact-container" id="contactContainer">
                     <div class="contact-section">
-                        <h4 style="color:#c7ea46; text-align:center;">Sosial Media</h4>
+                        <h4>Sosial Media</h4>
+                        <div class="contact-description">
+                            <i class="fas fa-hand-pointer"></i> Silahkan klik bagian sosial media kami untuk terhubung langsung
+                        </div>
                         <div class="social-grid" id="socialGrid"></div>
                     </div>
                     <div class="contact-section">
-                        <h4 style="color:#c7ea46; text-align:center;">Rekening Bank</h4>
+                        <h4>Rekening Bank</h4>
                         <div id="bankList"></div>
                     </div>
                 </div>
             </div>
 
+            <!-- ADMIN PAGE -->
             <div id="page-admin" class="app-page">
                 <div class="admin-tabs">
                     <button class="admin-tab active" onclick="switchAdminTab('produk')">Produk</button>
@@ -898,20 +1118,37 @@
                     <div class="form-produk">
                         <h4>Tambah Produk Baru</h4>
                         <input type="text" id="produkNama" placeholder="Nama Produk">
-                        <div class="upload-area" onclick="document.getElementById('fileGambar').click()" style="background:#8e44ad; padding:20px; text-align:center; border-radius:20px; margin-bottom:10px; cursor:pointer;">
+                        <div class="upload-area" onclick="document.getElementById('fileGambar').click()">
                             <i class="fas fa-cloud-upload-alt"></i>
                             <p id="uploadText">Klik pilih gambar</p>
                             <input type="file" id="fileGambar" accept="image/*" style="display:none;" onchange="previewGambar(this)">
                         </div>
                         <div id="previewImg" style="margin-bottom:10px; text-align:center;"></div>
                         <div class="ukuran-grid">
-                            <div class="ukuran-item"><label>30 ml</label><input type="number" id="harga30" placeholder="Harga"><input type="number" id="stok30" placeholder="Stok"></div>
-                            <div class="ukuran-item"><label>35 ml</label><input type="number" id="harga35" placeholder="Harga"><input type="number" id="stok35" placeholder="Stok"></div>
-                            <div class="ukuran-item"><label>50 ml</label><input type="number" id="harga50" placeholder="Harga"><input type="number" id="stok50" placeholder="Stok"></div>
-                            <div class="ukuran-item"><label>100 ml</label><input type="number" id="harga100" placeholder="Harga"><input type="number" id="stok100" placeholder="Stok"></div>
+                            <div class="ukuran-item">
+                                <label>30 ml</label>
+                                <input type="number" id="harga30" placeholder="Harga ฿">
+                                <input type="number" id="stok30" placeholder="Stok">
+                            </div>
+                            <div class="ukuran-item">
+                                <label>35 ml</label>
+                                <input type="number" id="harga35" placeholder="Harga ฿">
+                                <input type="number" id="stok35" placeholder="Stok">
+                            </div>
+                            <div class="ukuran-item">
+                                <label>50 ml</label>
+                                <input type="number" id="harga50" placeholder="Harga ฿">
+                                <input type="number" id="stok50" placeholder="Stok">
+                            </div>
+                            <div class="ukuran-item">
+                                <label>100 ml</label>
+                                <input type="number" id="harga100" placeholder="Harga ฿">
+                                <input type="number" id="stok100" placeholder="Stok">
+                            </div>
                         </div>
                         <button onclick="simpanProduk()" style="background:#c7ea46; padding:16px; border-radius:40px; width:100%; font-weight:600;">➕ Tambah Produk</button>
                     </div>
+                    
                     <div class="admin-product-list" id="adminProductList"></div>
                 </div>
                 
@@ -924,6 +1161,7 @@
                         <h4>Kelola Sosial Media</h4>
                         <div id="socialEditList"></div>
                         <button onclick="openAddSocialModal()" style="background:#c7ea46; margin-top:15px; padding:12px; border-radius:40px; width:100%;">➕ Tambah Sosial Media</button>
+                        
                         <h4 style="margin-top:30px;">Kelola Rekening Bank</h4>
                         <div id="bankEditList"></div>
                         <button onclick="openAddBankModal()" style="background:#c7ea46; margin-top:15px; padding:12px; border-radius:40px; width:100%;">➕ Tambah Bank</button>
@@ -933,7 +1171,9 @@
                 <div id="admin-adminlist" class="admin-panel">
                     <div class="form-produk">
                         <h4>Daftar Admin (Email Whitelist)</h4>
-                        <div class="whitelist-container" id="whitelistItems"></div>
+                        <div class="whitelist-container">
+                            <div id="whitelistItems"></div>
+                        </div>
                         <div style="display:flex; gap:10px; margin-top:15px;">
                             <input type="email" id="newAdminEmail" placeholder="Email admin baru" style="flex:2;">
                             <button onclick="addAdminEmail()" style="background:#c7ea46; padding:12px; border-radius:40px;">Tambah</button>
@@ -944,6 +1184,7 @@
         </div>
     </div>
 
+    <!-- BOTTOM NAV STICKY -->
     <div class="sticky-footer" id="bottomNav" style="display: none;">
         <div class="bottom-nav">
             <button class="nav-item" onclick="showPage('profil')"><i class="fas fa-user"></i><span>Profil</span></button>
@@ -951,45 +1192,54 @@
             <button class="nav-item" onclick="showPage('keranjang')"><i class="fas fa-shopping-cart"></i><span>Keranjang</span></button>
             <button class="nav-item" onclick="showPage('pesanan')"><i class="fas fa-list"></i><span>Pesanan</span></button>
             <button class="nav-item" onclick="showPage('kontak')"><i class="fas fa-phone"></i><span>Kontak</span></button>
-            <button class="nav-item" id="adminNavBtn" onclick="showPage('admin')" style="display:none;"><i class="fas fa-cog"></i><span>Admin</span></button>
+            <button class="nav-item" onclick="showPage('admin')"><i class="fas fa-cog"></i><span>Admin</span></button>
         </div>
     </div>
 </div>
 
-<div id="gantiPasswordModal" class="modal-password">
-    <div class="modal-password-content">
-        <h3>Ganti Password</h3>
-        <div id="passError" class="error-msg"></div>
-        <div id="passSuccess" class="success-msg"></div>
-        <input type="password" id="oldPassword" placeholder="Password Lama">
-        <input type="password" id="newPasswordBaru" placeholder="Password Baru">
-        <input type="password" id="confirmPasswordBaru" placeholder="Konfirmasi Password Baru">
-        <button class="btn-save-pass" onclick="gantiPassword()">Simpan</button>
-        <button class="btn-cancel-pass" onclick="closeGantiPasswordModal()">Batal</button>
-    </div>
-</div>
-
+<!-- MODALS -->
 <div id="editModal" class="modal">
     <div class="modal-content">
         <h3>Edit Produk</h3>
         <input type="hidden" id="editProductId">
         <label>Nama Produk</label>
-        <input type="text" id="editNama">
-        <div class="upload-area" onclick="document.getElementById('editFileGambar').click()" style="background:#8e44ad; padding:20px; text-align:center; border-radius:20px; cursor:pointer;">
+        <input type="text" id="editNama" placeholder="Nama Produk">
+        <label>Gambar Produk</label>
+        <div class="upload-area" onclick="document.getElementById('editFileGambar').click()">
             <i class="fas fa-cloud-upload-alt"></i>
-            <p id="editUploadText">Klik ganti gambar</p>
+            <p id="editUploadText">Klik untuk ganti gambar</p>
             <input type="file" id="editFileGambar" accept="image/*" style="display:none;" onchange="previewEditGambar(this)">
         </div>
         <div id="editPreviewImg" style="margin-bottom:15px; text-align:center;"></div>
         <div class="ukuran-grid">
-            <div class="ukuran-item"><label>30 ml</label><input type="number" id="editHarga30"><input type="number" id="editStok30"></div>
-            <div class="ukuran-item"><label>35 ml</label><input type="number" id="editHarga35"><input type="number" id="editStok35"></div>
-            <div class="ukuran-item"><label>50 ml</label><input type="number" id="editHarga50"><input type="number" id="editStok50"></div>
-            <div class="ukuran-item"><label>100 ml</label><input type="number" id="editHarga100"><input type="number" id="editStok100"></div>
+            <div class="ukuran-item">
+                <label>30 ml - Harga</label>
+                <input type="number" id="editHarga30" placeholder="Harga ฿">
+                <label>Stok</label>
+                <input type="number" id="editStok30" placeholder="Stok">
+            </div>
+            <div class="ukuran-item">
+                <label>35 ml - Harga</label>
+                <input type="number" id="editHarga35" placeholder="Harga ฿">
+                <label>Stok</label>
+                <input type="number" id="editStok35" placeholder="Stok">
+            </div>
+            <div class="ukuran-item">
+                <label>50 ml - Harga</label>
+                <input type="number" id="editHarga50" placeholder="Harga ฿">
+                <label>Stok</label>
+                <input type="number" id="editStok50" placeholder="Stok">
+            </div>
+            <div class="ukuran-item">
+                <label>100 ml - Harga</label>
+                <input type="number" id="editHarga100" placeholder="Harga ฿">
+                <label>Stok</label>
+                <input type="number" id="editStok100" placeholder="Stok">
+            </div>
         </div>
-        <div class="modal-actions" style="display:flex; gap:10px; margin-top:20px;">
-            <button class="btn-save" onclick="simpanEditProduk()" style="background:#046307; color:white; flex:1; padding:12px; border-radius:40px;">Simpan</button>
-            <button class="btn-cancel" onclick="closeEditModal()" style="background:#f8d7da; flex:1; padding:12px; border-radius:40px;">Batal</button>
+        <div class="modal-actions">
+            <button class="btn-save" onclick="simpanEditProduk()">Simpan</button>
+            <button class="btn-cancel" onclick="closeEditModal()">Batal</button>
         </div>
     </div>
 </div>
@@ -999,14 +1249,14 @@
         <h3 id="editSocialTitle">Tambah/Edit Sosial Media</h3>
         <input type="hidden" id="editSocialId">
         <label>Nama Platform</label>
-        <input type="text" id="editSocialName">
-        <label>Icon Class</label>
+        <input type="text" id="editSocialName" placeholder="Contoh: WhatsApp">
+        <label>Icon Class (Font Awesome)</label>
         <input type="text" id="editSocialIcon" placeholder="fab fa-whatsapp">
         <label>URL</label>
-        <input type="url" id="editSocialUrl">
-        <div class="modal-actions" style="display:flex; gap:10px; margin-top:20px;">
-            <button class="btn-save" onclick="simpanSocial()" style="background:#046307; color:white; flex:1;">Simpan</button>
-            <button class="btn-cancel" onclick="closeSocialModal()" style="background:#f8d7da; flex:1;">Batal</button>
+        <input type="url" id="editSocialUrl" placeholder="https://...">
+        <div class="modal-actions">
+            <button class="btn-save" onclick="simpanSocial()">Simpan</button>
+            <button class="btn-cancel" onclick="closeSocialModal()">Batal</button>
         </div>
     </div>
 </div>
@@ -1016,190 +1266,104 @@
         <h3 id="editBankTitle">Tambah/Edit Rekening Bank</h3>
         <input type="hidden" id="editBankId">
         <label>Nama Bank</label>
-        <input type="text" id="editBankName">
+        <input type="text" id="editBankName" placeholder="Contoh: BCA">
         <label>Nomor Rekening</label>
-        <input type="text" id="editBankNumber">
+        <input type="text" id="editBankNumber" placeholder="1234567890">
         <label>Nama Pemilik</label>
-        <input type="text" id="editBankOwner">
-        <div class="modal-actions" style="display:flex; gap:10px; margin-top:20px;">
-            <button class="btn-save" onclick="simpanBank()" style="background:#046307; color:white; flex:1;">Simpan</button>
-            <button class="btn-cancel" onclick="closeBankModal()" style="background:#f8d7da; flex:1;">Batal</button>
+        <input type="text" id="editBankOwner" placeholder="TA PARFUME">
+        <div class="modal-actions">
+            <button class="btn-save" onclick="simpanBank()">Simpan</button>
+            <button class="btn-cancel" onclick="closeBankModal()">Batal</button>
         </div>
     </div>
 </div>
 
 <script>
-    // ==================== DATA - AMBIL LANGSUNG DARI LOCALSTORAGE ====================
-    function getUsers() {
-        return JSON.parse(localStorage.getItem('taParfumeUsers')) || [
-            { email: 'andi@mail.com', password: '123456', profile: { nama: 'Andi Saputra', email: 'andi@mail.com', line: 'andi_parfume', telp: '081234567890', alamat: 'Jakarta' } },
-            { email: 'admin@taparfume.com', password: 'admin123', profile: { nama: 'Admin', email: 'admin@taparfume.com', line: 'admin_line', telp: '081234567891', alamat: 'Jakarta' } }
-        ];
-    }
+    // ==================== DATA ====================
+    let users = JSON.parse(localStorage.getItem('taParfumeUsers')) || [
+        { email: 'andi@mail.com', password: '123456', profile: { nama: 'Andi Saputra', email: 'andi@mail.com', line: 'andi_parfume', telp: '081234567890', alamat: 'Jakarta' } },
+        { email: 'admin@taparfume.com', password: 'admin123', profile: { nama: 'Admin', email: 'admin@taparfume.com', line: 'admin_line', telp: '081234567891', alamat: 'Jakarta' } },
+        { email: 'andrianusmen@gmail.com', password: 'admin123', profile: { nama: 'Andrianus Men', email: 'andrianusmen@gmail.com', line: 'andrianus_line', telp: '081234567892', alamat: 'Jakarta' } }
+    ];
     
-    function getAdminWhitelist() {
-        return JSON.parse(localStorage.getItem('adminWhitelist')) || ['admin@taparfume.com', 'andi@mail.com'];
-    }
-    
-    function getSocialMedia() {
-        return JSON.parse(localStorage.getItem('socialMedia')) || [
-            { id: 'wa', name: 'WhatsApp', icon: 'fab fa-whatsapp', url: 'https://wa.me/628566003334' },
-            { id: 'line', name: 'Line', icon: 'fab fa-line', url: 'https://line.me/ti/p/~andrimendrofa' },
-            { id: 'telegram', name: 'Telegram', icon: 'fab fa-telegram', url: 'https://t.me/TAparfume' },
-            { id: 'instagram', name: 'Instagram', icon: 'fab fa-instagram', url: 'https://www.instagram.com/taparfume' },
-            { id: 'facebook', name: 'Facebook', icon: 'fab fa-facebook', url: 'https://facebook.com/andry.sansf' },
-            { id: 'tiktok', name: 'TikTok', icon: 'fab fa-tiktok', url: 'https://www.tiktok.com/@ta_parfume' }
-        ];
-    }
-    
-    function getBankAccounts() {
-        return JSON.parse(localStorage.getItem('bankAccounts')) || [
-            { id: 1, bankName: 'BCA', accountNumber: '1234567890', accountOwner: 'TA PARFUME' },
-            { id: 2, bankName: 'Mandiri', accountNumber: '0987654321', accountOwner: 'TA PARFUME' }
-        ];
-    }
-    
-    function getProducts() {
-        return JSON.parse(localStorage.getItem('taParfumeProducts')) || [
-            { id:1, name:'DUNHILL BLUE', image:'', prices:{30:300000,35:350000,50:500000,100:900000}, stock:{30:5,35:3,50:2,100:1} },
-            { id:2, name:'BVLGARI MAN IN BLACK', image:'', prices:{30:300000,35:350000,50:500000,100:900000}, stock:{30:4,35:2,50:3,100:2} },
-            { id:3, name:'BVLGARI OMNIA AMETYS', image:'', prices:{30:300000,35:350000,50:500000,100:900000}, stock:{30:6,35:4,50:1,100:0} }
-        ];
-    }
-    
-    function getCart() {
-        return JSON.parse(localStorage.getItem('taParfumeCart')) || [];
-    }
-    
-    function getOrders() {
-        return JSON.parse(localStorage.getItem('taParfumeOrders')) || [];
-    }
-    
-    function getCustomerOrders() {
-        return JSON.parse(localStorage.getItem('customerOrders')) || [];
-    }
-    
-    // Variabel global yang akan selalu diambil dari localStorage saat dibutuhkan
+    let adminWhitelist = JSON.parse(localStorage.getItem('adminWhitelist')) || ['admin@taparfume.com', 'andi@mail.com', 'andrianusmen@gmail.com'];
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-    let verificationCodes = {};
-    let filteredProducts = [];
-    let uploadedImageBase64 = '';
-    let editImageBase64 = '';
     
-    // ==================== FUNGSI REFRESH ====================
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast-notification';
-        toast.innerHTML = message;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 2000);
-    }
+    let socialMedia = JSON.parse(localStorage.getItem('socialMedia')) || [
+        { id: 'wa', name: 'WhatsApp', icon: 'fab fa-whatsapp', url: 'https://wa.me/628123456789' },
+        { id: 'line', name: 'Line', icon: 'fab fa-line', url: 'https://line.me/ti/p/~username' },
+        { id: 'telegram', name: 'Telegram', icon: 'fab fa-telegram', url: 'https://t.me/username' },
+        { id: 'instagram', name: 'Instagram', icon: 'fab fa-instagram', url: 'https://instagram.com/username' },
+        { id: 'facebook', name: 'Facebook', icon: 'fab fa-facebook', url: 'https://facebook.com/username' },
+        { id: 'tiktok', name: 'TikTok', icon: 'fab fa-tiktok', url: 'https://tiktok.com/@username' }
+    ];
     
-    // Fungsi utama untuk refresh semua data dari localStorage (AMBIL DATA TERBARU)
-    function forceRefreshAllData() {
-        // Ambil data terbaru dari localStorage
-        const products = getProducts();
-        const socialMedia = getSocialMedia();
-        const bankAccounts = getBankAccounts();
-        const orders = getOrders();
-        const customerOrders = getCustomerOrders();
-        const cart = getCart();
-        
-        // Update filtered products
-        filteredProducts = [...products];
-        
-        // Refresh semua tampilan yang sedang aktif
-        if (document.getElementById('page-produk') && document.getElementById('page-produk').classList.contains('active')) {
-            renderPublicProducts();
-        }
-        if (document.getElementById('page-keranjang') && document.getElementById('page-keranjang').classList.contains('active')) {
-            renderCart();
-        }
-        if (document.getElementById('page-pesanan') && document.getElementById('page-pesanan').classList.contains('active')) {
-            renderOrders();
-        }
-        if (document.getElementById('page-kontak') && document.getElementById('page-kontak').classList.contains('active')) {
-            renderContactPage();
-        }
-        if (isAdmin() && document.getElementById('page-admin') && document.getElementById('page-admin').classList.contains('active')) {
-            renderAdminProducts();
-            renderAdminOrders();
-            renderAdminContact();
-            renderWhitelist();
-        }
-        
-        // Update timestamp
-        localStorage.setItem('lastProductUpdate', Date.now());
-    }
+    let bankAccounts = JSON.parse(localStorage.getItem('bankAccounts')) || [
+        { id: 1, bankName: 'BCA', accountNumber: '1234567890', accountOwner: 'TA PARFUME' },
+        { id: 2, bankName: 'Mandiri', accountNumber: '0987654321', accountOwner: 'TA PARFUME' }
+    ];
     
-    // Manual refresh by user
-    window.manualRefresh = function() {
-        forceRefreshAllData();
-        showToast('🔄 Data telah diperbarui!');
-    };
-    
-    // Storage event listener untuk sinkronisasi antar tab
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'taParfumeProducts' || e.key === 'socialMedia' || e.key === 'bankAccounts' || 
-            e.key === 'taParfumeOrders' || e.key === 'customerOrders' || e.key === 'taParfumeCart') {
-            forceRefreshAllData();
-            showToast('📦 Data baru tersedia!');
-        }
-    });
-    
-    // Interval pengecekan perubahan data (setiap 3 detik)
-    let lastCheck = localStorage.getItem('lastProductUpdate') || Date.now();
-    setInterval(function() {
-        const currentLastUpdate = localStorage.getItem('lastProductUpdate') || lastCheck;
-        if (currentLastUpdate != lastCheck) {
-            lastCheck = currentLastUpdate;
-            forceRefreshAllData();
-            showToast('📦 Data diperbarui secara otomatis!');
-        }
-    }, 3000);
-    
+    let products = JSON.parse(localStorage.getItem('taParfumeProducts')) || [
+        { id:1, name:'DUNHILL BLUE', image:'', prices:{30:300,35:350,50:500,100:900}, stock:{30:5,35:3,50:2,100:1} },
+        { id:2, name:'BVLGARI MAN IN BLACK', image:'', prices:{30:300,35:350,50:500,100:900}, stock:{30:4,35:2,50:3,100:2} },
+        { id:3, name:'BVLGARI OMNIA AMETYS', image:'', prices:{30:300,35:350,50:500,100:900}, stock:{30:6,35:4,50:1,100:0} }
+    ];
+    let cart = JSON.parse(localStorage.getItem('taParfumeCart')) || [];
+    let orders = JSON.parse(localStorage.getItem('taParfumeOrders')) || [];
+    let customerOrders = JSON.parse(localStorage.getItem('customerOrders')) || [];
+
+    let filteredProducts = [...products];
+
     // ==================== CEK ADMIN ====================
     function isAdmin() {
-        if (!currentUser) return false;
-        const whitelist = getAdminWhitelist();
-        return whitelist.includes(currentUser.email);
+        return currentUser && adminWhitelist.includes(currentUser.email);
     }
-    
+
+    // ==================== DOM ====================
+    const authContainer = document.getElementById('auth-container');
+    const appContainer = document.getElementById('app-container');
+    const bottomNav = document.getElementById('bottomNav');
+    const searchContainer = document.getElementById('searchContainer');
+
     // ==================== AUTH ====================
     function checkLogin() {
         if (currentUser) {
-            document.getElementById('auth-container').style.display = 'none';
-            document.getElementById('app-container').classList.add('visible');
-            document.getElementById('bottomNav').style.display = 'block';
+            authContainer.style.display = 'none';
+            appContainer.style.display = 'block';
+            bottomNav.style.display = 'block';
             
-            const adminNavItem = document.getElementById('adminNavBtn');
-            if (adminNavItem) adminNavItem.style.display = isAdmin() ? 'flex' : 'none';
+            const adminNavItem = document.querySelector('.nav-item[onclick*="admin"]');
+            if (adminNavItem) {
+                adminNavItem.style.display = isAdmin() ? 'flex' : 'none';
+            }
             
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-produk').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.querySelector('.nav-item[onclick*="produk"]').classList.add('active');
             document.getElementById('currentPageBadge').innerText = 'PRODUK';
-            document.getElementById('searchContainer').style.display = 'block';
+            
+            searchContainer.style.display = 'block';
             
             loadProfileToPage();
-            // REFRESH DATA SETELAH LOGIN - AMBIL DATA TERBARU
-            forceRefreshAllData();
+            renderPublicProducts();
+            renderCart();
+            renderOrders();
+            renderContactPage();
         } else {
-            document.getElementById('auth-container').style.display = 'block';
-            document.getElementById('app-container').classList.remove('visible');
-            document.getElementById('bottomNav').style.display = 'none';
-            document.getElementById('searchContainer').style.display = 'none';
+            authContainer.style.display = 'block';
+            appContainer.style.display = 'none';
+            bottomNav.style.display = 'none';
+            searchContainer.style.display = 'none';
             document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
             document.getElementById('auth-login').classList.add('active');
             document.getElementById('currentPageBadge').innerText = 'LOGIN';
         }
     }
-    
+
     window.handleLogin = function() {
         const email = document.getElementById('loginEmail').value;
         const pass = document.getElementById('loginPassword').value;
-        const users = getUsers();
         const user = users.find(u => u.email === email && u.password === pass);
         if (user) {
             currentUser = user;
@@ -1209,31 +1373,24 @@
             document.getElementById('loginError').innerText = 'Email/password salah';
         }
     };
-    
+
     window.showRegisterPage = function() {
         document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
         document.getElementById('auth-register').classList.add('active');
         document.getElementById('currentPageBadge').innerText = 'DAFTAR';
     };
-    
+
     window.showLoginPage = function() {
         document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
         document.getElementById('auth-login').classList.add('active');
         document.getElementById('currentPageBadge').innerText = 'LOGIN';
     };
-    
-    window.showForgotPage = function() {
-        document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
-        document.getElementById('auth-forgot').classList.add('active');
-        document.getElementById('currentPageBadge').innerText = 'LUPA PASSWORD';
-    };
-    
+
     window.handleRegister = function() {
         const nama = document.getElementById('regNama').value;
         const email = document.getElementById('regEmail').value;
         const pass = document.getElementById('regPassword').value;
         if (!nama || !email || !pass) { alert('Isi data wajib'); return; }
-        const users = getUsers();
         if (users.find(u => u.email === email)) { alert('Email sudah terdaftar'); return; }
         const newUser = {
             email, password: pass,
@@ -1245,59 +1402,17 @@
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         checkLogin();
     };
-    
-    window.sendVerificationCode = function() {
-        const email = document.getElementById('forgotEmail').value;
-        const users = getUsers();
-        const user = users.find(u => u.email === email);
-        if (!user) {
-            document.getElementById('forgotMessage').innerText = 'Email tidak terdaftar';
-            return;
-        }
-        const code = Math.floor(100000 + Math.random() * 900000).toString();
-        verificationCodes[email] = code;
-        document.getElementById('forgotMessage').className = 'success-msg';
-        document.getElementById('forgotMessage').innerHTML = `Kode verifikasi: <strong>${code}</strong>`;
-        document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
-        document.getElementById('auth-verify').classList.add('active');
-    };
-    
-    window.resetPassword = function() {
-        const email = document.getElementById('forgotEmail').value;
-        const code = document.getElementById('verifyCode').value;
-        const newPass = document.getElementById('newPassword').value;
-        const confirmPass = document.getElementById('confirmPassword').value;
-        if (!code || !newPass || !confirmPass) {
-            document.getElementById('verifyMessage').innerText = 'Isi semua field';
-            return;
-        }
-        if (newPass !== confirmPass) {
-            document.getElementById('verifyMessage').innerText = 'Password tidak cocok';
-            return;
-        }
-        if (verificationCodes[email] !== code) {
-            document.getElementById('verifyMessage').innerText = 'Kode verifikasi salah';
-            return;
-        }
-        const users = getUsers();
-        const userIndex = users.findIndex(u => u.email === email);
-        if (userIndex !== -1) {
-            users[userIndex].password = newPass;
-            localStorage.setItem('taParfumeUsers', JSON.stringify(users));
-            delete verificationCodes[email];
-            document.getElementById('verifyMessage').className = 'success-msg';
-            document.getElementById('verifyMessage').innerText = 'Password berhasil direset!';
-            setTimeout(() => showLoginPage(), 2000);
-        }
-    };
-    
+
     window.logout = function() {
         currentUser = null;
         localStorage.removeItem('currentUser');
+        cart = [];
+        customerOrders = [];
         localStorage.setItem('taParfumeCart', '[]');
+        localStorage.setItem('customerOrders', '[]');
         checkLogin();
     };
-    
+
     // ==================== PROFIL ====================
     function loadProfileToPage() {
         if (!currentUser) return;
@@ -1324,7 +1439,6 @@
             alamat: document.getElementById('profilAlamat').value
         };
         currentUser.profile = profil;
-        const users = getUsers();
         const idx = users.findIndex(u => u.email === currentUser.email);
         if (idx >= 0) users[idx].profile = profil;
         localStorage.setItem('taParfumeUsers', JSON.stringify(users));
@@ -1335,68 +1449,44 @@
         alert('Profil disimpan');
     };
     
-    window.showGantiPassword = function() {
-        document.getElementById('gantiPasswordModal').classList.add('active');
-        document.getElementById('passError').innerText = '';
-        document.getElementById('passSuccess').innerText = '';
-    };
-    
-    window.closeGantiPasswordModal = function() {
-        document.getElementById('gantiPasswordModal').classList.remove('active');
-    };
-    
     window.gantiPassword = function() {
-        const oldPass = document.getElementById('oldPassword').value;
-        const newPass = document.getElementById('newPasswordBaru').value;
-        const confirmPass = document.getElementById('confirmPasswordBaru').value;
-        if (!oldPass || !newPass || !confirmPass) {
-            document.getElementById('passError').innerText = 'Semua field harus diisi';
-            return;
+        const newPass = prompt('Password baru:');
+        if (newPass && newPass.length >= 3) {
+            currentUser.password = newPass;
+            const idx = users.findIndex(u => u.email === currentUser.email);
+            if (idx >= 0) users[idx].password = newPass;
+            localStorage.setItem('taParfumeUsers', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            alert('Password diubah');
         }
-        if (oldPass !== currentUser.password) {
-            document.getElementById('passError').innerText = 'Password lama salah';
-            return;
-        }
-        if (newPass !== confirmPass) {
-            document.getElementById('passError').innerText = 'Password baru tidak cocok';
-            return;
-        }
-        currentUser.password = newPass;
-        const users = getUsers();
-        const userIndex = users.findIndex(u => u.email === currentUser.email);
-        if (userIndex !== -1) users[userIndex].password = newPass;
-        localStorage.setItem('taParfumeUsers', JSON.stringify(users));
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        document.getElementById('passSuccess').innerText = 'Password berhasil diubah!';
-        setTimeout(() => closeGantiPasswordModal(), 1500);
     };
-    
-    // ==================== PRODUK ====================
+
+    // ==================== PRODUK DENGAN SEARCH ====================
     window.filterProducts = function() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const products = getProducts();
         filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchTerm));
         renderFilteredProducts();
     };
-    
+
     function renderFilteredProducts() {
         const container = document.getElementById('publicProductGrid');
         const noProductMsg = document.getElementById('noProductMessage');
         if (!container) return;
+        
         if (filteredProducts.length === 0) {
             container.innerHTML = '';
             noProductMsg.style.display = 'block';
             return;
         }
+        
         noProductMsg.style.display = 'none';
         let html = '';
         filteredProducts.forEach(p => {
             const imageHtml = p.image ? `<img src="${p.image}">` : '<i class="fas fa-box"></i>';
-            const availableSizes = [30,35,50,100].filter(uk => p.stock[uk] > 0);
-            const defaultUk = availableSizes.length > 0 ? availableSizes[0] : 30;
-            const priceDisplay = p.prices[defaultUk] ? `฿ ${p.prices[defaultUk].toLocaleString()}` : '฿ 0';
+            const ukuranTersedia = [30,35,50,100].filter(uk => p.stock[uk] > 0);
+            const defaultUk = ukuranTersedia.length > 0 ? ukuranTersedia[0] : 30;
             html += `
-                <div class="product-item" data-id="${p.id}" data-selected-size="${defaultUk}">
+                <div class="product-item" data-id="${p.id}" data-product='${JSON.stringify(p).replace(/'/g, "&apos;")}'>
                     <div class="product-image">${imageHtml}</div>
                     <div class="product-info">
                         <h3>${p.name}</h3>
@@ -1410,43 +1500,39 @@
                             `).join('')}
                         </div>
                         <div class="product-details">
-                            <span class="product-price" id="price-${p.id}">${priceDisplay}</span>
+                            <span class="product-price" id="price-${p.id}">฿ ${p.prices[defaultUk]}</span>
                             <span class="product-stock" id="stock-${p.id}">Stok: ${p.stock[defaultUk]}</span>
                         </div>
                     </div>
-                    <button class="buy-button" onclick="beliSekarang(${p.id})">+ KERANJANG</button>
+                    <button class="buy-button" onclick="beliSekarang(${p.id})">BELI SEKARANG</button>
                 </div>
             `;
         });
         container.innerHTML = html;
     }
-    
+
     window.renderPublicProducts = function() {
-        const products = getProducts();
         filteredProducts = [...products];
         renderFilteredProducts();
     };
-    
+
     window.selectSize = function(productId, ukuran) {
-        const products = getProducts();
         const product = products.find(p => p.id === productId);
         if (!product) return;
-        document.getElementById(`price-${productId}`).innerHTML = `฿ ${product.prices[ukuran].toLocaleString()}`;
-        document.getElementById(`stock-${productId}`).innerHTML = `Stok: ${product.stock[ukuran]}`;
+        document.getElementById(`price-${productId}`).innerText = `฿ ${product.prices[ukuran]}`;
+        document.getElementById(`stock-${productId}`).innerText = `Stok: ${product.stock[ukuran]}`;
         document.querySelectorAll(`#size-${productId} .size-btn`).forEach(btn => {
             btn.classList.remove('selected');
             if (btn.innerText.includes(`${ukuran}ml`)) btn.classList.add('selected');
         });
         document.querySelector(`[data-id="${productId}"]`).dataset.selectedSize = ukuran;
     };
-    
+
     window.beliSekarang = function(productId) {
-        const products = getProducts();
         const product = products.find(p => p.id === productId);
         const productEl = document.querySelector(`[data-id="${productId}"]`);
-        const selectedSize = parseInt(productEl?.dataset.selectedSize) || 30;
+        const selectedSize = parseInt(productEl.dataset.selectedSize) || 30;
         if (product.stock[selectedSize] <= 0) { alert('Stok habis'); return; }
-        let cart = getCart();
         const itemName = `${product.name} (${selectedSize}ml)`;
         const existing = cart.find(i => i.name === itemName);
         if (existing) existing.quantity++;
@@ -1454,47 +1540,52 @@
         product.stock[selectedSize]--;
         localStorage.setItem('taParfumeCart', JSON.stringify(cart));
         localStorage.setItem('taParfumeProducts', JSON.stringify(products));
-        localStorage.setItem('lastProductUpdate', Date.now());
         renderCart();
         renderPublicProducts();
         showPage('keranjang');
     };
-    
+
     // ==================== KERANJANG ====================
     function renderCart() {
         const container = document.getElementById('cartItemsContainer');
         const totalSpan = document.getElementById('totalPrice');
         if (!container) return;
-        let cart = getCart();
         if (cart.length === 0) {
             container.innerHTML = '<div style="text-align:center; padding:30px; color:white;">Keranjang kosong</div>';
             totalSpan.innerText = '฿ 0';
             return;
         }
         let html = '', total = 0;
-        cart.forEach((item, idx) => {
+        cart.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
-            html += `<div class="cart-item">
-                <div style="flex:2;"><h4>${item.name}</h4><div>฿ ${item.price.toLocaleString()} x ${item.quantity}</div></div>
-                <div class="cart-item-controls"><button onclick="updateQty('${item.name}', -1)">−</button><span>${item.quantity}</span><button onclick="updateQty('${item.name}', 1)">+</button></div>
-                <div style="font-weight:800;">฿ ${itemTotal.toLocaleString()}</div>
+            html += `<div class="cart-item" data-item-index="${index}">
+                <div style="flex:2;">
+                    <h4>${item.name}</h4>
+                    <div class="item-price">฿ ${item.price} x ${item.quantity}</div>
+                </div>
+                <div class="cart-item-controls">
+                    <button onclick="updateQty('${item.name}', -1)">−</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="updateQty('${item.name}', 1)">+</button>
+                </div>
+                <div style="font-weight:800; color:#ffffff;">฿ ${itemTotal}</div>
                 <button class="delete-item" onclick="hapusItem('${item.name}')"><i class="fas fa-trash"></i></button>
             </div>`;
         });
         container.innerHTML = html;
-        totalSpan.innerText = '฿ ' + total.toLocaleString();
+        totalSpan.innerText = '฿ ' + total;
     }
-    
+
     window.updateQty = function(name, change) {
-        let cart = getCart();
         const item = cart.find(i => i.name === name);
         if (!item) return;
-        const products = getProducts();
         const product = products.find(p => p.id === item.productId);
-        if (change > 0 && product.stock[item.size] <= 0) { alert('Stok habis'); return; }
-        if (change > 0) product.stock[item.size]--;
-        else if (change < 0) product.stock[item.size]++;
+        if (product) {
+            if (change > 0 && product.stock[item.size] <= 0) { alert('Stok habis'); return; }
+            if (change > 0) product.stock[item.size]--;
+            else if (change < 0) product.stock[item.size]++;
+        }
         item.quantity += change;
         if (item.quantity <= 0) {
             cart = cart.filter(i => i.name !== name);
@@ -1502,30 +1593,26 @@
         }
         localStorage.setItem('taParfumeCart', JSON.stringify(cart));
         localStorage.setItem('taParfumeProducts', JSON.stringify(products));
-        localStorage.setItem('lastProductUpdate', Date.now());
         renderCart();
         renderPublicProducts();
     };
-    
+
     window.hapusItem = function(name) {
-        let cart = getCart();
         const item = cart.find(i => i.name === name);
         if (item) {
-            const products = getProducts();
             const product = products.find(p => p.id === item.productId);
             if (product) product.stock[item.size] += item.quantity;
         }
         cart = cart.filter(i => i.name !== name);
         localStorage.setItem('taParfumeCart', JSON.stringify(cart));
-        localStorage.setItem('taParfumeProducts', JSON.stringify(getProducts()));
-        localStorage.setItem('lastProductUpdate', Date.now());
+        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
         renderCart();
         renderPublicProducts();
     };
-    
+
+    // ==================== CHECKOUT ====================
     window.checkout = function() {
         if (!currentUser) return;
-        let cart = getCart();
         if (cart.length === 0) { alert('Keranjang kosong'); return; }
         const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
         const newOrder = {
@@ -1536,75 +1623,274 @@
             status: 'Diproses',
             customer: { ...currentUser.profile }
         };
-        let orders = getOrders();
-        let customerOrders = getCustomerOrders();
         orders.push(newOrder);
         customerOrders.push(newOrder);
         cart = [];
         localStorage.setItem('taParfumeCart', JSON.stringify(cart));
         localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
         localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
-        localStorage.setItem('lastProductUpdate', Date.now());
         alert('Pesanan diterima!');
         showPage('pesanan');
         renderOrders();
     };
-    
+
+    // ==================== PESANAN ====================
     function renderOrders() {
         const container = document.getElementById('orderHistory');
         const emptyDiv = document.getElementById('emptyOrders');
         if (!container) return;
-        let customerOrders = getCustomerOrders();
-        const myOrders = customerOrders.filter(order => order.customer?.email === currentUser?.email);
-        if (myOrders.length === 0) {
+        if (customerOrders.length === 0) {
             emptyDiv.style.display = 'block';
             container.innerHTML = '';
             return;
         }
         emptyDiv.style.display = 'none';
         let html = '';
-        myOrders.forEach((ord, i) => {
-            html += `<div class="order-item"><div style="display:flex; justify-content:space-between;"><strong>Pesanan #${i+1}</strong><span class="order-status">${ord.status}</span></div>
-            <div style="margin:8px 0;">${ord.items.map(it => `${it.name} x${it.quantity}`).join(', ')}</div>
-            <div><strong>Total: ฿ ${ord.total.toLocaleString()}</strong></div>
-            <div style="font-size:11px; color:#ccc;">${ord.date}</div></div>`;
+        customerOrders.forEach((ord, i) => {
+            html += `<div class="order-item">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                    <span style="font-weight:800;">Pesanan #${i+1}</span>
+                    <span class="order-status">${ord.status}</span>
+                </div>
+                <div style="font-weight:600; margin-bottom:8px;">${ord.items.map(it => `${it.name} x${it.quantity}`).join(', ')}</div>
+                <div style="font-weight:800; font-size:16px;">Total: ฿ ${ord.total}</div>
+            </div>`;
         });
         container.innerHTML = html;
     }
-    
+
     // ==================== KONTAK ====================
     function renderContactPage() {
         renderSocialGrid();
         renderBankList();
     }
-    
+
     function renderSocialGrid() {
         const grid = document.getElementById('socialGrid');
-        const socialMedia = getSocialMedia();
         let html = '';
-        socialMedia.forEach(s => {
-            html += `<div class="social-item" onclick="window.open('${s.url}', '_blank')"><i class="${s.icon}"></i><span>${s.name}</span></div>`;
+        socialMedia.forEach(social => {
+            html += `
+                <div class="social-item" onclick="window.open('${social.url}', '_blank')">
+                    <i class="${social.icon}"></i>
+                    <span>${social.name}</span>
+                </div>
+            `;
         });
         grid.innerHTML = html;
     }
-    
+
     function renderBankList() {
         const list = document.getElementById('bankList');
-        const bankAccounts = getBankAccounts();
         let html = '';
-        bankAccounts.forEach(b => {
-            html += `<div class="bank-item"><div><strong>${b.bankName}</strong><br>${b.accountNumber} a.n. ${b.accountOwner}</div>
-            <button class="copy-btn" onclick="copyToClipboard('${b.accountNumber}')">Salin</button></div>`;
+        bankAccounts.forEach(bank => {
+            html += `
+                <div class="bank-item">
+                    <div class="bank-info">
+                        <strong>${bank.bankName}</strong><br>
+                        ${bank.accountNumber} a.n. ${bank.accountOwner}
+                    </div>
+                    <div class="bank-actions">
+                        <button class="copy-btn" onclick="copyToClipboard('${bank.accountNumber}')">Salin No.</button>
+                    </div>
+                </div>
+            `;
         });
         list.innerHTML = html;
     }
-    
+
     window.copyToClipboard = function(text) {
-        navigator.clipboard.writeText(text);
-        alert('Nomor rekening disalin!');
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Nomor rekening disalin!');
+        });
     };
-    
-    // ==================== ADMIN FUNCTIONS ====================
+
+    // ==================== ADMIN KONTAK ====================
+    function renderAdminContact() {
+        if (!isAdmin()) return;
+        
+        const socialContainer = document.getElementById('socialEditList');
+        let socialHtml = '';
+        socialMedia.forEach(s => {
+            socialHtml += `
+                <div style="margin-bottom:15px; padding:15px; background:#8e44ad; border-radius:20px;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; justify-content:center;">
+                        <i class="${s.icon}" style="font-size:24px; color:white;"></i>
+                        <span style="color:white; font-weight:600;">${s.name}</span>
+                    </div>
+                    <div style="display:flex; gap:5px; margin-bottom:10px;">
+                        <input type="url" id="social_url_${s.id}" value="${s.url}" placeholder="URL" style="flex:2; padding:8px; border-radius:30px; border:2px solid #c7ea46;">
+                        <button onclick="updateSocialUrl('${s.id}')" style="background:#c7ea46; padding:8px 15px; border-radius:30px;">Update</button>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="openEditSocialModal('${s.id}')" style="background:#c7ea46; padding:8px; border-radius:30px; flex:1;">Edit Detail</button>
+                        <button onclick="deleteSocial('${s.id}')" style="background:#ff4444; color:white; padding:8px; border-radius:30px; flex:1;">Hapus</button>
+                    </div>
+                </div>
+            `;
+        });
+        socialContainer.innerHTML = socialHtml || '<p style="color:white; text-align:center;">Belum ada sosial media</p>';
+        
+        const bankContainer = document.getElementById('bankEditList');
+        let bankHtml = '';
+        bankAccounts.forEach(b => {
+            bankHtml += `
+                <div style="margin-bottom:15px; padding:15px; background:#8e44ad; border-radius:20px;">
+                    <div style="margin-bottom:10px;">
+                        <input type="text" id="bank_name_${b.id}" value="${b.bankName}" placeholder="Nama Bank" style="width:100%; padding:8px; margin-bottom:5px; border-radius:30px;">
+                        <input type="text" id="bank_number_${b.id}" value="${b.accountNumber}" placeholder="No Rekening" style="width:100%; padding:8px; margin-bottom:5px; border-radius:30px;">
+                        <input type="text" id="bank_owner_${b.id}" value="${b.accountOwner}" placeholder="Nama Pemilik" style="width:100%; padding:8px; margin-bottom:5px; border-radius:30px;">
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="updateBank(${b.id})" style="background:#c7ea46; padding:8px; border-radius:30px; flex:1;">Update</button>
+                        <button onclick="deleteBank(${b.id})" style="background:#ff4444; color:white; padding:8px; border-radius:30px; flex:1;">Hapus</button>
+                    </div>
+                </div>
+            `;
+        });
+        bankContainer.innerHTML = bankHtml || '<p style="color:white; text-align:center;">Belum ada bank</p>';
+    }
+
+    window.updateSocialUrl = function(id) {
+        const url = document.getElementById(`social_url_${id}`).value;
+        const index = socialMedia.findIndex(s => s.id === id);
+        if (index !== -1) {
+            socialMedia[index].url = url;
+            localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
+            renderContactPage();
+            renderAdminContact();
+            alert('URL sosial media diperbarui');
+        }
+    };
+
+    window.openEditSocialModal = function(id) {
+        const social = socialMedia.find(s => s.id === id);
+        if (social) {
+            document.getElementById('editSocialId').value = social.id;
+            document.getElementById('editSocialName').value = social.name;
+            document.getElementById('editSocialIcon').value = social.icon;
+            document.getElementById('editSocialUrl').value = social.url;
+            document.getElementById('editSocialTitle').innerText = 'Edit Sosial Media';
+            document.getElementById('editSocialModal').classList.add('active');
+        }
+    };
+
+    window.openAddSocialModal = function() {
+        document.getElementById('editSocialId').value = '';
+        document.getElementById('editSocialName').value = '';
+        document.getElementById('editSocialIcon').value = 'fab fa-';
+        document.getElementById('editSocialUrl').value = '';
+        document.getElementById('editSocialTitle').innerText = 'Tambah Sosial Media';
+        document.getElementById('editSocialModal').classList.add('active');
+    };
+
+    window.closeSocialModal = function() {
+        document.getElementById('editSocialModal').classList.remove('active');
+    };
+
+    window.simpanSocial = function() {
+        const id = document.getElementById('editSocialId').value;
+        const name = document.getElementById('editSocialName').value;
+        const icon = document.getElementById('editSocialIcon').value;
+        const url = document.getElementById('editSocialUrl').value;
+        
+        if (!name || !icon || !url) {
+            alert('Semua field harus diisi');
+            return;
+        }
+        
+        if (id) {
+            const index = socialMedia.findIndex(s => s.id === id);
+            if (index !== -1) {
+                socialMedia[index] = { ...socialMedia[index], name, icon, url };
+            }
+        } else {
+            const newId = 'social_' + Date.now();
+            socialMedia.push({ id: newId, name, icon, url });
+        }
+        
+        localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
+        renderContactPage();
+        renderAdminContact();
+        closeSocialModal();
+        alert('Sosial media disimpan');
+    };
+
+    window.deleteSocial = function(id) {
+        if (confirm('Hapus sosial media ini?')) {
+            socialMedia = socialMedia.filter(s => s.id !== id);
+            localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
+            renderContactPage();
+            renderAdminContact();
+        }
+    };
+
+    window.updateBank = function(id) {
+        const bankName = document.getElementById(`bank_name_${id}`).value;
+        const accountNumber = document.getElementById(`bank_number_${id}`).value;
+        const accountOwner = document.getElementById(`bank_owner_${id}`).value;
+        
+        const index = bankAccounts.findIndex(b => b.id === id);
+        if (index !== -1) {
+            bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
+            localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+            renderContactPage();
+            renderAdminContact();
+            alert('Data bank diperbarui');
+        }
+    };
+
+    window.openAddBankModal = function() {
+        document.getElementById('editBankId').value = '';
+        document.getElementById('editBankName').value = '';
+        document.getElementById('editBankNumber').value = '';
+        document.getElementById('editBankOwner').value = '';
+        document.getElementById('editBankTitle').innerText = 'Tambah Rekening Bank';
+        document.getElementById('editBankModal').classList.add('active');
+    };
+
+    window.closeBankModal = function() {
+        document.getElementById('editBankModal').classList.remove('active');
+    };
+
+    window.simpanBank = function() {
+        const id = document.getElementById('editBankId').value;
+        const bankName = document.getElementById('editBankName').value;
+        const accountNumber = document.getElementById('editBankNumber').value;
+        const accountOwner = document.getElementById('editBankOwner').value;
+        
+        if (!bankName || !accountNumber || !accountOwner) {
+            alert('Semua field harus diisi');
+            return;
+        }
+        
+        if (id) {
+            const index = bankAccounts.findIndex(b => b.id == id);
+            if (index !== -1) {
+                bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
+            }
+        } else {
+            const newId = Date.now();
+            bankAccounts.push({ id: newId, bankName, accountNumber, accountOwner });
+        }
+        
+        localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+        renderContactPage();
+        renderAdminContact();
+        closeBankModal();
+        alert('Data bank disimpan');
+    };
+
+    window.deleteBank = function(id) {
+        if (confirm('Hapus rekening bank ini?')) {
+            bankAccounts = bankAccounts.filter(b => b.id !== id);
+            localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+            renderContactPage();
+            renderAdminContact();
+        }
+    };
+
+    // ==================== ADMIN PRODUK ====================
+    let uploadedImageBase64 = '';
     window.previewGambar = function(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -1616,12 +1902,11 @@
             reader.readAsDataURL(input.files[0]);
         }
     };
-    
+
     window.simpanProduk = function() {
-        if (!isAdmin()) { alert('Akses ditolak'); return; }
+        if (!isAdmin()) { alert('Anda tidak memiliki akses'); return; }
         const nama = document.getElementById('produkNama').value;
         if (!nama) { alert('Nama produk harus diisi'); return; }
-        let products = getProducts();
         const newProduct = {
             id: Date.now(),
             name: nama,
@@ -1641,8 +1926,7 @@
         };
         products.push(newProduct);
         localStorage.setItem('taParfumeProducts', JSON.stringify(products));
-        localStorage.setItem('lastProductUpdate', Date.now());
-        alert('Produk ditambahkan!');
+        alert('Produk ditambahkan');
         document.getElementById('produkNama').value = '';
         document.getElementById('harga30').value = '';
         document.getElementById('stok30').value = '';
@@ -1653,62 +1937,81 @@
         document.getElementById('harga100').value = '';
         document.getElementById('stok100').value = '';
         document.getElementById('previewImg').innerHTML = '';
+        document.getElementById('uploadText').innerText = 'Klik pilih gambar';
         uploadedImageBase64 = '';
         renderAdminProducts();
-        forceRefreshAllData();
-        showToast('✅ Produk baru ditambahkan!');
+        renderPublicProducts();
     };
-    
+
     function renderAdminProducts() {
         if (!isAdmin()) return;
         const container = document.getElementById('adminProductList');
         if (!container) return;
-        let products = getProducts();
+        
         let html = '';
         products.forEach(p => {
-            const totalStock = Object.values(p.stock).reduce((a,b) => a+b, 0);
-            html += `<div class="admin-product-item"><div><h4>${p.name}</h4><div>Total Stok: ${totalStock}</div></div>
-            <div><button class="btn-edit" onclick="openEditModal(${p.id})">Edit</button>
-            <button class="btn-delete" onclick="hapusProduk(${p.id})">Hapus</button></div></div>`;
+            const prices = Object.values(p.prices).filter(price => price > 0);
+            const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
+            const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
+            const totalStock = Object.values(p.stock).reduce((sum, stock) => sum + stock, 0);
+            
+            html += `
+                <div class="admin-product-item">
+                    <div class="admin-product-info">
+                        <h4>${p.name}</h4>
+                        <div class="product-range">฿${minPrice} - ฿${maxPrice}</div>
+                        <div class="total-stock">Total Stok: ${totalStock}</div>
+                    </div>
+                    <div class="admin-product-actions">
+                        <button class="btn-edit" onclick="openEditModal(${p.id})">Edit</button>
+                        <button class="btn-delete" onclick="hapusProduk(${p.id})">Hapus</button>
+                    </div>
+                </div>
+            `;
         });
-        container.innerHTML = html || '<p style="text-align:center; padding:20px;">Belum ada produk</p>';
+        
+        container.innerHTML = html || '<p style="color:white; text-align:center; padding:20px;">Belum ada produk</p>';
     }
-    
+
     window.hapusProduk = function(id) {
         if (!isAdmin()) return;
         if (confirm('Hapus produk ini?')) {
-            let products = getProducts();
             products = products.filter(p => p.id !== id);
             localStorage.setItem('taParfumeProducts', JSON.stringify(products));
-            localStorage.setItem('lastProductUpdate', Date.now());
             renderAdminProducts();
-            forceRefreshAllData();
-            showToast('🗑️ Produk dihapus!');
+            renderPublicProducts();
         }
     };
-    
+
+    // ==================== EDIT PRODUK ====================
+    let editImageBase64 = '';
     window.openEditModal = function(productId) {
         if (!isAdmin()) return;
-        let products = getProducts();
         const product = products.find(p => p.id === productId);
         if (!product) return;
+        
         document.getElementById('editProductId').value = product.id;
         document.getElementById('editNama').value = product.name;
-        document.getElementById('editHarga30').value = product.prices[30] || 0;
-        document.getElementById('editStok30').value = product.stock[30] || 0;
-        document.getElementById('editHarga35').value = product.prices[35] || 0;
-        document.getElementById('editStok35').value = product.stock[35] || 0;
-        document.getElementById('editHarga50').value = product.prices[50] || 0;
-        document.getElementById('editStok50').value = product.stock[50] || 0;
-        document.getElementById('editHarga100').value = product.prices[100] || 0;
-        document.getElementById('editStok100').value = product.stock[100] || 0;
+        document.getElementById('editHarga30').value = product.prices[30];
+        document.getElementById('editStok30').value = product.stock[30];
+        document.getElementById('editHarga35').value = product.prices[35];
+        document.getElementById('editStok35').value = product.stock[35];
+        document.getElementById('editHarga50').value = product.prices[50];
+        document.getElementById('editStok50').value = product.stock[50];
+        document.getElementById('editHarga100').value = product.prices[100];
+        document.getElementById('editStok100').value = product.stock[100];
+        
         if (product.image) {
             document.getElementById('editPreviewImg').innerHTML = `<img src="${product.image}" style="max-width:100px;">`;
             editImageBase64 = product.image;
+        } else {
+            document.getElementById('editPreviewImg').innerHTML = '';
+            editImageBase64 = '';
         }
+        
         document.getElementById('editModal').classList.add('active');
     };
-    
+
     window.previewEditGambar = function(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -1720,17 +2023,17 @@
             reader.readAsDataURL(input.files[0]);
         }
     };
-    
+
     window.simpanEditProduk = function() {
         if (!isAdmin()) return;
         const id = parseInt(document.getElementById('editProductId').value);
-        let products = getProducts();
-        const index = products.findIndex(p => p.id === id);
-        if (index === -1) return;
-        products[index] = {
+        const productIndex = products.findIndex(p => p.id === id);
+        if (productIndex === -1) return;
+        
+        products[productIndex] = {
             id: id,
             name: document.getElementById('editNama').value,
-            image: editImageBase64 || products[index].image,
+            image: editImageBase64 || products[productIndex].image,
             prices: {
                 30: parseInt(document.getElementById('editHarga30').value) || 0,
                 35: parseInt(document.getElementById('editHarga35').value) || 0,
@@ -1744,281 +2047,127 @@
                 100: parseInt(document.getElementById('editStok100').value) || 0
             }
         };
+        
         localStorage.setItem('taParfumeProducts', JSON.stringify(products));
-        localStorage.setItem('lastProductUpdate', Date.now());
         closeEditModal();
         renderAdminProducts();
-        forceRefreshAllData();
-        showToast('✏️ Produk diperbarui!');
+        renderPublicProducts();
+        alert('Produk diperbarui');
     };
-    
+
     window.closeEditModal = function() {
         document.getElementById('editModal').classList.remove('active');
         editImageBase64 = '';
     };
-    
+
+    // ==================== ADMIN PESANAN ====================
     function renderAdminOrders() {
         if (!isAdmin()) return;
         const container = document.getElementById('adminOrderList');
-        let orders = getOrders();
+        if (!container) return;
         if (orders.length === 0) {
             container.innerHTML = '<p style="color:white; text-align:center; padding:20px;">Belum ada pesanan</p>';
             return;
         }
         let html = '';
         orders.forEach((order, idx) => {
-            html += `<div style="background:#3e0455; border-radius:20px; padding:16px; margin-bottom:12px;">
+            html += `<div style="background:#3e0455; border-radius:24px; padding:18px; margin-bottom:16px; color:white;">
                 <div><strong>Pesanan #${idx+1}</strong> (${order.date}) - ${order.status}</div>
-                <div>${order.items.map(it => `${it.name} x${it.quantity}`).join(', ')} | Total: ฿${order.total.toLocaleString()}</div>
-                <div style="background:#8e44ad; padding:8px; margin:8px 0;"><strong>Pelanggan:</strong> ${order.customer?.nama} (${order.customer?.email})</div>
-                <div style="display:flex; gap:8px;"><button onclick="ubahStatus('${order.id}', 'Selesai')" style="background:#c7ea46; padding:6px 12px; border-radius:20px;">Selesai</button>
-                <button onclick="ubahStatus('${order.id}', 'Dibatalkan')" style="background:#ffaa44; padding:6px 12px; border-radius:20px;">Batalkan</button>
-                <button onclick="hapusPesanan(${order.id})" style="background:#ff4444; color:white; padding:6px 12px; border-radius:20px;">Hapus</button></div>
+                <div>Items: ${order.items.map(it => `${it.name} x${it.quantity}`).join(', ')} | Total: ฿${order.total}</div>
+                <div style="background:#8e44ad; padding:10px; margin:10px 0;">
+                    <strong>Pelanggan:</strong> ${order.customer?.nama || '-'}<br>
+                    Email: ${order.customer?.email || '-'}<br>
+                    Line: ${order.customer?.line || '-'}<br>
+                    Telp: ${order.customer?.telp || '-'}<br>
+                    Alamat: ${order.customer?.alamat || '-'}
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button onclick="ubahStatusPesanan(${order.id}, 'Selesai')" style="background:#c7ea46; padding:8px; border-radius:30px; flex:1;">Selesai</button>
+                    <button onclick="ubahStatusPesanan(${order.id}, 'Dibatalkan')" style="background:#f8d7da; padding:8px; border-radius:30px; flex:1;">Batalkan</button>
+                    <button onclick="hapusPesanan(${order.id})" style="background:#ff4444; color:white; padding:8px; border-radius:30px;">Hapus</button>
+                </div>
             </div>`;
         });
         container.innerHTML = html;
     }
-    
-    window.ubahStatus = function(id, status) {
-        let orders = getOrders();
-        let customerOrders = getCustomerOrders();
-        const order = orders.find(o => o.id == id);
+
+    window.ubahStatusPesanan = function(id, status) {
+        if (!isAdmin()) return;
+        const order = orders.find(o => o.id === id);
         if (order) order.status = status;
-        const custOrder = customerOrders.find(o => o.id == id);
+        const custOrder = customerOrders.find(o => o.id === id);
         if (custOrder) custOrder.status = status;
         localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
         localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
-        localStorage.setItem('lastProductUpdate', Date.now());
         renderAdminOrders();
         renderOrders();
-        showToast(`Status pesanan: ${status}`);
     };
-    
+
     window.hapusPesanan = function(id) {
-        if (confirm('Hapus pesanan?')) {
-            let orders = getOrders();
-            let customerOrders = getCustomerOrders();
+        if (!isAdmin()) return;
+        if (confirm('Hapus pesanan ini?')) {
             orders = orders.filter(o => o.id !== id);
             customerOrders = customerOrders.filter(o => o.id !== id);
             localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
             localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
-            localStorage.setItem('lastProductUpdate', Date.now());
             renderAdminOrders();
             renderOrders();
         }
     };
-    
-    function renderAdminContact() {
-        if (!isAdmin()) return;
-        let socialMedia = getSocialMedia();
-        const socialContainer = document.getElementById('socialEditList');
-        let socialHtml = '';
-        socialMedia.forEach(s => {
-            socialHtml += `<div style="background:#8e44ad; padding:15px; border-radius:20px; margin-bottom:15px;">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><i class="${s.icon}" style="font-size:24px;"></i><span>${s.name}</span></div>
-                <input type="url" id="social_url_${s.id}" value="${s.url}" style="width:100%; padding:8px; border-radius:20px; margin-bottom:8px;">
-                <div style="display:flex; gap:8px;"><button onclick="updateSocialUrl('${s.id}')" style="background:#c7ea46; padding:6px; border-radius:20px; flex:1;">Update</button>
-                <button onclick="openEditSocialModal('${s.id}')" style="background:#c7ea46; padding:6px; border-radius:20px; flex:1;">Edit</button>
-                <button onclick="deleteSocial('${s.id}')" style="background:#ff4444; color:white; padding:6px; border-radius:20px; flex:1;">Hapus</button></div>
-            </div>`;
-        });
-        socialContainer.innerHTML = socialHtml || '<p style="text-align:center;">Belum ada sosial media</p>';
-        
-        let bankAccounts = getBankAccounts();
-        const bankContainer = document.getElementById('bankEditList');
-        let bankHtml = '';
-        bankAccounts.forEach(b => {
-            bankHtml += `<div style="background:#8e44ad; padding:15px; border-radius:20px; margin-bottom:15px;">
-                <input type="text" id="bank_name_${b.id}" value="${b.bankName}" placeholder="Nama Bank" style="width:100%; padding:8px; border-radius:20px; margin-bottom:5px;">
-                <input type="text" id="bank_number_${b.id}" value="${b.accountNumber}" placeholder="No Rekening" style="width:100%; padding:8px; border-radius:20px; margin-bottom:5px;">
-                <input type="text" id="bank_owner_${b.id}" value="${b.accountOwner}" placeholder="Nama Pemilik" style="width:100%; padding:8px; border-radius:20px; margin-bottom:8px;">
-                <div style="display:flex; gap:8px;"><button onclick="updateBank(${b.id})" style="background:#c7ea46; padding:6px; border-radius:20px; flex:1;">Update</button>
-                <button onclick="deleteBank(${b.id})" style="background:#ff4444; color:white; padding:6px; border-radius:20px; flex:1;">Hapus</button></div>
-            </div>`;
-        });
-        bankContainer.innerHTML = bankHtml || '<p style="text-align:center;">Belum ada bank</p>';
-    }
-    
-    window.updateSocialUrl = function(id) {
-        let socialMedia = getSocialMedia();
-        const url = document.getElementById(`social_url_${id}`).value;
-        const index = socialMedia.findIndex(s => s.id === id);
-        if (index !== -1) {
-            socialMedia[index].url = url;
-            localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
-            localStorage.setItem('lastProductUpdate', Date.now());
-            renderContactPage();
-            renderAdminContact();
-            forceRefreshAllData();
-            showToast('🔗 Link sosial media diperbarui!');
-        }
-    };
-    
-    window.openEditSocialModal = function(id) {
-        let socialMedia = getSocialMedia();
-        const social = socialMedia.find(s => s.id === id);
-        if (social) {
-            document.getElementById('editSocialId').value = social.id;
-            document.getElementById('editSocialName').value = social.name;
-            document.getElementById('editSocialIcon').value = social.icon;
-            document.getElementById('editSocialUrl').value = social.url;
-            document.getElementById('editSocialTitle').innerText = 'Edit Sosial Media';
-            document.getElementById('editSocialModal').classList.add('active');
-        }
-    };
-    
-    window.openAddSocialModal = function() {
-        document.getElementById('editSocialId').value = '';
-        document.getElementById('editSocialName').value = '';
-        document.getElementById('editSocialIcon').value = 'fab fa-';
-        document.getElementById('editSocialUrl').value = '';
-        document.getElementById('editSocialTitle').innerText = 'Tambah Sosial Media';
-        document.getElementById('editSocialModal').classList.add('active');
-    };
-    
-    window.closeSocialModal = function() {
-        document.getElementById('editSocialModal').classList.remove('active');
-    };
-    
-    window.simpanSocial = function() {
-        const id = document.getElementById('editSocialId').value;
-        const name = document.getElementById('editSocialName').value;
-        const icon = document.getElementById('editSocialIcon').value;
-        const url = document.getElementById('editSocialUrl').value;
-        if (!name || !icon || !url) { alert('Isi semua field'); return; }
-        let socialMedia = getSocialMedia();
-        if (id) {
-            const index = socialMedia.findIndex(s => s.id === id);
-            if (index !== -1) socialMedia[index] = { ...socialMedia[index], name, icon, url };
-        } else {
-            socialMedia.push({ id: 'social_' + Date.now(), name, icon, url });
-        }
-        localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
-        localStorage.setItem('lastProductUpdate', Date.now());
-        renderContactPage();
-        renderAdminContact();
-        forceRefreshAllData();
-        closeSocialModal();
-        showToast('✅ Sosial media disimpan!');
-    };
-    
-    window.deleteSocial = function(id) {
-        if (confirm('Hapus sosial media?')) {
-            let socialMedia = getSocialMedia();
-            socialMedia = socialMedia.filter(s => s.id !== id);
-            localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
-            localStorage.setItem('lastProductUpdate', Date.now());
-            renderContactPage();
-            renderAdminContact();
-            forceRefreshAllData();
-            showToast('🗑️ Sosial media dihapus!');
-        }
-    };
-    
-    window.updateBank = function(id) {
-        const bankName = document.getElementById(`bank_name_${id}`).value;
-        const accountNumber = document.getElementById(`bank_number_${id}`).value;
-        const accountOwner = document.getElementById(`bank_owner_${id}`).value;
-        let bankAccounts = getBankAccounts();
-        const index = bankAccounts.findIndex(b => b.id === id);
-        if (index !== -1) {
-            bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
-            localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-            localStorage.setItem('lastProductUpdate', Date.now());
-            renderContactPage();
-            renderAdminContact();
-            forceRefreshAllData();
-            showToast('🏦 Data bank diperbarui!');
-        }
-    };
-    
-    window.openAddBankModal = function() {
-        document.getElementById('editBankId').value = '';
-        document.getElementById('editBankName').value = '';
-        document.getElementById('editBankNumber').value = '';
-        document.getElementById('editBankOwner').value = '';
-        document.getElementById('editBankTitle').innerText = 'Tambah Rekening Bank';
-        document.getElementById('editBankModal').classList.add('active');
-    };
-    
-    window.closeBankModal = function() {
-        document.getElementById('editBankModal').classList.remove('active');
-    };
-    
-    window.simpanBank = function() {
-        const id = document.getElementById('editBankId').value;
-        const bankName = document.getElementById('editBankName').value;
-        const accountNumber = document.getElementById('editBankNumber').value;
-        const accountOwner = document.getElementById('editBankOwner').value;
-        if (!bankName || !accountNumber || !accountOwner) { alert('Isi semua field'); return; }
-        let bankAccounts = getBankAccounts();
-        if (id) {
-            const index = bankAccounts.findIndex(b => b.id == id);
-            if (index !== -1) bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
-        } else {
-            bankAccounts.push({ id: Date.now(), bankName, accountNumber, accountOwner });
-        }
-        localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-        localStorage.setItem('lastProductUpdate', Date.now());
-        renderContactPage();
-        renderAdminContact();
-        forceRefreshAllData();
-        closeBankModal();
-        showToast('🏦 Data bank disimpan!');
-    };
-    
-    window.deleteBank = function(id) {
-        if (confirm('Hapus rekening bank?')) {
-            let bankAccounts = getBankAccounts();
-            bankAccounts = bankAccounts.filter(b => b.id !== id);
-            localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-            localStorage.setItem('lastProductUpdate', Date.now());
-            renderContactPage();
-            renderAdminContact();
-            forceRefreshAllData();
-            showToast('🗑️ Bank dihapus!');
-        }
-    };
-    
+
+    // ==================== ADMIN WHITELIST ====================
     function renderWhitelist() {
         const container = document.getElementById('whitelistItems');
-        let adminWhitelist = getAdminWhitelist();
         let html = '';
         adminWhitelist.forEach(email => {
-            html += `<div class="whitelist-item"><span>${email}</span><button onclick="removeAdminEmail('${email}')" style="background:#ff4444; color:white; padding:4px 12px; border-radius:20px;">Hapus</button></div>`;
+            html += `
+                <div class="whitelist-item">
+                    <span>${email}</span>
+                    <button onclick="removeAdminEmail('${email}')" style="background:#ff4444; color:white; border:none; padding:4px 12px; border-radius:30px;">Hapus</button>
+                </div>
+            `;
         });
         container.innerHTML = html;
     }
-    
+
     window.addAdminEmail = function() {
         const email = document.getElementById('newAdminEmail').value.trim();
         if (!email) return;
-        let adminWhitelist = getAdminWhitelist();
         if (!adminWhitelist.includes(email)) {
             adminWhitelist.push(email);
             localStorage.setItem('adminWhitelist', JSON.stringify(adminWhitelist));
             renderWhitelist();
             document.getElementById('newAdminEmail').value = '';
             alert('Email admin ditambahkan');
-        } else alert('Email sudah ada');
+        } else {
+            alert('Email sudah ada dalam daftar');
+        }
     };
-    
+
     window.removeAdminEmail = function(email) {
-        if (confirm(`Hapus ${email}?`)) {
-            let adminWhitelist = getAdminWhitelist();
+        if (confirm(`Hapus ${email} dari daftar admin?`)) {
             adminWhitelist = adminWhitelist.filter(e => e !== email);
             localStorage.setItem('adminWhitelist', JSON.stringify(adminWhitelist));
             renderWhitelist();
+            
             if (currentUser && currentUser.email === email) {
-                document.getElementById('adminNavBtn').style.display = 'none';
+                const adminNavItem = document.querySelector('.nav-item[onclick*="admin"]');
+                if (adminNavItem) adminNavItem.style.display = 'none';
             }
         }
     };
-    
+
+    // ==================== ADMIN TAB ====================
     window.switchAdminTab = function(tab) {
-        if (!isAdmin()) { alert('Akses ditolak'); showPage('produk'); return; }
+        if (!isAdmin()) {
+            alert('Anda tidak memiliki akses ke menu admin');
+            showPage('produk');
+            return;
+        }
+        
         document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+        
         if (tab === 'produk') {
             document.querySelector('.admin-tab').classList.add('active');
             document.getElementById('admin-produk').classList.add('active');
@@ -2037,25 +2186,45 @@
             renderWhitelist();
         }
     };
-    
+
+    // ==================== NAVIGASI ====================
     window.showPage = function(pageId) {
         if (!currentUser) return;
-        if (pageId === 'admin' && !isAdmin()) { alert('Akses ditolak'); return; }
+        
+        if (pageId === 'admin' && !isAdmin()) {
+            alert('Anda tidak memiliki akses ke menu admin');
+            return;
+        }
+        
         document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
         document.getElementById('page-' + pageId).classList.add('active');
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        const navMap = { profil:0, produk:1, keranjang:2, pesanan:3, kontak:4, admin:5 };
-        if (navMap[pageId] !== undefined) document.querySelectorAll('.nav-item')[navMap[pageId]]?.classList.add('active');
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            if (btn.innerText.toLowerCase().includes(pageId)) btn.classList.add('active');
+        });
         document.getElementById('currentPageBadge').innerText = pageId.toUpperCase();
-        document.getElementById('searchContainer').style.display = pageId === 'produk' ? 'block' : 'none';
-        if (pageId === 'produk') { document.getElementById('searchInput').value = ''; renderPublicProducts(); }
+        
+        if (pageId === 'produk') {
+            searchContainer.style.display = 'block';
+            document.getElementById('searchInput').value = '';
+            renderPublicProducts();
+        } else {
+            searchContainer.style.display = 'none';
+        }
+        
         if (pageId === 'profil') loadProfileToPage();
         if (pageId === 'keranjang') renderCart();
         if (pageId === 'pesanan') renderOrders();
         if (pageId === 'kontak') renderContactPage();
-        if (pageId === 'admin' && isAdmin()) { renderAdminProducts(); renderAdminOrders(); renderAdminContact(); renderWhitelist(); }
+        if (pageId === 'admin' && isAdmin()) { 
+            renderAdminProducts(); 
+            renderAdminOrders();
+            renderAdminContact();
+            renderWhitelist();
+        }
     };
-    
+
+    // Inisialisasi
     checkLogin();
 </script>
 </body>
