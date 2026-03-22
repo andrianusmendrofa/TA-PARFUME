@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>TA PARFUME · elegan total</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>TA PARFUME | Perfume Store</title>
     <!-- Font Awesome 5 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <style>
@@ -15,31 +15,27 @@
         }
 
         body {
-        body {
-            background-image: url('walpa3.jpg');
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%230b5e2e" d="M10,10 L90,10 L50,50 Z"/></svg>'), linear-gradient(145deg, #0a2f1f 0%, #063b1f 100%);
+            background-size: 30px 30px, auto;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 0;
-            margin: 0;
+            align-items: center;
+            padding: 12px;
         }
 
         .phone-frame {
-            max-width: 1200px;
+            max-width: 500px;
             width: 100%;
             background-color: #ffffff;
-            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.25);
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.45);
             border-radius: 36px 36px 28px 28px;
             overflow: hidden;
             border: 3px solid #f0eae2;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            max-height: 100vh;
+            height: 90vh;
+            max-height: 800px;
         }
 
         /* HEADER STICKY */
@@ -111,17 +107,39 @@
             font-style: italic;
         }
 
-         /* Konten utama - SCROLLABLE */
+        /* Konten utama - SCROLLABLE */
         .main-content {
             flex: 1;
             overflow-y: auto;
             padding: 20px 20px 12px 20px;
-            background: url('walpa5.jpg');
-            background-size: cover;
-            background-position: center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><circle cx="50" cy="50" r="40" fill="%238e44ad"/></svg>'), #fef5e7;
+            background-size: 60px 60px, auto;
             scroll-behavior: smooth;
         }
 
+        /* Sync Notification */
+        .sync-notice {
+            background: linear-gradient(135deg, #c7ea46, #b0d630);
+            color: #1e3b2a;
+            padding: 12px 18px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 40px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: pulse 1.5s infinite;
+            border: 2px solid #046307;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
 
         /* ========== AUTH ========== */
         #auth-container {
@@ -210,18 +228,11 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        @media screen and (min-width: 900px) {
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
 
         .product-item {
-            background: url('walpa3.jpg');
+            background: linear-gradient(145deg, #ffffff, #fcf7ef);
             min-height: 500px;
             height: auto;
-            background-size: cover;
-            background-position: center;
             border-radius: 24px;
             padding: 20px 15px 20px 15px;
             border: 2px solid #c7ea46;
@@ -232,11 +243,10 @@
             transition: transform 0.2s;
         }
 
-
         .product-image {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background: #8e44ad;
+            background: linear-gradient(135deg, #8e44ad, #6c3483);
             border-radius: 20px;
             margin-bottom: 15px;
             display: flex;
@@ -258,9 +268,8 @@
         .product-info h3 {
             font-size: 20px;
             font-weight: 700;
-            color: white;
+            color: #1f2a1b;
             margin-bottom: 15px;
-            text-shadow: 1px 1px 2px black;
             text-align: center;
             letter-spacing: 0.3px;
             line-height: 1.4;
@@ -303,14 +312,14 @@
         }
         .product-price {
             font-weight: 700;
-            color: #ffffff;
+            color: #2c3e1f;
             font-size: 22px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
             letter-spacing: 0.5px;
         }
         .product-stock {
-            background: #b13e3e;
-            color: white;
+            background: #ffecb3;
+            color: #1e3b2a;
             padding: 5px 14px;
             border-radius: 30px;
             font-size: 13px;
@@ -340,7 +349,7 @@
 
         /* ========== PROFIL PAGE ========== */
         .profile-card {
-            background: #3e0455;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 32px;
             padding: 22px;
             border: 3px solid #c7ea46;
@@ -418,7 +427,7 @@
             overflow-y: auto;
         }
         .cart-item {
-            background: #3e0455;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 24px;
             padding: 14px;
             display: flex;
@@ -470,10 +479,10 @@
             justify-content: space-between;
             font-weight: 800;
             font-size: 18px;
-            color: #ffffff;
+            color: #1f3b2c;
         }
         .cart-summary span {
-            color: #ffffff;
+            color: #1f3b2c;
             font-weight: 800;
         }
         .delete-item {
@@ -507,38 +516,18 @@
             width: 100%;
             margin-top: 16px;
             cursor: pointer;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 0 0 1px rgba(199, 234, 70, 0.3);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-        .checkout-btn:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
         }
         .checkout-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.4), 0 0 0 2px rgba(199, 234, 70, 0.6);
-            background: linear-gradient(145deg, #34495e, #2c3e50);
-        }
-        .checkout-btn:hover:before {
-            left: 100%;
-        }
-        .checkout-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 0 0 1px #c7ea46;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4);
         }
 
         /* ========== PESANAN ========== */
         .order-item {
-            background: #3e0455;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 20px;
             padding: 16px;
             margin-bottom: 12px;
@@ -566,7 +555,7 @@
 
         /* ========== KONTAK ========== */
         .contact-container {
-            background: #3e0455;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 32px;
             padding: 22px;
             border: 3px solid #c7ea46;
@@ -575,7 +564,6 @@
             margin-bottom: 30px;
         }
         
-        /* Judul Sosial Media dan Rekening Bank - ELEGAN */
         .contact-section h4 {
             color: #ffffff;
             margin-bottom: 20px;
@@ -597,12 +585,6 @@
             height: 3px;
             background: linear-gradient(90deg, transparent, #c7ea46, #ffffff, #c7ea46, transparent);
             border-radius: 3px;
-            animation: glowLine 2s infinite;
-        }
-        @keyframes glowLine {
-            0% { opacity: 0.5; width: 30%; left: 35%; }
-            50% { opacity: 1; width: 70%; left: 15%; }
-            100% { opacity: 0.5; width: 30%; left: 35%; }
         }
         
         .contact-description {
@@ -614,7 +596,6 @@
             background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 40px;
             border: 1px solid #c7ea46;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         .social-grid {
             display: grid;
@@ -630,24 +611,21 @@
             border: 2px solid #c7ea46;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         .social-item:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 0 2px #c7ea46;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
         .social-item i {
             font-size: 40px;
             color: white;
             margin-bottom: 8px;
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
         }
         .social-item span {
             display: block;
             color: white;
             font-weight: 600;
             font-size: 12px;
-            text-shadow: 1px 1px 2px black;
         }
         .bank-item {
             background: linear-gradient(145deg, #8e44ad, #6c3483);
@@ -659,12 +637,6 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-        .bank-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4), 0 0 0 2px #c7ea46;
         }
         .bank-info {
             color: white;
@@ -672,7 +644,6 @@
         .bank-info strong {
             color: #c7ea46;
             font-size: 18px;
-            text-shadow: 1px 1px 2px black;
         }
         .bank-actions {
             display: flex;
@@ -686,13 +657,6 @@
             padding: 8px 16px;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .copy-btn:hover {
-            transform: scale(1.05);
-            background: #d4f25c;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
         /* ========== ADMIN ========== */
@@ -710,11 +674,6 @@
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .admin-tab:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .admin-tab.active {
             background: #046307;
@@ -728,7 +687,7 @@
         }
 
         .form-produk {
-            background: #3e0455;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 32px;
             padding: 22px;
             margin-bottom: 30px;
@@ -760,11 +719,6 @@
             cursor: pointer;
             color: white;
             margin-bottom: 15px;
-            transition: all 0.2s ease;
-        }
-        .upload-area:hover {
-            background: #9b59b6;
-            transform: scale(1.02);
         }
         .ukuran-grid {
             display: grid;
@@ -781,9 +735,6 @@
         .ukuran-item label {
             color: #c7ea46;
         }
-        .ukuran-item input {
-            margin-top: 5px;
-        }
 
         .admin-product-list {
             margin-top: 20px;
@@ -798,56 +749,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s ease;
-        }
-        .admin-product-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-        }
-        .admin-product-info {
-            flex: 2;
-        }
-        .admin-product-info h4 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: white;
-        }
-        .admin-product-info .product-range {
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 4px;
-        }
-        .admin-product-info .total-stock {
-            font-size: 14px;
-            color: white;
-        }
-        .admin-product-actions {
-            display: flex;
-            gap: 8px;
-        }
-        .admin-product-actions button {
-            padding: 8px 16px;
-            border-radius: 30px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .admin-product-actions button:hover {
-            transform: scale(1.05);
-        }
-        .btn-edit {
-            background: #c7ea46;
-            color: #1e3b2a;
-        }
-        .btn-delete {
-            background: #ff4444;
-            color: white;
-        }
-        .btn-delete:hover {
-            background: #ff6666;
         }
 
         .whitelist-container {
@@ -864,9 +765,6 @@
             align-items: center;
             padding: 8px 0;
             border-bottom: 1px solid #c7ea46;
-            color: white;
-        }
-        .whitelist-item span {
             color: white;
         }
 
@@ -887,7 +785,7 @@
             display: flex;
         }
         .modal-content {
-            background: #3e0455;
+            background: linear-gradient(145deg, #8e44ad, #6c3483);
             border-radius: 40px;
             padding: 25px;
             max-width: 500px;
@@ -921,11 +819,6 @@
             border: none;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .modal-actions button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         .btn-save {
             background: #046307;
@@ -967,9 +860,6 @@
             font-weight: 600;
             transition: all 0.2s ease;
         }
-        .nav-item:hover {
-            background: rgba(4, 99, 7, 0.2);
-        }
         .nav-item i {
             font-size: 20px;
             color: #046307;
@@ -982,6 +872,17 @@
         .nav-item.active i {
             color: white;
         }
+        
+        .online-status {
+            font-size: 10px;
+            background: rgba(0,0,0,0.6);
+            padding: 3px 8px;
+            border-radius: 20px;
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -989,6 +890,7 @@
     <!-- HEADER STICKY -->
     <div class="sticky-header">
         <div class="top-header">
+            <div class="online-status" id="onlineStatus">🟢 Online</div>
             <div class="store-name">TA PARFUME</div>
             <div class="produk-badge" id="currentPageBadge">฿</div>
         </div>
@@ -1014,6 +916,11 @@
                     <input type="password" id="loginPassword" placeholder="Password">
                     <button onclick="handleLogin()">Masuk</button>
                     <div class="register-link" onclick="showRegisterPage()">Belum punya akun? Daftar</div>
+                    <div style="margin-top: 15px; font-size: 12px; text-align: center; color: #666;">
+                        <strong>Akun Demo:</strong><br>
+                        Admin: admin@taparfume.com / admin123<br>
+                        Customer: pelanggan@mail.com / 123456
+                    </div>
                 </div>
             </div>
             <div id="auth-register" class="auth-page">
@@ -1033,6 +940,11 @@
 
         <!-- APP CONTAINER -->
         <div id="app-container">
+            <!-- Sync Notification -->
+            <div id="syncNotification" class="sync-notice" style="display:none;" onclick="forceSync()">
+                <i class="fas fa-sync-alt"></i> <span id="syncMessage">Ada update baru dari Admin! Klik untuk refresh data</span>
+            </div>
+            
             <!-- PROFIL PAGE -->
             <div id="page-profil" class="app-page">
                 <div class="profile-card">
@@ -1083,26 +995,14 @@
 
             <!-- PESANAN PAGE -->
             <div id="page-pesanan" class="app-page">
-                <div style="color:white; margin-bottom:16px; font-weight:800; text-align:center;">Riwayat Pesanan</div>
+                <div style="color:#1f3b2c; margin-bottom:16px; font-weight:800; text-align:center;">Riwayat Pesanan</div>
                 <div id="orderHistory"></div>
-                <div style="text-align:center; color:#ccc;" id="emptyOrders">Belum ada pesanan</div>
+                <div style="text-align:center; color:#666;" id="emptyOrders">Belum ada pesanan</div>
             </div>
 
             <!-- KONTAK PAGE -->
             <div id="page-kontak" class="app-page">
-                <div class="contact-container" id="contactContainer">
-                    <div class="contact-section">
-                        <h4>Sosial Media</h4>
-                        <div class="contact-description">
-                            <i class="fas fa-hand-pointer"></i> Silahkan klik bagian sosial media kami untuk terhubung langsung
-                        </div>
-                        <div class="social-grid" id="socialGrid"></div>
-                    </div>
-                    <div class="contact-section">
-                        <h4>Rekening Bank</h4>
-                        <div id="bankList"></div>
-                    </div>
-                </div>
+                <div class="contact-container" id="contactContainer"></div>
             </div>
 
             <!-- ADMIN PAGE -->
@@ -1192,7 +1092,7 @@
             <button class="nav-item" onclick="showPage('keranjang')"><i class="fas fa-shopping-cart"></i><span>Keranjang</span></button>
             <button class="nav-item" onclick="showPage('pesanan')"><i class="fas fa-list"></i><span>Pesanan</span></button>
             <button class="nav-item" onclick="showPage('kontak')"><i class="fas fa-phone"></i><span>Kontak</span></button>
-            <button class="nav-item" onclick="showPage('admin')"><i class="fas fa-cog"></i><span>Admin</span></button>
+            <button class="nav-item admin-only" onclick="showPage('admin')"><i class="fas fa-cog"></i><span>Admin</span></button>
         </div>
     </div>
 </div>
@@ -1279,23 +1179,19 @@
 </div>
 
 <script>
-    // ==================== DATA ====================
+    // ==================== GLOBAL DATA ====================
     let users = JSON.parse(localStorage.getItem('taParfumeUsers')) || [
-        { email: 'andi@mail.com', password: '123456', profile: { nama: 'Andi Saputra', email: 'andi@mail.com', line: 'andi_parfume', telp: '081234567890', alamat: 'Jakarta' } },
-        { email: 'admin@taparfume.com', password: 'admin123', profile: { nama: 'Admin', email: 'admin@taparfume.com', line: 'admin_line', telp: '081234567891', alamat: 'Jakarta' } },
-        { email: 'andrianusmen@gmail.com', password: 'admin123', profile: { nama: 'Andrianus Men', email: 'andrianusmen@gmail.com', line: 'andrianus_line', telp: '081234567892', alamat: 'Jakarta' } }
+        { email: 'admin@taparfume.com', password: 'admin123', profile: { nama: 'Administrator', email: 'admin@taparfume.com', line: 'admin_line', telp: '081234567890', alamat: 'Jakarta' } },
+        { email: 'pelanggan@mail.com', password: '123456', profile: { nama: 'Pelanggan Setia', email: 'pelanggan@mail.com', line: 'pelanggan_line', telp: '081234567891', alamat: 'Bandung' } }
     ];
     
-    let adminWhitelist = JSON.parse(localStorage.getItem('adminWhitelist')) || ['admin@taparfume.com', 'andi@mail.com', 'andrianusmen@gmail.com'];
+    let adminWhitelist = JSON.parse(localStorage.getItem('adminWhitelist')) || ['admin@taparfume.com'];
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
     
     let socialMedia = JSON.parse(localStorage.getItem('socialMedia')) || [
         { id: 'wa', name: 'WhatsApp', icon: 'fab fa-whatsapp', url: 'https://wa.me/628123456789' },
-        { id: 'line', name: 'Line', icon: 'fab fa-line', url: 'https://line.me/ti/p/~username' },
-        { id: 'telegram', name: 'Telegram', icon: 'fab fa-telegram', url: 'https://t.me/username' },
-        { id: 'instagram', name: 'Instagram', icon: 'fab fa-instagram', url: 'https://instagram.com/username' },
-        { id: 'facebook', name: 'Facebook', icon: 'fab fa-facebook', url: 'https://facebook.com/username' },
-        { id: 'tiktok', name: 'TikTok', icon: 'fab fa-tiktok', url: 'https://tiktok.com/@username' }
+        { id: 'ig', name: 'Instagram', icon: 'fab fa-instagram', url: 'https://instagram.com/taparfume' },
+        { id: 'line', name: 'Line', icon: 'fab fa-line', url: 'https://line.me/ti/p/~taparfume' }
     ];
     
     let bankAccounts = JSON.parse(localStorage.getItem('bankAccounts')) || [
@@ -1305,59 +1201,145 @@
     
     let products = JSON.parse(localStorage.getItem('taParfumeProducts')) || [
         { id:1, name:'DUNHILL BLUE', image:'', prices:{30:300,35:350,50:500,100:900}, stock:{30:5,35:3,50:2,100:1} },
-        { id:2, name:'BVLGARI MAN IN BLACK', image:'', prices:{30:300,35:350,50:500,100:900}, stock:{30:4,35:2,50:3,100:2} },
-        { id:3, name:'BVLGARI OMNIA AMETYS', image:'', prices:{30:300,35:350,50:500,100:900}, stock:{30:6,35:4,50:1,100:0} }
+        { id:2, name:'BVLGARI MAN IN BLACK', image:'', prices:{30:350,35:400,50:550,100:950}, stock:{30:4,35:2,50:3,100:2} },
+        { id:3, name:'BVLGARI OMNIA AMETHYST', image:'', prices:{30:320,35:380,50:520,100:880}, stock:{30:6,35:4,50:1,100:0} }
     ];
     let cart = JSON.parse(localStorage.getItem('taParfumeCart')) || [];
     let orders = JSON.parse(localStorage.getItem('taParfumeOrders')) || [];
     let customerOrders = JSON.parse(localStorage.getItem('customerOrders')) || [];
-
+    let dataVersion = { products: 1, social: 1, banks: 1 };
+    
     let filteredProducts = [...products];
+    let syncInterval = null;
 
-    // ==================== CEK ADMIN ====================
-    function isAdmin() {
+    // Load saved versions
+    const savedVersions = JSON.parse(localStorage.getItem('dataVersions'));
+    if (savedVersions) dataVersion = savedVersions;
+
+    // ==================== HELPER ====================
+    function isAdminUser() {
         return currentUser && adminWhitelist.includes(currentUser.email);
     }
 
-    // ==================== DOM ====================
-    const authContainer = document.getElementById('auth-container');
-    const appContainer = document.getElementById('app-container');
-    const bottomNav = document.getElementById('bottomNav');
-    const searchContainer = document.getElementById('searchContainer');
+    function saveAll() {
+        localStorage.setItem('taParfumeUsers', JSON.stringify(users));
+        localStorage.setItem('adminWhitelist', JSON.stringify(adminWhitelist));
+        localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
+        localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
+        localStorage.setItem('taParfumeCart', JSON.stringify(cart));
+        localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
+        localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        localStorage.setItem('dataVersions', JSON.stringify(dataVersion));
+        localStorage.setItem('lastUpdate', new Date().toLocaleString());
+        localStorage.setItem('lastUpdateBy', currentUser?.email || 'system');
+    }
+
+    // ==================== REAL-TIME SYNC ====================
+    function checkForUpdates() {
+        const savedVersionsData = JSON.parse(localStorage.getItem('dataVersions')) || { products: 1, social: 1, banks: 1 };
+        const lastUpdateBy = localStorage.getItem('lastUpdateBy') || 'Admin';
+        let hasUpdate = false;
+        
+        if (savedVersionsData.products > dataVersion.products) {
+            const newProducts = JSON.parse(localStorage.getItem('taParfumeProducts')) || products;
+            if (JSON.stringify(newProducts) !== JSON.stringify(products)) {
+                products = newProducts;
+                filteredProducts = [...products];
+                dataVersion.products = savedVersionsData.products;
+                renderPublicProducts();
+                if (isAdminUser()) renderAdminProducts();
+                hasUpdate = true;
+            }
+        }
+        
+        if (savedVersionsData.social > dataVersion.social) {
+            const newSocial = JSON.parse(localStorage.getItem('socialMedia')) || socialMedia;
+            if (JSON.stringify(newSocial) !== JSON.stringify(socialMedia)) {
+                socialMedia = newSocial;
+                dataVersion.social = savedVersionsData.social;
+                renderContactPage();
+                if (isAdminUser()) renderAdminContact();
+                hasUpdate = true;
+            }
+        }
+        
+        if (savedVersionsData.banks > dataVersion.banks) {
+            const newBanks = JSON.parse(localStorage.getItem('bankAccounts')) || bankAccounts;
+            if (JSON.stringify(newBanks) !== JSON.stringify(bankAccounts)) {
+                bankAccounts = newBanks;
+                dataVersion.banks = savedVersionsData.banks;
+                renderContactPage();
+                if (isAdminUser()) renderAdminContact();
+                hasUpdate = true;
+            }
+        }
+        
+        if (hasUpdate && !isAdminUser()) {
+            const notif = document.getElementById('syncNotification');
+            const syncMsg = document.getElementById('syncMessage');
+            if (notif && syncMsg) {
+                syncMsg.innerHTML = `${lastUpdateBy !== 'system' ? lastUpdateBy : 'Admin'} telah memperbarui data! Klik untuk refresh`;
+                notif.style.display = 'flex';
+                setTimeout(() => {
+                    if (notif.style.display === 'flex') notif.style.opacity = '0.8';
+                }, 8000);
+            }
+        }
+        
+        return hasUpdate;
+    }
+    
+    window.forceSync = function() {
+        const notif = document.getElementById('syncNotification');
+        if (notif) notif.style.display = 'none';
+        checkForUpdates();
+        alert('✓ Data berhasil disinkronkan!');
+        renderPublicProducts();
+        renderCart();
+        renderContactPage();
+    };
+    
+    function startAutoSync() {
+        if (syncInterval) clearInterval(syncInterval);
+        syncInterval = setInterval(() => {
+            checkForUpdates();
+        }, 5000);
+    }
 
     // ==================== AUTH ====================
     function checkLogin() {
         if (currentUser) {
-            authContainer.style.display = 'none';
-            appContainer.style.display = 'block';
-            bottomNav.style.display = 'block';
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+            document.getElementById('bottomNav').style.display = 'block';
             
-            const adminNavItem = document.querySelector('.nav-item[onclick*="admin"]');
+            const adminNavItem = document.querySelector('.nav-item.admin-only');
             if (adminNavItem) {
-                adminNavItem.style.display = isAdmin() ? 'flex' : 'none';
+                adminNavItem.style.display = isAdminUser() ? 'flex' : 'none';
             }
             
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-produk').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelector('.nav-item[onclick*="produk"]').classList.add('active');
             document.getElementById('currentPageBadge').innerText = 'PRODUK';
-            
-            searchContainer.style.display = 'block';
+            document.getElementById('searchContainer').style.display = 'block';
             
             loadProfileToPage();
             renderPublicProducts();
             renderCart();
             renderOrders();
             renderContactPage();
+            startAutoSync();
         } else {
-            authContainer.style.display = 'block';
-            appContainer.style.display = 'none';
-            bottomNav.style.display = 'none';
-            searchContainer.style.display = 'none';
+            document.getElementById('auth-container').style.display = 'block';
+            document.getElementById('app-container').style.display = 'none';
+            document.getElementById('bottomNav').style.display = 'none';
+            document.getElementById('searchContainer').style.display = 'none';
             document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
             document.getElementById('auth-login').classList.add('active');
             document.getElementById('currentPageBadge').innerText = 'LOGIN';
+            if (syncInterval) clearInterval(syncInterval);
         }
     }
 
@@ -1367,7 +1349,7 @@
         const user = users.find(u => u.email === email && u.password === pass);
         if (user) {
             currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            saveAll();
             checkLogin();
         } else {
             document.getElementById('loginError').innerText = 'Email/password salah';
@@ -1397,19 +1379,16 @@
             profile: { nama, email, line: document.getElementById('regLine').value, telp: document.getElementById('regTelp').value, alamat: document.getElementById('regAlamat').value }
         };
         users.push(newUser);
-        localStorage.setItem('taParfumeUsers', JSON.stringify(users));
         currentUser = newUser;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        saveAll();
         checkLogin();
     };
 
     window.logout = function() {
         currentUser = null;
-        localStorage.removeItem('currentUser');
         cart = [];
         customerOrders = [];
-        localStorage.setItem('taParfumeCart', '[]');
-        localStorage.setItem('customerOrders', '[]');
+        saveAll();
         checkLogin();
     };
 
@@ -1441,8 +1420,7 @@
         currentUser.profile = profil;
         const idx = users.findIndex(u => u.email === currentUser.email);
         if (idx >= 0) users[idx].profile = profil;
-        localStorage.setItem('taParfumeUsers', JSON.stringify(users));
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        saveAll();
         document.querySelectorAll('#page-profil input, #page-profil textarea').forEach(el => el.readOnly = true);
         document.getElementById('editProfilBtn').style.display = 'flex';
         document.getElementById('saveProfileContainer').style.display = 'none';
@@ -1455,13 +1433,12 @@
             currentUser.password = newPass;
             const idx = users.findIndex(u => u.email === currentUser.email);
             if (idx >= 0) users[idx].password = newPass;
-            localStorage.setItem('taParfumeUsers', JSON.stringify(users));
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            saveAll();
             alert('Password diubah');
         }
     };
 
-    // ==================== PRODUK DENGAN SEARCH ====================
+    // ==================== PRODUK ====================
     window.filterProducts = function() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
         filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchTerm));
@@ -1483,10 +1460,10 @@
         let html = '';
         filteredProducts.forEach(p => {
             const imageHtml = p.image ? `<img src="${p.image}">` : '<i class="fas fa-box"></i>';
-            const ukuranTersedia = [30,35,50,100].filter(uk => p.stock[uk] > 0);
-            const defaultUk = ukuranTersedia.length > 0 ? ukuranTersedia[0] : 30;
+            const availableSizes = [30,35,50,100].filter(uk => p.stock[uk] > 0);
+            const defaultUk = availableSizes.length > 0 ? availableSizes[0] : 30;
             html += `
-                <div class="product-item" data-id="${p.id}" data-product='${JSON.stringify(p).replace(/'/g, "&apos;")}'>
+                <div class="product-item" data-id="${p.id}" data-selected-size="${defaultUk}">
                     <div class="product-image">${imageHtml}</div>
                     <div class="product-info">
                         <h3>${p.name}</h3>
@@ -1531,17 +1508,17 @@
     window.beliSekarang = function(productId) {
         const product = products.find(p => p.id === productId);
         const productEl = document.querySelector(`[data-id="${productId}"]`);
-        const selectedSize = parseInt(productEl.dataset.selectedSize) || 30;
+        const selectedSize = parseInt(productEl?.dataset.selectedSize) || 30;
         if (product.stock[selectedSize] <= 0) { alert('Stok habis'); return; }
         const itemName = `${product.name} (${selectedSize}ml)`;
         const existing = cart.find(i => i.name === itemName);
         if (existing) existing.quantity++;
         else cart.push({ name: itemName, price: product.prices[selectedSize], quantity: 1, size: selectedSize, productId: product.id });
         product.stock[selectedSize]--;
-        localStorage.setItem('taParfumeCart', JSON.stringify(cart));
-        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
+        saveAll();
         renderCart();
         renderPublicProducts();
+        if (isAdminUser()) renderAdminProducts();
         showPage('keranjang');
     };
 
@@ -1551,26 +1528,26 @@
         const totalSpan = document.getElementById('totalPrice');
         if (!container) return;
         if (cart.length === 0) {
-            container.innerHTML = '<div style="text-align:center; padding:30px; color:white;">Keranjang kosong</div>';
+            container.innerHTML = '<div style="text-align:center; padding:30px; color:#1f3b2c;">Keranjang kosong</div>';
             totalSpan.innerText = '฿ 0';
             return;
         }
         let html = '', total = 0;
-        cart.forEach((item, index) => {
+        cart.forEach((item) => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
-            html += `<div class="cart-item" data-item-index="${index}">
+            html += `<div class="cart-item">
                 <div style="flex:2;">
                     <h4>${item.name}</h4>
                     <div class="item-price">฿ ${item.price} x ${item.quantity}</div>
                 </div>
                 <div class="cart-item-controls">
-                    <button onclick="updateQty('${item.name}', -1)">−</button>
+                    <button onclick="updateQty('${item.name.replace(/'/g, "\\'")}', -1)">−</button>
                     <span>${item.quantity}</span>
-                    <button onclick="updateQty('${item.name}', 1)">+</button>
+                    <button onclick="updateQty('${item.name.replace(/'/g, "\\'")}', 1)">+</button>
                 </div>
                 <div style="font-weight:800; color:#ffffff;">฿ ${itemTotal}</div>
-                <button class="delete-item" onclick="hapusItem('${item.name}')"><i class="fas fa-trash"></i></button>
+                <button class="delete-item" onclick="hapusItem('${item.name.replace(/'/g, "\\'")}')"><i class="fas fa-trash"></i></button>
             </div>`;
         });
         container.innerHTML = html;
@@ -1581,20 +1558,14 @@
         const item = cart.find(i => i.name === name);
         if (!item) return;
         const product = products.find(p => p.id === item.productId);
-        if (product) {
-            if (change > 0 && product.stock[item.size] <= 0) { alert('Stok habis'); return; }
-            if (change > 0) product.stock[item.size]--;
-            else if (change < 0) product.stock[item.size]++;
-        }
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            cart = cart.filter(i => i.name !== name);
-            if (product) product.stock[item.size] += Math.abs(change);
-        }
-        localStorage.setItem('taParfumeCart', JSON.stringify(cart));
-        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
+        if (change > 0 && product.stock[item.size] <= 0) { alert('Stok habis'); return; }
+        if (change > 0) { product.stock[item.size]--; item.quantity++; }
+        else if (change < 0 && item.quantity > 1) { product.stock[item.size]++; item.quantity--; }
+        else if (change < 0 && item.quantity === 1) { product.stock[item.size]++; cart = cart.filter(i => i.name !== name); }
+        saveAll();
         renderCart();
         renderPublicProducts();
+        if (isAdminUser()) renderAdminProducts();
     };
 
     window.hapusItem = function(name) {
@@ -1604,10 +1575,10 @@
             if (product) product.stock[item.size] += item.quantity;
         }
         cart = cart.filter(i => i.name !== name);
-        localStorage.setItem('taParfumeCart', JSON.stringify(cart));
-        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
+        saveAll();
         renderCart();
         renderPublicProducts();
+        if (isAdminUser()) renderAdminProducts();
     };
 
     // ==================== CHECKOUT ====================
@@ -1626,12 +1597,11 @@
         orders.push(newOrder);
         customerOrders.push(newOrder);
         cart = [];
-        localStorage.setItem('taParfumeCart', JSON.stringify(cart));
-        localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
-        localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
+        saveAll();
         alert('Pesanan diterima!');
         showPage('pesanan');
         renderOrders();
+        if (isAdminUser()) renderAdminOrders();
     };
 
     // ==================== PESANAN ====================
@@ -1646,14 +1616,15 @@
         }
         emptyDiv.style.display = 'none';
         let html = '';
-        customerOrders.forEach((ord, i) => {
+        customerOrders.slice().reverse().forEach((ord) => {
             html += `<div class="order-item">
                 <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                    <span style="font-weight:800;">Pesanan #${i+1}</span>
+                    <span style="font-weight:800;">Pesanan #${ord.id}</span>
                     <span class="order-status">${ord.status}</span>
                 </div>
                 <div style="font-weight:600; margin-bottom:8px;">${ord.items.map(it => `${it.name} x${it.quantity}`).join(', ')}</div>
                 <div style="font-weight:800; font-size:16px;">Total: ฿ ${ord.total}</div>
+                <div style="font-size:11px; margin-top:5px;">${ord.date}</div>
             </div>`;
         });
         container.innerHTML = html;
@@ -1661,233 +1632,40 @@
 
     // ==================== KONTAK ====================
     function renderContactPage() {
-        renderSocialGrid();
-        renderBankList();
-    }
-
-    function renderSocialGrid() {
-        const grid = document.getElementById('socialGrid');
-        let html = '';
-        socialMedia.forEach(social => {
-            html += `
-                <div class="social-item" onclick="window.open('${social.url}', '_blank')">
-                    <i class="${social.icon}"></i>
-                    <span>${social.name}</span>
+        const container = document.getElementById('contactContainer');
+        if (!container) return;
+        const socialHtml = `
+            <div class="contact-section">
+                <h4>Sosial Media</h4>
+                <div class="contact-description">
+                    <i class="fas fa-hand-pointer"></i> Silahkan klik bagian sosial media kami untuk terhubung langsung
                 </div>
-            `;
-        });
-        grid.innerHTML = html;
-    }
-
-    function renderBankList() {
-        const list = document.getElementById('bankList');
-        let html = '';
-        bankAccounts.forEach(bank => {
-            html += `
-                <div class="bank-item">
-                    <div class="bank-info">
-                        <strong>${bank.bankName}</strong><br>
-                        ${bank.accountNumber} a.n. ${bank.accountOwner}
-                    </div>
-                    <div class="bank-actions">
-                        <button class="copy-btn" onclick="copyToClipboard('${bank.accountNumber}')">Salin No.</button>
-                    </div>
+                <div class="social-grid">
+                    ${socialMedia.map(s => `
+                        <div class="social-item" onclick="window.open('${s.url}', '_blank')">
+                            <i class="${s.icon}"></i>
+                            <span>${s.name}</span>
+                        </div>
+                    `).join('')}
                 </div>
-            `;
-        });
-        list.innerHTML = html;
+            </div>
+            <div class="contact-section">
+                <h4>Rekening Bank</h4>
+                ${bankAccounts.map(b => `
+                    <div class="bank-item">
+                        <div class="bank-info">
+                            <strong>${b.bankName}</strong><br>
+                            ${b.accountNumber} a.n. ${b.accountOwner}
+                        </div>
+                        <div class="bank-actions">
+                            <button class="copy-btn" onclick="navigator.clipboard.writeText('${b.accountNumber}'); alert('Nomor rekening disalin!')">Salin No.</button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        container.innerHTML = socialHtml;
     }
-
-    window.copyToClipboard = function(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert('Nomor rekening disalin!');
-        });
-    };
-
-    // ==================== ADMIN KONTAK ====================
-    function renderAdminContact() {
-        if (!isAdmin()) return;
-        
-        const socialContainer = document.getElementById('socialEditList');
-        let socialHtml = '';
-        socialMedia.forEach(s => {
-            socialHtml += `
-                <div style="margin-bottom:15px; padding:15px; background:#8e44ad; border-radius:20px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; justify-content:center;">
-                        <i class="${s.icon}" style="font-size:24px; color:white;"></i>
-                        <span style="color:white; font-weight:600;">${s.name}</span>
-                    </div>
-                    <div style="display:flex; gap:5px; margin-bottom:10px;">
-                        <input type="url" id="social_url_${s.id}" value="${s.url}" placeholder="URL" style="flex:2; padding:8px; border-radius:30px; border:2px solid #c7ea46;">
-                        <button onclick="updateSocialUrl('${s.id}')" style="background:#c7ea46; padding:8px 15px; border-radius:30px;">Update</button>
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <button onclick="openEditSocialModal('${s.id}')" style="background:#c7ea46; padding:8px; border-radius:30px; flex:1;">Edit Detail</button>
-                        <button onclick="deleteSocial('${s.id}')" style="background:#ff4444; color:white; padding:8px; border-radius:30px; flex:1;">Hapus</button>
-                    </div>
-                </div>
-            `;
-        });
-        socialContainer.innerHTML = socialHtml || '<p style="color:white; text-align:center;">Belum ada sosial media</p>';
-        
-        const bankContainer = document.getElementById('bankEditList');
-        let bankHtml = '';
-        bankAccounts.forEach(b => {
-            bankHtml += `
-                <div style="margin-bottom:15px; padding:15px; background:#8e44ad; border-radius:20px;">
-                    <div style="margin-bottom:10px;">
-                        <input type="text" id="bank_name_${b.id}" value="${b.bankName}" placeholder="Nama Bank" style="width:100%; padding:8px; margin-bottom:5px; border-radius:30px;">
-                        <input type="text" id="bank_number_${b.id}" value="${b.accountNumber}" placeholder="No Rekening" style="width:100%; padding:8px; margin-bottom:5px; border-radius:30px;">
-                        <input type="text" id="bank_owner_${b.id}" value="${b.accountOwner}" placeholder="Nama Pemilik" style="width:100%; padding:8px; margin-bottom:5px; border-radius:30px;">
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <button onclick="updateBank(${b.id})" style="background:#c7ea46; padding:8px; border-radius:30px; flex:1;">Update</button>
-                        <button onclick="deleteBank(${b.id})" style="background:#ff4444; color:white; padding:8px; border-radius:30px; flex:1;">Hapus</button>
-                    </div>
-                </div>
-            `;
-        });
-        bankContainer.innerHTML = bankHtml || '<p style="color:white; text-align:center;">Belum ada bank</p>';
-    }
-
-    window.updateSocialUrl = function(id) {
-        const url = document.getElementById(`social_url_${id}`).value;
-        const index = socialMedia.findIndex(s => s.id === id);
-        if (index !== -1) {
-            socialMedia[index].url = url;
-            localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
-            renderContactPage();
-            renderAdminContact();
-            alert('URL sosial media diperbarui');
-        }
-    };
-
-    window.openEditSocialModal = function(id) {
-        const social = socialMedia.find(s => s.id === id);
-        if (social) {
-            document.getElementById('editSocialId').value = social.id;
-            document.getElementById('editSocialName').value = social.name;
-            document.getElementById('editSocialIcon').value = social.icon;
-            document.getElementById('editSocialUrl').value = social.url;
-            document.getElementById('editSocialTitle').innerText = 'Edit Sosial Media';
-            document.getElementById('editSocialModal').classList.add('active');
-        }
-    };
-
-    window.openAddSocialModal = function() {
-        document.getElementById('editSocialId').value = '';
-        document.getElementById('editSocialName').value = '';
-        document.getElementById('editSocialIcon').value = 'fab fa-';
-        document.getElementById('editSocialUrl').value = '';
-        document.getElementById('editSocialTitle').innerText = 'Tambah Sosial Media';
-        document.getElementById('editSocialModal').classList.add('active');
-    };
-
-    window.closeSocialModal = function() {
-        document.getElementById('editSocialModal').classList.remove('active');
-    };
-
-    window.simpanSocial = function() {
-        const id = document.getElementById('editSocialId').value;
-        const name = document.getElementById('editSocialName').value;
-        const icon = document.getElementById('editSocialIcon').value;
-        const url = document.getElementById('editSocialUrl').value;
-        
-        if (!name || !icon || !url) {
-            alert('Semua field harus diisi');
-            return;
-        }
-        
-        if (id) {
-            const index = socialMedia.findIndex(s => s.id === id);
-            if (index !== -1) {
-                socialMedia[index] = { ...socialMedia[index], name, icon, url };
-            }
-        } else {
-            const newId = 'social_' + Date.now();
-            socialMedia.push({ id: newId, name, icon, url });
-        }
-        
-        localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
-        renderContactPage();
-        renderAdminContact();
-        closeSocialModal();
-        alert('Sosial media disimpan');
-    };
-
-    window.deleteSocial = function(id) {
-        if (confirm('Hapus sosial media ini?')) {
-            socialMedia = socialMedia.filter(s => s.id !== id);
-            localStorage.setItem('socialMedia', JSON.stringify(socialMedia));
-            renderContactPage();
-            renderAdminContact();
-        }
-    };
-
-    window.updateBank = function(id) {
-        const bankName = document.getElementById(`bank_name_${id}`).value;
-        const accountNumber = document.getElementById(`bank_number_${id}`).value;
-        const accountOwner = document.getElementById(`bank_owner_${id}`).value;
-        
-        const index = bankAccounts.findIndex(b => b.id === id);
-        if (index !== -1) {
-            bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
-            localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-            renderContactPage();
-            renderAdminContact();
-            alert('Data bank diperbarui');
-        }
-    };
-
-    window.openAddBankModal = function() {
-        document.getElementById('editBankId').value = '';
-        document.getElementById('editBankName').value = '';
-        document.getElementById('editBankNumber').value = '';
-        document.getElementById('editBankOwner').value = '';
-        document.getElementById('editBankTitle').innerText = 'Tambah Rekening Bank';
-        document.getElementById('editBankModal').classList.add('active');
-    };
-
-    window.closeBankModal = function() {
-        document.getElementById('editBankModal').classList.remove('active');
-    };
-
-    window.simpanBank = function() {
-        const id = document.getElementById('editBankId').value;
-        const bankName = document.getElementById('editBankName').value;
-        const accountNumber = document.getElementById('editBankNumber').value;
-        const accountOwner = document.getElementById('editBankOwner').value;
-        
-        if (!bankName || !accountNumber || !accountOwner) {
-            alert('Semua field harus diisi');
-            return;
-        }
-        
-        if (id) {
-            const index = bankAccounts.findIndex(b => b.id == id);
-            if (index !== -1) {
-                bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
-            }
-        } else {
-            const newId = Date.now();
-            bankAccounts.push({ id: newId, bankName, accountNumber, accountOwner });
-        }
-        
-        localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-        renderContactPage();
-        renderAdminContact();
-        closeBankModal();
-        alert('Data bank disimpan');
-    };
-
-    window.deleteBank = function(id) {
-        if (confirm('Hapus rekening bank ini?')) {
-            bankAccounts = bankAccounts.filter(b => b.id !== id);
-            localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-            renderContactPage();
-            renderAdminContact();
-        }
-    };
 
     // ==================== ADMIN PRODUK ====================
     let uploadedImageBase64 = '';
@@ -1904,7 +1682,7 @@
     };
 
     window.simpanProduk = function() {
-        if (!isAdmin()) { alert('Anda tidak memiliki akses'); return; }
+        if (!isAdminUser()) { alert('Anda tidak memiliki akses'); return; }
         const nama = document.getElementById('produkNama').value;
         if (!nama) { alert('Nama produk harus diisi'); return; }
         const newProduct = {
@@ -1925,8 +1703,10 @@
             }
         };
         products.push(newProduct);
-        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
-        alert('Produk ditambahkan');
+        dataVersion.products++;
+        saveAll();
+        alert('✅ Produk ditambahkan! Semua pelanggan akan melihat update dalam 5 detik.');
+        
         document.getElementById('produkNama').value = '';
         document.getElementById('harga30').value = '';
         document.getElementById('stok30').value = '';
@@ -1937,56 +1717,53 @@
         document.getElementById('harga100').value = '';
         document.getElementById('stok100').value = '';
         document.getElementById('previewImg').innerHTML = '';
-        document.getElementById('uploadText').innerText = 'Klik pilih gambar';
         uploadedImageBase64 = '';
+        
         renderAdminProducts();
         renderPublicProducts();
     };
 
     function renderAdminProducts() {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         const container = document.getElementById('adminProductList');
         if (!container) return;
         
         let html = '';
         products.forEach(p => {
-            const prices = Object.values(p.prices).filter(price => price > 0);
-            const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
-            const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
             const totalStock = Object.values(p.stock).reduce((sum, stock) => sum + stock, 0);
-            
             html += `
                 <div class="admin-product-item">
                     <div class="admin-product-info">
                         <h4>${p.name}</h4>
-                        <div class="product-range">฿${minPrice} - ฿${maxPrice}</div>
-                        <div class="total-stock">Total Stok: ${totalStock}</div>
+                        <div>Total Stok: ${totalStock}</div>
+                        <div style="font-size:12px;">Harga: 30ml=฿${p.prices[30]}, 100ml=฿${p.prices[100]}</div>
                     </div>
                     <div class="admin-product-actions">
-                        <button class="btn-edit" onclick="openEditModal(${p.id})">Edit</button>
-                        <button class="btn-delete" onclick="hapusProduk(${p.id})">Hapus</button>
+                        <button class="btn-edit" onclick="openEditModal(${p.id})" style="background:#c7ea46; padding:8px 16px;">Edit</button>
+                        <button class="btn-delete" onclick="hapusProduk(${p.id})" style="background:#ff4444; padding:8px 16px;">Hapus</button>
                     </div>
                 </div>
             `;
         });
-        
-        container.innerHTML = html || '<p style="color:white; text-align:center; padding:20px;">Belum ada produk</p>';
+        container.innerHTML = html || '<p style="text-align:center;">Belum ada produk</p>';
     }
 
     window.hapusProduk = function(id) {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         if (confirm('Hapus produk ini?')) {
             products = products.filter(p => p.id !== id);
-            localStorage.setItem('taParfumeProducts', JSON.stringify(products));
+            dataVersion.products++;
+            saveAll();
             renderAdminProducts();
             renderPublicProducts();
+            alert('✅ Produk dihapus!');
         }
     };
 
     // ==================== EDIT PRODUK ====================
     let editImageBase64 = '';
     window.openEditModal = function(productId) {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         const product = products.find(p => p.id === productId);
         if (!product) return;
         
@@ -2025,15 +1802,15 @@
     };
 
     window.simpanEditProduk = function() {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         const id = parseInt(document.getElementById('editProductId').value);
-        const productIndex = products.findIndex(p => p.id === id);
-        if (productIndex === -1) return;
+        const index = products.findIndex(p => p.id === id);
+        if (index === -1) return;
         
-        products[productIndex] = {
+        products[index] = {
             id: id,
             name: document.getElementById('editNama').value,
-            image: editImageBase64 || products[productIndex].image,
+            image: editImageBase64 || products[index].image,
             prices: {
                 30: parseInt(document.getElementById('editHarga30').value) || 0,
                 35: parseInt(document.getElementById('editHarga35').value) || 0,
@@ -2048,11 +1825,12 @@
             }
         };
         
-        localStorage.setItem('taParfumeProducts', JSON.stringify(products));
+        dataVersion.products++;
+        saveAll();
         closeEditModal();
         renderAdminProducts();
         renderPublicProducts();
-        alert('Produk diperbarui');
+        alert('✅ Produk diperbarui!');
     };
 
     window.closeEditModal = function() {
@@ -2062,29 +1840,32 @@
 
     // ==================== ADMIN PESANAN ====================
     function renderAdminOrders() {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         const container = document.getElementById('adminOrderList');
         if (!container) return;
         if (orders.length === 0) {
-            container.innerHTML = '<p style="color:white; text-align:center; padding:20px;">Belum ada pesanan</p>';
+            container.innerHTML = '<p style="text-align:center;">Belum ada pesanan</p>';
             return;
         }
         let html = '';
-        orders.forEach((order, idx) => {
-            html += `<div style="background:#3e0455; border-radius:24px; padding:18px; margin-bottom:16px; color:white;">
-                <div><strong>Pesanan #${idx+1}</strong> (${order.date}) - ${order.status}</div>
-                <div>Items: ${order.items.map(it => `${it.name} x${it.quantity}`).join(', ')} | Total: ฿${order.total}</div>
-                <div style="background:#8e44ad; padding:10px; margin:10px 0;">
+        orders.slice().reverse().forEach((order) => {
+            html += `<div style="background:#8e44ad; border-radius:24px; padding:16px; margin-bottom:12px; border:2px solid #c7ea46; color:white;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                    <strong>Pesanan #${order.id}</strong>
+                    <span class="order-status">${order.status}</span>
+                </div>
+                <div>Items: ${order.items.map(it => `${it.name} x${it.quantity}`).join(', ')}</div>
+                <div>Total: ฿${order.total}</div>
+                <div style="background:#6c3483; padding:8px; margin:8px 0; border-radius:16px;">
                     <strong>Pelanggan:</strong> ${order.customer?.nama || '-'}<br>
                     Email: ${order.customer?.email || '-'}<br>
-                    Line: ${order.customer?.line || '-'}<br>
                     Telp: ${order.customer?.telp || '-'}<br>
                     Alamat: ${order.customer?.alamat || '-'}
                 </div>
-                <div style="display:flex; gap:10px;">
-                    <button onclick="ubahStatusPesanan(${order.id}, 'Selesai')" style="background:#c7ea46; padding:8px; border-radius:30px; flex:1;">Selesai</button>
-                    <button onclick="ubahStatusPesanan(${order.id}, 'Dibatalkan')" style="background:#f8d7da; padding:8px; border-radius:30px; flex:1;">Batalkan</button>
-                    <button onclick="hapusPesanan(${order.id})" style="background:#ff4444; color:white; padding:8px; border-radius:30px;">Hapus</button>
+                <div style="display:flex; gap:8px;">
+                    <button onclick="ubahStatusPesanan(${order.id}, 'Selesai')" style="background:#0b5e2e; padding:8px; border-radius:30px;">✅ Selesai</button>
+                    <button onclick="ubahStatusPesanan(${order.id}, 'Dibatalkan')" style="background:#ff9800; padding:8px; border-radius:30px;">❌ Batalkan</button>
+                    <button onclick="hapusPesanan(${order.id})" style="background:#ff4444; padding:8px; border-radius:30px;">🗑️ Hapus</button>
                 </div>
             </div>`;
         });
@@ -2092,26 +1873,182 @@
     }
 
     window.ubahStatusPesanan = function(id, status) {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         const order = orders.find(o => o.id === id);
         if (order) order.status = status;
         const custOrder = customerOrders.find(o => o.id === id);
         if (custOrder) custOrder.status = status;
-        localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
-        localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
+        saveAll();
         renderAdminOrders();
         renderOrders();
     };
 
     window.hapusPesanan = function(id) {
-        if (!isAdmin()) return;
+        if (!isAdminUser()) return;
         if (confirm('Hapus pesanan ini?')) {
             orders = orders.filter(o => o.id !== id);
             customerOrders = customerOrders.filter(o => o.id !== id);
-            localStorage.setItem('taParfumeOrders', JSON.stringify(orders));
-            localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
+            saveAll();
             renderAdminOrders();
             renderOrders();
+        }
+    };
+
+    // ==================== ADMIN KONTAK ====================
+    function renderAdminContact() {
+        if (!isAdminUser()) return;
+        const socialDiv = document.getElementById('socialEditList');
+        socialDiv.innerHTML = socialMedia.map(s => `
+            <div style="margin-bottom:15px; padding:12px; background:#8e44ad; border-radius:20px;">
+                <div><strong>${s.name}</strong> <i class="${s.icon}"></i></div>
+                <input type="url" id="surl_${s.id}" value="${s.url}" style="width:100%; margin:8px 0; padding:8px; border-radius:20px;">
+                <button onclick="updateSocialUrl('${s.id}')" style="background:#c7ea46; padding:6px 12px;">Update URL</button>
+                <button onclick="openEditSocialModal('${s.id}')" style="background:#c7ea46; padding:6px 12px;">Edit Detail</button>
+                <button onclick="deleteSocial('${s.id}')" style="background:#ff4444; padding:6px 12px;">Hapus</button>
+            </div>
+        `).join('');
+        
+        const bankDiv = document.getElementById('bankEditList');
+        bankDiv.innerHTML = bankAccounts.map(b => `
+            <div style="margin-bottom:15px; padding:12px; background:#8e44ad; border-radius:20px;">
+                <div><strong>${b.bankName}</strong></div>
+                <input type="text" id="bname_${b.id}" value="${b.bankName}" style="width:100%; margin:5px 0; padding:8px; border-radius:20px;">
+                <input type="text" id="bnum_${b.id}" value="${b.accountNumber}" style="width:100%; margin:5px 0; padding:8px; border-radius:20px;">
+                <input type="text" id="bowner_${b.id}" value="${b.accountOwner}" style="width:100%; margin:5px 0; padding:8px; border-radius:20px;">
+                <button onclick="updateBank(${b.id})" style="background:#c7ea46; padding:6px 12px;">Update</button>
+                <button onclick="deleteBank(${b.id})" style="background:#ff4444; padding:6px 12px;">Hapus</button>
+            </div>
+        `).join('');
+    }
+
+    window.updateSocialUrl = function(id) {
+        const url = document.getElementById(`surl_${id}`).value;
+        const index = socialMedia.findIndex(s => s.id === id);
+        if (index !== -1) {
+            socialMedia[index].url = url;
+            dataVersion.social++;
+            saveAll();
+            renderContactPage();
+            renderAdminContact();
+            alert('✅ URL sosial media diperbarui!');
+        }
+    };
+
+    window.openEditSocialModal = function(id) {
+        const social = socialMedia.find(s => s.id === id);
+        if (social) {
+            document.getElementById('editSocialId').value = social.id;
+            document.getElementById('editSocialName').value = social.name;
+            document.getElementById('editSocialIcon').value = social.icon;
+            document.getElementById('editSocialUrl').value = social.url;
+            document.getElementById('editSocialModal').classList.add('active');
+        }
+    };
+
+    window.openAddSocialModal = function() {
+        document.getElementById('editSocialId').value = '';
+        document.getElementById('editSocialName').value = '';
+        document.getElementById('editSocialIcon').value = 'fab fa-';
+        document.getElementById('editSocialUrl').value = '';
+        document.getElementById('editSocialModal').classList.add('active');
+    };
+
+    window.closeSocialModal = function() {
+        document.getElementById('editSocialModal').classList.remove('active');
+    };
+
+    window.simpanSocial = function() {
+        const id = document.getElementById('editSocialId').value;
+        const name = document.getElementById('editSocialName').value;
+        const icon = document.getElementById('editSocialIcon').value;
+        const url = document.getElementById('editSocialUrl').value;
+        
+        if (!name || !icon || !url) {
+            alert('Semua field harus diisi');
+            return;
+        }
+        
+        if (id) {
+            const index = socialMedia.findIndex(s => s.id === id);
+            if (index !== -1) {
+                socialMedia[index] = { ...socialMedia[index], name, icon, url };
+            }
+        } else {
+            socialMedia.push({ id: 'soc_' + Date.now(), name, icon, url });
+        }
+        
+        dataVersion.social++;
+        saveAll();
+        renderContactPage();
+        renderAdminContact();
+        closeSocialModal();
+        alert('✅ Sosial media disimpan!');
+    };
+
+    window.deleteSocial = function(id) {
+        if (confirm('Hapus sosial media ini?')) {
+            socialMedia = socialMedia.filter(s => s.id !== id);
+            dataVersion.social++;
+            saveAll();
+            renderContactPage();
+            renderAdminContact();
+        }
+    };
+
+    window.updateBank = function(id) {
+        const bankName = document.getElementById(`bname_${id}`).value;
+        const accountNumber = document.getElementById(`bnum_${id}`).value;
+        const accountOwner = document.getElementById(`bowner_${id}`).value;
+        
+        const index = bankAccounts.findIndex(b => b.id === id);
+        if (index !== -1) {
+            bankAccounts[index] = { ...bankAccounts[index], bankName, accountNumber, accountOwner };
+            dataVersion.banks++;
+            saveAll();
+            renderContactPage();
+            renderAdminContact();
+            alert('✅ Data bank diperbarui!');
+        }
+    };
+
+    window.openAddBankModal = function() {
+        document.getElementById('editBankId').value = '';
+        document.getElementById('editBankName').value = '';
+        document.getElementById('editBankNumber').value = '';
+        document.getElementById('editBankOwner').value = '';
+        document.getElementById('editBankModal').classList.add('active');
+    };
+
+    window.closeBankModal = function() {
+        document.getElementById('editBankModal').classList.remove('active');
+    };
+
+    window.simpanBank = function() {
+        const bankName = document.getElementById('editBankName').value;
+        const accountNumber = document.getElementById('editBankNumber').value;
+        const accountOwner = document.getElementById('editBankOwner').value;
+        
+        if (!bankName || !accountNumber || !accountOwner) {
+            alert('Semua field harus diisi');
+            return;
+        }
+        
+        bankAccounts.push({ id: Date.now(), bankName, accountNumber, accountOwner });
+        dataVersion.banks++;
+        saveAll();
+        renderContactPage();
+        renderAdminContact();
+        closeBankModal();
+        alert('✅ Data bank disimpan!');
+    };
+
+    window.deleteBank = function(id) {
+        if (confirm('Hapus rekening bank ini?')) {
+            bankAccounts = bankAccounts.filter(b => b.id !== id);
+            dataVersion.banks++;
+            saveAll();
+            renderContactPage();
+            renderAdminContact();
         }
     };
 
@@ -2135,10 +2072,10 @@
         if (!email) return;
         if (!adminWhitelist.includes(email)) {
             adminWhitelist.push(email);
-            localStorage.setItem('adminWhitelist', JSON.stringify(adminWhitelist));
+            saveAll();
             renderWhitelist();
             document.getElementById('newAdminEmail').value = '';
-            alert('Email admin ditambahkan');
+            alert('✅ Email admin ditambahkan');
         } else {
             alert('Email sudah ada dalam daftar');
         }
@@ -2147,11 +2084,10 @@
     window.removeAdminEmail = function(email) {
         if (confirm(`Hapus ${email} dari daftar admin?`)) {
             adminWhitelist = adminWhitelist.filter(e => e !== email);
-            localStorage.setItem('adminWhitelist', JSON.stringify(adminWhitelist));
+            saveAll();
             renderWhitelist();
-            
             if (currentUser && currentUser.email === email) {
-                const adminNavItem = document.querySelector('.nav-item[onclick*="admin"]');
+                const adminNavItem = document.querySelector('.nav-item.admin-only');
                 if (adminNavItem) adminNavItem.style.display = 'none';
             }
         }
@@ -2159,7 +2095,7 @@
 
     // ==================== ADMIN TAB ====================
     window.switchAdminTab = function(tab) {
-        if (!isAdmin()) {
+        if (!isAdminUser()) {
             alert('Anda tidak memiliki akses ke menu admin');
             showPage('produk');
             return;
@@ -2191,7 +2127,7 @@
     window.showPage = function(pageId) {
         if (!currentUser) return;
         
-        if (pageId === 'admin' && !isAdmin()) {
+        if (pageId === 'admin' && !isAdminUser()) {
             alert('Anda tidak memiliki akses ke menu admin');
             return;
         }
@@ -2202,21 +2138,21 @@
         document.querySelectorAll('.nav-item').forEach(btn => {
             if (btn.innerText.toLowerCase().includes(pageId)) btn.classList.add('active');
         });
-        document.getElementById('currentPageBadge').innerText = pageId.toUpperCase();
+        document.getElementById('currentPageBadge').innerHTML = pageId.toUpperCase();
         
         if (pageId === 'produk') {
-            searchContainer.style.display = 'block';
+            document.getElementById('searchContainer').style.display = 'block';
             document.getElementById('searchInput').value = '';
             renderPublicProducts();
         } else {
-            searchContainer.style.display = 'none';
+            document.getElementById('searchContainer').style.display = 'none';
         }
         
         if (pageId === 'profil') loadProfileToPage();
         if (pageId === 'keranjang') renderCart();
         if (pageId === 'pesanan') renderOrders();
         if (pageId === 'kontak') renderContactPage();
-        if (pageId === 'admin' && isAdmin()) { 
+        if (pageId === 'admin' && isAdminUser()) { 
             renderAdminProducts(); 
             renderAdminOrders();
             renderAdminContact();
@@ -2224,7 +2160,16 @@
         }
     };
 
-    // Inisialisasi
+    // ==================== ONLINE STATUS ====================
+    window.addEventListener('online', () => {
+        document.getElementById('onlineStatus').innerHTML = '🟢 Online';
+        checkForUpdates();
+    });
+    window.addEventListener('offline', () => {
+        document.getElementById('onlineStatus').innerHTML = '🔴 Offline';
+    });
+
+    // ==================== INIT ====================
     checkLogin();
 </script>
 </body>
