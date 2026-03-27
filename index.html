@@ -1,665 +1,1132 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>TA-PARFUME - Toko Parfume Premium</title>
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-    body { background-color: #f5f7fb; color: #1e293b; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
-    .top-bar { background-color: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-    .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 0.9rem 0; }
-    .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #2c3e50, #1a2a3a); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .logo i { background: none; color: #8b5a2b; margin-right: 6px; }
-    .search-bar { flex: 1; max-width: 500px; display: flex; background: #f1f3f8; border-radius: 2rem; overflow: hidden; border: 1px solid #e2e8f0; }
-    .search-bar input { flex: 1; padding: 0.8rem 1.2rem; border: none; background: transparent; outline: none; }
-    .search-bar button { background: white; border: none; padding: 0 1.2rem; cursor: pointer; color: #8b5a2b; }
-    .nav-icons { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-icons .icon { position: relative; font-size: 1.4rem; color: #334155; cursor: pointer; }
-    .cart-badge { position: absolute; top: -8px; right: -12px; background: #e67e22; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.1rem 0.4rem; border-radius: 20px; min-width: 18px; text-align: center; }
-    .categories { background: white; border-bottom: 1px solid #eef2f6; padding: 0.8rem 0; overflow-x: auto; white-space: nowrap; }
-    .categories-wrapper { display: inline-flex; gap: 1.8rem; padding: 0 1.5rem; }
-    .cat-item { display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 500; color: #475569; cursor: pointer; transition: all 0.2s; }
-    .cat-item i { font-size: 1.4rem; background: #f1f5f9; padding: 8px; border-radius: 50%; width: 40px; text-align: center; }
-    .cat-item.active, .cat-item:hover { color: #8b5a2b; }
-    .cat-item.active i, .cat-item:hover i { background: #f5ede5; color: #8b5a2b; }
-    .admin-submenu { background: #f8fafc; padding: 0.8rem 0; border-bottom: 1px solid #e2e8f0; display: none; }
-    .admin-submenu.show { display: block; }
-    .submenu-wrapper { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .submenu-item { padding: 0.5rem 1.2rem; background: white; border-radius: 2rem; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: #475569; border: 1px solid #e2e8f0; transition: all 0.2s; }
-    .submenu-item.active { background: #e67e22; color: white; border-color: #e67e22; }
-    .products-section { padding: 1rem 0 3rem; }
-    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-    .section-header h2 { font-size: 1.6rem; font-weight: 700; }
-    .btn-primary { background: #e67e22; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 2rem; cursor: pointer; font-weight: 600; }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-    .product-card { background: white; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #edf2f7; transition: all 0.2s; }
-    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
-    .product-img { background: #f8fafc; height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .product-img img { width: 100%; height: 100%; object-fit: cover; }
-    .product-img i { font-size: 4rem; color: #94a3b8; }
-    .product-info { padding: 1.2rem; }
-    .product-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; text-align: center; }
-    .product-variant-select { margin: 1rem 0; }
-    .product-variant-select label { display: block; font-size: 0.8rem; color: #64748b; margin-bottom: 0.3rem; }
-    .product-variant-select select { width: 100%; padding: 0.7rem; border: 1px solid #e2e8f0; border-radius: 0.8rem; font-size: 0.9rem; background: white; cursor: pointer; }
-    .price-stock-row { display: flex; justify-content: space-between; align-items: center; margin: 0.8rem 0; padding: 0.5rem 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
-    .product-price { font-weight: 800; font-size: 1.3rem; color: #e67e22; }
-    .product-stock { font-size: 0.85rem; color: #64748b; }
-    .product-stock i { margin-right: 0.3rem; }
-    .add-to-cart-btn { background: #f5ede5; border: none; padding: 0.7rem; border-radius: 2rem; width: 100%; cursor: pointer; font-weight: 600; color: #8b5a2b; transition: all 0.2s; margin-top: 0.5rem; }
-    .add-to-cart-btn:hover:not(:disabled) { background: #8b5a2b; color: white; }
-    .add-to-cart-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .product-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; justify-content: center; }
-    .product-actions button { padding: 0.3rem 0.8rem; border-radius: 1rem; border: none; cursor: pointer; font-size: 0.75rem; }
-    .btn-edit { background: #e67e22; color: white; }
-    .btn-delete { background: #ef4444; color: white; }
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; visibility: hidden; opacity: 0; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
-    .modal-overlay.open { visibility: visible; opacity: 1; }
-    .modal-content { background: white; width: 90%; max-width: 600px; max-height: 85vh; border-radius: 1.5rem; overflow-y: auto; }
-    .modal-header { padding: 1.2rem; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; font-weight: 700; }
-    .modal-header i { cursor: pointer; }
-    .modal-body { padding: 1.2rem; }
-    .modal-body input, .modal-body select { width: 100%; padding: 0.7rem; margin-bottom: 1rem; border: 1px solid #e2e8f0; border-radius: 0.8rem; }
-    .size-group { border: 1px solid #e2e8f0; border-radius: 0.8rem; padding: 0.8rem; margin-bottom: 1rem; }
-    .size-group h4 { margin-bottom: 0.5rem; font-size: 0.9rem; }
-    .size-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center; flex-wrap: wrap; }
-    .size-row strong { width: 50px; }
-    .size-row input { flex: 1; margin-bottom: 0; }
-    .image-preview { margin-top: 0.5rem; margin-bottom: 1rem; }
-    .image-preview img { max-width: 150px; max-height: 150px; border-radius: 0.5rem; border: 1px solid #e2e8f0; padding: 0.3rem; }
-    .btn-submit { background: #e67e22; color: white; border: none; padding: 0.7rem; width: 100%; border-radius: 2rem; font-weight: 600; cursor: pointer; margin-top: 1rem; }
-    .orders-table { width: 100%; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; background: white; border-radius: 1rem; overflow: hidden; }
-    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #eef2f6; vertical-align: top; }
-    th { background: #f8fafc; font-weight: 600; }
-    .status-badge { padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600; display: inline-block; }
-    .status-pending { background: #fef3c7; color: #d97706; }
-    .status-process { background: #dbeafe; color: #2563eb; }
-    .status-success { background: #d1fae5; color: #059669; }
-    .status-cancelled { background: #fee2e2; color: #dc2626; }
-    .cart-panel { position: fixed; top: 0; right: 0; width: 100%; max-width: 400px; height: 100%; background: white; box-shadow: -2px 0 20px rgba(0,0,0,0.1); transform: translateX(100%); transition: transform 0.3s; display: flex; flex-direction: column; z-index: 1001; }
-    .cart-overlay.open .cart-panel { transform: translateX(0); }
-    .cart-header { padding: 1.2rem; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; font-weight: bold; }
-    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
-    .cart-footer { padding: 1rem; border-top: 1px solid #eee; }
-    .checkout-btn { width: 100%; background: #e67e22; padding: 0.8rem; border: none; border-radius: 2rem; color: white; font-weight: bold; cursor: pointer; }
-    footer { background: #1a2a3a; color: #cbd5e1; padding: 2rem 0; text-align: center; margin-top: 2rem; }
-    .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: white; padding: 0.6rem 1.2rem; border-radius: 40px; z-index: 1100; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
-    .contact-settings { background: white; border-radius: 1rem; padding: 1.5rem; }
-    .contact-group { margin-bottom: 1.5rem; border-bottom: 1px solid #eef2f6; padding-bottom: 1rem; }
-    .bank-item { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; align-items: center; }
-    @media (max-width: 768px) { .navbar { flex-direction: column; } .product-grid { gap: 1rem; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>TA-PARFUME - Toko Parfum Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-attachment: fixed;
+            padding-bottom: 70px;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              radial-gradient(circle at 80% 30%, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dashboard-header {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-header h1 i {
+            margin-right: 10px;
+            color: #ff6b6b;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-item-bottom {
+            flex: 1;
+            text-align: center;
+            padding: 8px 5px;
+            color: rgba(255,255,255,0.6);
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .nav-item-bottom i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .nav-item-bottom:hover, .nav-item-bottom.active {
+            color: #ff6b6b;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .content-area {
+            padding: 15px;
+            min-height: calc(100vh - 70px);
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .card-header h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .card-header h4 i {
+            margin-right: 8px;
+            color: #ff6b6b;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e53, #ff6b6b);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+
+        .size-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            margin-bottom: 12px;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .stock-info {
+            font-size: 12px;
+            background: #f8f9fa;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .stock-available { color: #28a745; }
+        .stock-empty { color: #dc3545; }
+
+        .btn-add-cart {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn-add-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+        }
+
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .social-card {
+            text-align: center;
+            padding: 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            min-width: 80px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-icon-wrapper {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 28px;
+        }
+
+        .whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .line { background: linear-gradient(135deg, #00B900, #009900); }
+        .telegram { background: linear-gradient(135deg, #0088cc, #006699); }
+        .instagram { background: linear-gradient(135deg, #f09433, #bc1888); }
+        .facebook { background: linear-gradient(135deg, #1877f2, #0e5a9e); }
+        .tiktok { background: linear-gradient(135deg, #000000, #69C9D0, #EE1D52); }
+        .social-icon-wrapper i { color: white; }
+
+        .bank-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            background: white;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .bank-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+        }
+
+        .bank-card:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .bank-icon { font-size: 24px; color: #ff6b6b; margin-right: 12px; }
+        .copy-icon { cursor: pointer; color: #ff6b6b; margin-left: 8px; font-size: 12px; }
+
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .update-notification {
+            position: fixed;
+            top: 70px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            z-index: 2000;
+            animation: slideIn 0.5s ease-out;
+            font-size: 12px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .product-name { font-size: 13px; }
+            .price-tag { font-size: 14px; }
+        }
+
+        .table-responsive { overflow-x: auto; }
+        .table { background: white; border-radius: 10px; font-size: 12px; }
+        .table thead th { background: linear-gradient(135deg, #2c3e50, #1a1a2e); color: white; padding: 10px; }
+        .swal2-container { z-index: 2000 !important; }
+        .product-image-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+    </style>
 </head>
 <body>
-
-<div class="top-bar">
-  <div class="container">
-    <div class="navbar">
-      <div class="logo"><i class="fas fa-spray-can-sparkles"></i> TA-PARFUME</div>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Cari parfume...">
-        <button id="searchBtn"><i class="fas fa-search"></i></button>
-      </div>
-      <div class="nav-icons">
-        <div class="icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span id="cartCountBadge" class="cart-badge">0</span></div>
-        <div class="icon"><i class="far fa-user-circle"></i></div>
-      </div>
+    <div class="dashboard-header">
+        <h1><i class="fas fa-perfume"></i> TA-PARFUME</h1>
     </div>
-  </div>
-</div>
-
-<div class="categories">
-  <div class="categories-wrapper" id="categoryList">
-    <div class="cat-item" data-cat="admin"><i class="fas fa-user-shield"></i><span>Admin</span></div>
-    <div class="cat-item active" data-cat="produk"><i class="fas fa-box-open"></i><span>Produk</span></div>
-    <div class="cat-item" data-cat="riwayat"><i class="fas fa-history"></i><span>Riwayat Pesanan</span></div>
-    <div class="cat-item" data-cat="kontak"><i class="fas fa-store-alt"></i><span>Kontak Toko</span></div>
-  </div>
-</div>
-
-<div id="adminSubmenu" class="admin-submenu">
-  <div class="container">
-    <div class="submenu-wrapper">
-      <div class="submenu-item active" data-sub="kelola-produk">📦 Kelola Produk</div>
-      <div class="submenu-item" data-sub="kelola-pesanan">📋 Kelola Pesanan</div>
-      <div class="submenu-item" data-sub="kelola-kontak">📞 Kelola Kontak</div>
+    
+    <div class="content-area" id="contentArea"></div>
+    
+    <div class="bottom-nav">
+        <div class="nav-item-bottom" onclick="showContent('profil')"><i class="fas fa-user"></i><span>Profil</span></div>
+        <div class="nav-item-bottom" onclick="showContent('produk')"><i class="fas fa-box"></i><span>Produk</span></div>
+        <div class="nav-item-bottom" onclick="showContent('keranjang')"><i class="fas fa-shopping-cart"></i><span>Keranjang</span></div>
+        <div class="nav-item-bottom" onclick="showContent('pesanan')"><i class="fas fa-clipboard-list"></i><span>Pesanan</span></div>
+        <div class="nav-item-bottom" onclick="showContent('kontak')"><i class="fas fa-phone"></i><span>Kontak</span></div>
+        <div class="nav-item-bottom" onclick="showContent('admin')"><i class="fas fa-cog"></i><span>Admin</span></div>
     </div>
-  </div>
-</div>
 
-<main class="products-section container">
-  <div class="section-header">
-    <h2 id="sectionTitle">📦 Koleksi Parfume Premium</h2>
-    <button id="addProductBtn" class="btn-primary" style="display: none;"><i class="fas fa-plus"></i> Tambah Produk</button>
-  </div>
-  <div class="product-grid" id="productGrid"></div>
-</main>
-
-<footer><div class="container"><p>&copy; 2025 TA-PARFUME — Wewangian Premium untuk Setiap Momen</p></div></footer>
-
-<div id="cartOverlay" class="modal-overlay"><div class="cart-panel"><div class="cart-header"><span>🛒 Keranjang Belanja</span><i id="closeCart" class="fas fa-times" style="cursor:pointer;"></i></div><div class="cart-items" id="cartItemsList"></div><div class="cart-footer"><div style="display:flex; justify-content:space-between; margin-bottom:1rem;"><span>Total</span><span id="cartTotalPrice">฿ 0</span></div><button id="checkoutBtn" class="checkout-btn">Checkout Sekarang</button></div></div></div>
-
-<div id="productModal" class="modal-overlay"><div class="modal-content"><div class="modal-header"><span id="modalTitle">Tambah Produk</span><i class="fas fa-times" id="closeModal" style="cursor:pointer;"></i></div><div class="modal-body" id="modalBody"></div></div></div>
-
-<div id="toastMsg" class="toast-msg"></div>
-
-<script>
-  const availableSizes = ["30ml", "35ml", "50ml", "100ml"];
-  let products = [];
-  let nextProductId = 1;
-  let orders = [];
-  let contacts = {
-    whatsapp: "https://wa.me/6281288889999", 
-    line: "https://line.me/ti/p/@taparume", 
-    telegram: "https://t.me/ta_parfume", 
-    instagram: "https://instagram.com/taparume", 
-    facebook: "https://facebook.com/taparume", 
-    tiktok: "https://tiktok.com/@taparume",
-    banks: [{ name: "Bank Central Asia (BCA)", account: "1234567890", owner: "TA PARFUME" }]
-  };
-
-  let cart = [];
-  let currentMenu = "produk";
-  let adminSub = "kelola-produk";
-  let searchKeyword = "";
-  let currentEditingProductId = null;
-
-  // Inisialisasi data default jika localStorage kosong
-  function initializeDefaultData() {
-    if(products.length === 0) {
-      products = [
-        { id: 1, name: "Velvet Noir", imageData: null, variants: [{ size: "30ml", price: 1990, stock: 25 }, { size: "50ml", price: 2990, stock: 15 }, { size: "100ml", price: 4990, stock: 8 }] },
-        { id: 2, name: "Floral Bloom", imageData: null, variants: [{ size: "30ml", price: 1790, stock: 30 }, { size: "50ml", price: 2790, stock: 20 }, { size: "100ml", price: 4590, stock: 10 }] },
-        { id: 3, name: "Amber Oud", imageData: null, variants: [{ size: "30ml", price: 2990, stock: 12 }, { size: "50ml", price: 4990, stock: 8 }, { size: "100ml", price: 7990, stock: 5 }] }
-      ];
-      nextProductId = 4;
-    }
-    
-    if(orders.length === 0) {
-      orders = [
-        { id: "TRX/TA/2025/0001", date: "15 Maret 2025, 14:23 WIB", customer: "Budi Santoso", phone: "+62 812-3456-7890", email: "budi@email.com", address: "Jl. Mawar Melati No. 123, Jakarta", items: "Velvet Noir - 50ml x 1", total: 2990, status: "success", note: "-" },
-        { id: "TRX/TA/2025/0002", date: "18 Maret 2025, 09:47 WIB", customer: "Siti Aisyah", phone: "+62 856-7890-1234", email: "siti@mail.com", address: "Jl. Anggrek No. 45, Bandung", items: "Floral Bloom - 30ml x 2", total: 3580, status: "process", note: "-" }
-      ];
-    }
-  }
-
-  function formatTHB(amount) { return "฿ " + amount.toLocaleString("th-TH"); }
-  
-  function showToast(msg) { 
-    let t = document.getElementById("toastMsg"); 
-    t.innerText = msg; 
-    t.style.opacity = "1"; 
-    setTimeout(() => t.style.opacity = "0", 2000); 
-  }
-  
-  function saveToLocalStorage() { 
-    localStorage.setItem("ta_products", JSON.stringify(products)); 
-    localStorage.setItem("ta_orders", JSON.stringify(orders)); 
-    localStorage.setItem("ta_contacts", JSON.stringify(contacts)); 
-    localStorage.setItem("ta_nextProductId", nextProductId); 
-    console.log("Data saved:", products.length, "products"); // Debug
-  }
-  
-  function loadFromLocalStorage() { 
-    let saved = localStorage.getItem("ta_products"); 
-    if(saved) { 
-      products = JSON.parse(saved);
-      console.log("Loaded products:", products.length);
-    }
-    saved = localStorage.getItem("ta_orders"); 
-    if(saved) orders = JSON.parse(saved); 
-    saved = localStorage.getItem("ta_contacts"); 
-    if(saved) contacts = JSON.parse(saved); 
-    saved = localStorage.getItem("ta_nextProductId"); 
-    if(saved) nextProductId = parseInt(saved); 
-    
-    initializeDefaultData(); // Pastikan ada data default jika kosong
-  }
-
-  function refreshAllDisplays() { 
-    console.log("Refreshing display, currentMenu:", currentMenu, "adminSub:", adminSub);
-    if(currentMenu === "admin" && adminSub === "kelola-produk") {
-      renderAdminProducts();
-    } else if(currentMenu === "admin" && adminSub === "kelola-pesanan") {
-      renderAdminOrders();
-    } else if(currentMenu === "admin" && adminSub === "kelola-kontak") {
-      renderAdminContacts();
-    } else if(currentMenu === "produk") {
-      renderProducts();
-    } else if(currentMenu === "riwayat") {
-      renderOrderHistory();
-    } else if(currentMenu === "kontak") {
-      renderPublicContact();
-    }
-    updateCartUI(); 
-  }
-
-  function renderMain() {
-    if(currentMenu === "admin") {
-      document.getElementById("adminSubmenu").classList.add("show");
-      if(adminSub === "kelola-produk") renderAdminProducts();
-      else if(adminSub === "kelola-pesanan") renderAdminOrders();
-      else if(adminSub === "kelola-kontak") renderAdminContacts();
-      document.getElementById("addProductBtn").style.display = adminSub === "kelola-produk" ? "block" : "none";
-      document.getElementById("sectionTitle").innerHTML = adminSub === "kelola-produk" ? "📦 Kelola Produk" : (adminSub === "kelola-pesanan" ? "📋 Kelola Pesanan" : "📞 Kelola Kontak Toko");
-    } else if(currentMenu === "produk") {
-      document.getElementById("adminSubmenu").classList.remove("show");
-      document.getElementById("addProductBtn").style.display = "none";
-      renderProducts();
-    } else if(currentMenu === "riwayat") {
-      document.getElementById("adminSubmenu").classList.remove("show");
-      document.getElementById("addProductBtn").style.display = "none";
-      renderOrderHistory();
-    } else if(currentMenu === "kontak") {
-      document.getElementById("adminSubmenu").classList.remove("show");
-      document.getElementById("addProductBtn").style.display = "none";
-      renderPublicContact();
-    }
-  }
-
-  function renderProducts() {
-    let filtered = products.filter(p => p.name.toLowerCase().includes(searchKeyword.toLowerCase()));
-    let grid = document.getElementById("productGrid");
-    document.getElementById("sectionTitle").innerHTML = searchKeyword ? `🔍 Hasil: "${searchKeyword}"` : "📦 Koleksi Parfume Premium";
-    
-    if(filtered.length === 0) { 
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">😢 Produk tidak ditemukan</div>`; 
-      return; 
-    }
-    
-    grid.innerHTML = filtered.map(p => {
-      let defaultVariant = p.variants[0];
-      return `<div class="product-card" data-product-id="${p.id}">
-        <div class="product-img">${p.imageData ? `<img src="${p.imageData}" alt="${p.name}">` : `<i class="fas fa-spray-can"></i>`}</div>
-        <div class="product-info">
-          <div class="product-title">${escapeHtml(p.name)}</div>
-          <div class="product-variant-select">
-            <label>📏 Pilih Ukuran</label>
-            <select class="size-select" data-id="${p.id}" id="sizeSelect-${p.id}">
-              ${p.variants.map(v => `<option value='${JSON.stringify(v)}' data-price="${v.price}" data-stock="${v.stock}">${v.size} - ${formatTHB(v.price)} (Stok: ${v.stock})</option>`).join('')}
-            </select>
-          </div>
-          <div class="price-stock-row">
-            <span class="product-price" id="priceDisplay-${p.id}">${formatTHB(defaultVariant.price)}</span>
-            <span class="product-stock" id="stockDisplay-${p.id}"><i class="fas fa-box"></i> Stok: ${defaultVariant.stock}</span>
-          </div>
-          <button class="add-to-cart-btn" data-id="${p.id}" data-size="${defaultVariant.size}" data-price="${defaultVariant.price}" data-stock="${defaultVariant.stock}" ${defaultVariant.stock <= 0 ? 'disabled' : ''}><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</button>
-        </div>
-      </div>`;
-    }).join('');
-
-    // Bind event listeners untuk setiap produk
-    products.forEach(p => {
-      let select = document.getElementById(`sizeSelect-${p.id}`);
-      if(select) {
-        select.addEventListener('change', function(e) {
-          let selectedVariant = JSON.parse(this.value);
-          let priceDisplay = document.getElementById(`priceDisplay-${p.id}`);
-          let stockDisplay = document.getElementById(`stockDisplay-${p.id}`);
-          let addBtn = document.querySelector(`.add-to-cart-btn[data-id="${p.id}"]`);
-          if(priceDisplay) priceDisplay.innerText = formatTHB(selectedVariant.price);
-          if(stockDisplay) stockDisplay.innerHTML = `<i class="fas fa-box"></i> Stok: ${selectedVariant.stock}`;
-          if(addBtn) {
-            addBtn.setAttribute('data-size', selectedVariant.size);
-            addBtn.setAttribute('data-price', selectedVariant.price);
-            addBtn.setAttribute('data-stock', selectedVariant.stock);
-            addBtn.disabled = selectedVariant.stock <= 0;
-          }
-        });
-      }
-    });
-
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        let id = parseInt(btn.dataset.id);
-        let size = btn.dataset.size;
-        let price = parseInt(btn.dataset.price);
-        let stock = parseInt(btn.dataset.stock);
-        if(stock <= 0) { showToast("⚠️ Stok produk habis!"); return; }
-        addToCart(id, size, price);
-      });
-    });
-  }
-
-  function escapeHtml(str) {
-    if(!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if(m === '&') return '&amp;';
-      if(m === '<') return '&lt;';
-      if(m === '>') return '&gt;';
-      return m;
-    });
-  }
-
-  function addToCart(productId, size, price) {
-    let product = products.find(p => p.id === productId);
-    if(!product) return;
-    let existing = cart.find(i => i.id === productId && i.size === size);
-    if(existing) existing.quantity++;
-    else cart.push({ id: product.id, name: product.name, size: size, price: price, quantity: 1, image: product.imageData });
-    updateCartUI();
-    showToast(`✅ ${product.name} (${size}) ditambahkan ke keranjang`);
-  }
-
-  function renderAdminProducts() {
-    let grid = document.getElementById("productGrid");
-    if(products.length === 0) { 
-      grid.innerHTML = `<div style="text-align:center; padding:3rem;">Belum ada produk. Klik Tambah Produk</div>`; 
-      return; 
-    }
-    grid.innerHTML = products.map(p => `<div class="product-card"><div class="product-img">${p.imageData ? `<img src="${p.imageData}" style="width:100%;height:100%;object-fit:cover;">` : `<i class="fas fa-spray-can fa-3x"></i>`}</div><div class="product-info"><div class="product-title">${escapeHtml(p.name)}</div>${p.variants.map(v => `<div style="font-size:0.8rem;">${v.size}: ${formatTHB(v.price)} (Stok: ${v.stock})</div>`).join('')}<div class="product-actions"><button class="btn-edit" onclick="openEditProduct(${p.id})">✏️ Edit</button><button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️ Hapus</button></div></div></div>`).join('');
-  }
-
-  window.openAddProduct = () => {
-    currentEditingProductId = null;
-    showProductModal("Tambah Produk", null);
-  };
-  
-  window.openEditProduct = (id) => { 
-    let p = products.find(p => p.id === id); 
-    if(p) {
-      currentEditingProductId = id;
-      showProductModal("Edit Produk", p);
-    }
-  };
-  
-  function showProductModal(title, product) {
-    let modal = document.getElementById("productModal");
-    let modalBody = document.getElementById("modalBody");
-    let sizesHtml = availableSizes.map(size => {
-      let variant = product ? product.variants.find(v => v.size === size) : null;
-      return `<div class="size-row">
-        <strong>${size}</strong>
-        <input type="number" id="price_${size.replace('ml','')}" placeholder="Harga (฿)" value="${variant ? variant.price : ''}" style="width:130px;">
-        <input type="number" id="stock_${size.replace('ml','')}" placeholder="Stok" value="${variant ? variant.stock : ''}" style="width:100px;">
-      </div>`;
-    }).join('');
-    
-    modalBody.innerHTML = `
-      <input type="text" id="productName" placeholder="Nama Produk" value="${product ? escapeHtml(product.name) : ''}">
-      <div style="margin-bottom:1rem;">
-        <label>Foto Produk:</label>
-        <input type="file" id="productImage" accept="image/*">
-        <div id="imagePreview" class="image-preview">${product && product.imageData ? `<img src="${product.imageData}">` : ''}</div>
-      </div>
-      <div class="size-group">
-        <h4>Ukuran, Harga & Stok</h4>
-        ${sizesHtml}
-      </div>
-      <button class="btn-submit" id="saveProductBtn">💾 Simpan</button>
-    `;
-    
-    document.getElementById("modalTitle").innerText = title;
-    modal.classList.add("open");
-    document.getElementById("closeModal").onclick = () => modal.classList.remove("open");
-    
-    // Event preview gambar
-    let fileInput = document.getElementById("productImage");
-    fileInput.onchange = function(e) {
-      let file = e.target.files[0];
-      if(file) {
-        let reader = new FileReader();
-        reader.onload = function(ev) {
-          let preview = document.getElementById("imagePreview");
-          preview.innerHTML = `<img src="${ev.target.result}">`;
+    <script>
+        let currentUser = null;
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        let carts = JSON.parse(localStorage.getItem('carts')) || {};
+        let orders = JSON.parse(localStorage.getItem('orders')) || {};
+        let contacts = JSON.parse(localStorage.getItem('contacts')) || {
+            social: { whatsapp: '', line: '', telegram: '', instagram: '', facebook: '', tiktok: '' },
+            banks: []
         };
-        reader.readAsDataURL(file);
-      }
-    };
-    
-    // Hapus event listener lama jika ada
-    let saveBtn = document.getElementById("saveProductBtn");
-    let newSaveBtn = saveBtn.cloneNode(true);
-    saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
-    newSaveBtn.onclick = () => saveProduct();
-  }
-  
-  function saveProduct() {
-    let name = document.getElementById("productName").value.trim();
-    if(!name) { showToast("Nama produk wajib diisi"); return; }
-    
-    let variants = [];
-    for(let size of availableSizes) {
-      let priceInput = document.getElementById(`price_${size.replace('ml','')}`);
-      let stockInput = document.getElementById(`stock_${size.replace('ml','')}`);
-      let price = parseInt(priceInput.value);
-      let stock = parseInt(stockInput.value) || 0;
-      if(price && !isNaN(price) && price > 0) {
-        variants.push({ size: size, price: price, stock: stock });
-      }
-    }
-    
-    if(variants.length === 0) { 
-      showToast("Minimal satu ukuran harus diisi dengan harga yang valid"); 
-      return; 
-    }
-    
-    let fileInput = document.getElementById("productImage");
-    
-    const finishSave = (finalImageData) => {
-      if(currentEditingProductId !== null) {
-        // Update produk yang sudah ada
-        let index = products.findIndex(p => p.id === currentEditingProductId);
-        if(index !== -1) {
-          products[index] = {
-            ...products[index],
-            name: name,
-            variants: variants,
-            imageData: finalImageData
-          };
-          showToast("✅ Produk berhasil diupdate");
+        
+        let currentMenu = 'produk';
+        const defaultSizes = ['30ml', '35ml', '50ml', '100ml'];
+        const defaultPrices = { '30ml': 300, '35ml': 350, '50ml': 500, '100ml': 900 };
+
+        if (products.length === 0) {
+            products = [
+                { id: 1, name: 'VICTORIA\'S SECRET SCANDALOUS', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] },
+                { id: 2, name: 'DIOR SAUVAGE', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] },
+                { id: 3, name: 'HUGO BOSS XX WOMEN', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] }
+            ];
+            localStorage.setItem('products', JSON.stringify(products));
         }
-      } else {
-        // Tambah produk baru
-        let newProduct = {
-          id: nextProductId++,
-          name: name,
-          variants: variants,
-          imageData: finalImageData
-        };
-        products.push(newProduct);
-        showToast("✅ Produk berhasil ditambahkan");
-      }
-      
-      saveToLocalStorage();
-      document.getElementById("productModal").classList.remove("open");
-      currentEditingProductId = null;
-      
-      // Refresh semua tampilan
-      if(currentMenu === "produk") {
-        renderProducts();
-      } else if(currentMenu === "admin" && adminSub === "kelola-produk") {
-        renderAdminProducts();
-      }
-      
-      // Jika sedang di menu admin, pastikan tampilan admin tetap
-      if(currentMenu === "admin") {
-        renderMain();
-      } else {
-        renderProducts();
-      }
-    };
-    
-    if(fileInput.files && fileInput.files.length > 0) {
-      let file = fileInput.files[0];
-      let reader = new FileReader();
-      reader.onload = function(e) {
-        finishSave(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      // Jika tidak ada gambar baru, gunakan gambar lama (jika edit) atau null (jika baru)
-      let existingProduct = currentEditingProductId !== null ? products.find(p => p.id === currentEditingProductId) : null;
-      finishSave(existingProduct ? existingProduct.imageData : null);
-    }
-  }
-  
-  window.deleteProduct = (id) => { 
-    if(confirm("Yakin ingin menghapus produk ini?")){ 
-      products = products.filter(p => p.id !== id); 
-      saveToLocalStorage(); 
-      
-      // Refresh berdasarkan menu saat ini
-      if(currentMenu === "produk") {
-        renderProducts();
-      } else if(currentMenu === "admin" && adminSub === "kelola-produk") {
-        renderAdminProducts();
-      }
-      
-      showToast("🗑️ Produk berhasil dihapus"); 
-    } 
-  };
 
-  function renderAdminOrders() {
-    let grid = document.getElementById("productGrid");
-    let statusMap = { pending: "Menunggu", process: "Diproses", success: "Berhasil", cancelled: "Dibatalkan" };
-    grid.innerHTML = `<div class="orders-table"><table>
-<thead>\n<tr><th>ID Pesanan</th><th>Tanggal</th><th>Pelanggan</th><th>Telepon</th><th>Alamat</th><th>Produk</th><th>Total</th><th>Status</th><th>Aksi</th></tr>\n</thead>\n<tbody>${orders.map(o => `<tr>\n<td>${o.id}</td>\n<td>${o.date}</td>\n<td>${o.customer}</td>\n<td>${o.phone}</td>\n<td style="max-width:200px;">${o.address}</td>\n<td style="max-width:150px;">${o.items}</td>\n<td>${formatTHB(o.total)}</td>\n<td><span class="status-badge status-${o.status}">${statusMap[o.status]}</span></td>\n<td><select onchange="updateOrderStatus('${o.id}',this.value)"><option value="pending" ${o.status=='pending'?'selected':''}>Menunggu</option><option value="process" ${o.status=='process'?'selected':''}>Diproses</option><option value="success" ${o.status=='success'?'selected':''}>Berhasil</option><option value="cancelled" ${o.status=='cancelled'?'selected':''}>Dibatalkan</option></select><br><button onclick="deleteOrder('${o.id}')" style="background:#ef4444; color:white; margin-top:0.2rem; padding:0.2rem 0.5rem; border:none; border-radius:0.3rem;">Hapus</button></td>\n</tr>`).join('')}</tbody>\n</table>\n</div>`;
-  }
+        const adminUser = { username: 'admin', password: 'admin123', role: 'admin', profile: { name: 'Admin Toko', lineId: '', whatsapp: '', address: '' } };
+        if (!users.find(u => u.username === 'admin')) {
+            users.push(adminUser);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
 
-  function renderAdminContacts() {
-    let grid = document.getElementById("productGrid");
-    grid.innerHTML = `<div class="contact-settings"><h3>🔗 Media Sosial & Kontak Toko</h3>${['whatsapp','line','telegram','instagram','facebook','tiktok'].map(k => `<div class="contact-group"><h4>${k.toUpperCase()}</h4><input type="text" id="${k}Url" value="${contacts[k]}" style="width:100%; padding:0.5rem; margin-bottom:0.5rem;"><button onclick="saveContact('${k}',document.getElementById('${k}Url').value)" style="background:#e67e22; color:white; border:none; padding:0.3rem 1rem; border-radius:0.5rem;">Simpan</button><div style="font-size:0.7rem; color:#666; word-break:break-all; margin-top:0.3rem;">${contacts[k]}</div></div>`).join('')}<div class="contact-group"><h4>🏦 Rekening Bank</h4><div id="banksList"></div><button onclick="addBank()" class="btn-primary" style="margin-top:0.5rem;">+ Tambah Bank</button></div></div>`;
-    renderBanksList();
-  }
-  
-  function renderBanksList() { 
-    let div = document.getElementById("banksList"); 
-    if(div) div.innerHTML = contacts.banks.map((b,idx) => `<div class="bank-item"><input type="text" value="${b.name}" id="bankName${idx}" style="flex:2;"><input type="text" value="${b.account}" id="bankAcc${idx}" style="flex:2;"><input type="text" value="${b.owner}" id="bankOwner${idx}" style="flex:2;"><button onclick="updateBank(${idx})" style="background:#e67e22; color:white;">Update</button><button onclick="deleteBank(${idx})" style="background:#ef4444; color:white;">Hapus</button></div>`).join(''); 
-  }
-  
-  window.saveContact = (k,v) => { contacts[k]=v; saveToLocalStorage(); renderAdminContacts(); showToast("Kontak berhasil disimpan"); };
-  window.addBank = () => { contacts.banks.push({name:"Bank Baru",account:"",owner:""}); saveToLocalStorage(); renderAdminContacts(); };
-  window.updateBank = (idx) => { contacts.banks[idx]={name:document.getElementById(`bankName${idx}`).value,account:document.getElementById(`bankAcc${idx}`).value,owner:document.getElementById(`bankOwner${idx}`).value}; saveToLocalStorage(); showToast("Bank berhasil diupdate"); renderAdminContacts(); };
-  window.deleteBank = (idx) => { contacts.banks.splice(idx,1); saveToLocalStorage(); renderAdminContacts(); };
-  
-  function renderPublicContact() {
-    let grid = document.getElementById("productGrid");
-    document.getElementById("sectionTitle").innerHTML = "🏪 Kontak & Informasi Toko";
-    grid.innerHTML = `<div style="background:white; border-radius:1.5rem; padding:2rem; text-align:center;"><i class="fas fa-spray-can-sparkles" style="font-size:3rem; color:#e67e22;"></i><h3>TA-PARFUME Official Store</h3><div style="background:#f1f5f9; border-radius:1rem; padding:1.5rem; margin-top:1rem; text-align:left;"><p><i class="fab fa-whatsapp"></i> <a href="${contacts.whatsapp}" target="_blank">Chat WhatsApp</a><br><span style="font-size:0.7rem; word-break:break-all;">${contacts.whatsapp}</span></p><p><i class="fab fa-instagram"></i> <a href="${contacts.instagram}" target="_blank">Instagram</a></p><p><i class="fab fa-facebook"></i> <a href="${contacts.facebook}" target="_blank">Facebook</a></p><p><i class="fab fa-tiktok"></i> <a href="${contacts.tiktok}" target="_blank">TikTok</a></p><hr><h4>🏦 Rekening Pembayaran</h4>${contacts.banks.map(b => `<p><strong>${b.name}</strong><br>No. Rek: ${b.account}<br>a.n ${b.owner}</p>`).join('')}</div></div>`;
-  }
-  
-  function renderOrderHistory() {
-    let grid = document.getElementById("productGrid");
-    document.getElementById("sectionTitle").innerHTML = "📜 Riwayat Pesanan Saya";
-    let userOrders = orders.filter(o => o.customer === "Budi Santoso");
-    if(userOrders.length === 0) { grid.innerHTML = `<div style="text-align:center; padding:3rem;">Belum ada pesanan</div>`; return; }
-    let statusMap = { pending: "Menunggu", process: "Diproses", success: "Berhasil", cancelled: "Dibatalkan" };
-    grid.innerHTML = userOrders.map(o => `<div class="product-card"><div class="product-img"><i class="fas fa-receipt fa-3x"></i></div><div class="product-info"><div><strong>${o.id}</strong> - ${o.date}</div><div>${formatTHB(o.total)}</div><div>${o.items}</div><div><span class="status-badge status-${o.status}">${statusMap[o.status]}</span></div></div></div>`).join('');
-  }
+        function showContent(menu) {
+            if (!currentUser) { showLogin(); return; }
+            currentMenu = menu;
+            document.querySelectorAll('.nav-item-bottom').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item-bottom').classList.add('active');
+            
+            switch(menu) {
+                case 'profil': showProfile(); break;
+                case 'produk': showProducts(); break;
+                case 'keranjang': showCart(); break;
+                case 'pesanan': showOrders(); break;
+                case 'kontak': showContacts(); break;
+                case 'admin':
+                    if (currentUser.role === 'admin') showAdminPanel();
+                    else Swal.fire('Error', 'Hanya admin yang dapat mengakses menu ini!', 'error');
+                    break;
+            }
+        }
 
-  function updateCartUI() {
-    document.getElementById("cartCountBadge").innerText = cart.reduce((s,i)=>s+i.quantity,0);
-    let container = document.getElementById("cartItemsList");
-    if(cart.length === 0) { container.innerHTML = "<div style='text-align:center; padding:1rem;'>🛒 Keranjang kosong</div>"; document.getElementById("cartTotalPrice").innerText = "฿ 0"; return; }
-    let total = 0;
-    container.innerHTML = cart.map((i,idx) => { total += i.price * i.quantity; return `<div style="display:flex; gap:0.8rem; margin-bottom:1rem; padding-bottom:0.8rem; border-bottom:1px solid #eee;"><div style="width:60px; height:60px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center;">${i.image ? `<img src="${i.image}" style="width:100%;height:100%;object-fit:cover;">` : `<i class="fas fa-spray-can"></i>`}</div><div style="flex:1;"><div><strong>${escapeHtml(i.name)}</strong> (${i.size})</div><div>${formatTHB(i.price)}</div><div style="margin-top:5px;"><button onclick="changeQty(${idx},-1)" style="padding:0.2rem 0.6rem; border-radius:0.3rem; border:1px solid #ddd;">-</button> ${i.quantity} <button onclick="changeQty(${idx},1)" style="padding:0.2rem 0.6rem; border-radius:0.3rem; border:1px solid #ddd;">+</button> <button onclick="removeCartItem(${idx})" style="color:red; margin-left:0.5rem;">Hapus</button></div></div></div>`; }).join('');
-    document.getElementById("cartTotalPrice").innerText = formatTHB(total);
-  }
-  
-  window.changeQty = (idx,delta) => { if(cart[idx]){ let newQty = cart[idx].quantity+delta; if(newQty<=0) cart.splice(idx,1); else cart[idx].quantity=newQty; updateCartUI(); } };
-  window.removeCartItem = (idx) => { cart.splice(idx,1); updateCartUI(); };
-  
-  function checkout() {
-    if(cart.length === 0) { showToast("Keranjang kosong!"); return; }
-    let newOrder = { 
-      id: "TRX/TA/2025/"+(orders.length+1001), 
-      date: new Date().toLocaleString('id-ID'), 
-      customer: "Budi Santoso", 
-      phone: "+62 812-3456-7890", 
-      email: "budi@email.com", 
-      address: "Jl. Contoh No.123, Jakarta", 
-      items: cart.map(i=>`${i.name} (${i.size}) x ${i.quantity}`).join(", "), 
-      total: cart.reduce((s,i)=>s+(i.price*i.quantity),0), 
-      status: "pending", 
-      note: "-" 
-    };
-    orders.unshift(newOrder); 
-    cart = []; 
-    updateCartUI(); 
-    saveToLocalStorage(); 
-    document.getElementById("cartOverlay").classList.remove("open"); 
-    showToast(`✅ Pesanan #${newOrder.id} berhasil dibuat`); 
-    renderMain();
-  }
-  
-  window.updateOrderStatus = (id,status) => { 
-    let o = orders.find(o=>o.id===id); 
-    if(o){ 
-      o.status=status; 
-      saveToLocalStorage(); 
-      renderAdminOrders(); 
-      showToast("Status pesanan berhasil diupdate"); 
-    } 
-  };
-  
-  window.deleteOrder = (id) => { 
-    if(confirm("Yakin ingin menghapus pesanan ini?")){ 
-      orders=orders.filter(o=>o.id!==id); 
-      saveToLocalStorage(); 
-      renderAdminOrders(); 
-      showToast("Pesanan berhasil dihapus"); 
-    } 
-  };
+        function showLogin() {
+            document.getElementById('contentArea').innerHTML = `
+                <div class="row justify-content-center">
+                    <div class="col-md-5 col-10">
+                        <div class="card">
+                            <div class="card-header"><h4><i class="fas fa-sign-in-alt"></i> Login / Register</h4></div>
+                            <div class="card-body">
+                                <form id="loginForm">
+                                    <div class="mb-2"><label>Username</label><input type="text" class="form-control" id="loginUsername" required></div>
+                                    <div class="mb-2"><label>Password</label><input type="password" class="form-control" id="loginPassword" required></div>
+                                    <button type="submit" class="btn btn-primary w-100 mb-2">Login</button>
+                                    <button type="button" class="btn btn-secondary w-100" onclick="showRegister()">Register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('loginForm').onsubmit = (e) => {
+                e.preventDefault();
+                const user = users.find(u => u.username === document.getElementById('loginUsername').value && u.password === document.getElementById('loginPassword').value);
+                if (user) {
+                    currentUser = user;
+                    Swal.fire({ title: 'Success!', text: 'Login berhasil!', icon: 'success', timer: 1500, showConfirmButton: false });
+                    setTimeout(() => showProducts(), 1500);
+                } else {
+                    Swal.fire('Error', 'Username atau password salah!', 'error');
+                }
+            };
+        }
 
-  function initMenu() {
-    document.querySelectorAll('.cat-item').forEach(cat => cat.addEventListener('click', () => {
-      document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
-      cat.classList.add('active');
-      currentMenu = cat.dataset.cat;
-      searchKeyword = "";
-      document.getElementById("searchInput").value = "";
-      if(currentMenu === "admin") adminSub = "kelola-produk";
-      renderMain();
-    }));
-    document.querySelectorAll('.submenu-item').forEach(sub => sub.addEventListener('click', () => {
-      document.querySelectorAll('.submenu-item').forEach(s => s.classList.remove('active'));
-      sub.classList.add('active');
-      adminSub = sub.dataset.sub;
-      renderMain();
-    }));
-  }
-  
-  function bindSearch() { 
-    document.getElementById("searchBtn").onclick = () => { 
-      if(currentMenu === "produk"){ 
-        searchKeyword = document.getElementById("searchInput").value; 
-        renderProducts(); 
-      } else showToast("Pencarian hanya tersedia di halaman Produk"); 
-    }; 
-    document.getElementById("searchInput").addEventListener("keypress", (e) => { 
-      if(e.key === "Enter") document.getElementById("searchBtn").click(); 
-    }); 
-  }
-  
-  function cartPanel() { 
-    let overlay = document.getElementById("cartOverlay"); 
-    document.getElementById("cartIcon").onclick = () => { 
-      overlay.classList.add("open"); 
-      updateCartUI(); 
-    }; 
-    document.getElementById("closeCart").onclick = () => overlay.classList.remove("open"); 
-    overlay.onclick = (e) => { 
-      if(e.target === overlay) overlay.classList.remove("open"); 
-    }; 
-    document.getElementById("checkoutBtn").onclick = checkout; 
-  }
+        function showRegister() {
+            document.getElementById('contentArea').innerHTML = `
+                <div class="row justify-content-center">
+                    <div class="col-md-5 col-10">
+                        <div class="card">
+                            <div class="card-header"><h4><i class="fas fa-user-plus"></i> Register</h4></div>
+                            <div class="card-body">
+                                <form id="registerForm">
+                                    <div class="mb-2"><label>Username</label><input type="text" class="form-control" id="regUsername" required></div>
+                                    <div class="mb-2"><label>Password</label><input type="password" class="form-control" id="regPassword" required></div>
+                                    <div class="mb-2"><label>Nama Lengkap</label><input type="text" class="form-control" id="regName" required></div>
+                                    <button type="submit" class="btn btn-primary w-100 mb-2">Register</button>
+                                    <button type="button" class="btn btn-secondary w-100" onclick="showLogin()">Kembali</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('registerForm').onsubmit = (e) => {
+                e.preventDefault();
+                const username = document.getElementById('regUsername').value;
+                if (users.find(u => u.username === username)) {
+                    Swal.fire('Error', 'Username sudah terdaftar!', 'error');
+                    return;
+                }
+                users.push({ username, password: document.getElementById('regPassword').value, role: 'user', profile: { name: document.getElementById('regName').value, lineId: '', whatsapp: '', address: '' } });
+                localStorage.setItem('users', JSON.stringify(users));
+                Swal.fire('Success', 'Registrasi berhasil! Silakan login.', 'success');
+                showLogin();
+            };
+        }
 
-  // Inisialisasi
-  loadFromLocalStorage();
-  initMenu();
-  bindSearch();
-  cartPanel();
-  document.getElementById("addProductBtn").onclick = () => window.openAddProduct();
-  renderMain();
-</script>
+        function showProfile() {
+            const profile = currentUser.profile;
+            document.getElementById('contentArea').innerHTML = `
+                <div class="card">
+                    <div class="card-header"><h4><i class="fas fa-id-card"></i> Profil Pelanggan</h4></div>
+                    <div class="card-body">
+                        <form id="profileForm">
+                            <div class="mb-2"><label>Username</label><input type="text" class="form-control" value="${currentUser.username}" disabled></div>
+                            <div class="mb-2"><label>Nama Lengkap</label><input type="text" class="form-control" id="profileName" value="${profile.name || ''}" required></div>
+                            <div class="mb-2"><label>ID Line</label><input type="text" class="form-control" id="profileLineId" value="${profile.lineId || ''}"></div>
+                            <div class="mb-2"><label>No WhatsApp</label><input type="text" class="form-control" id="profileWhatsapp" value="${profile.whatsapp || ''}" required></div>
+                            <div class="mb-2"><label>Alamat</label><textarea class="form-control" id="profileAddress" rows="2" required>${profile.address || ''}</textarea></div>
+                            <button type="submit" class="btn btn-primary w-100 mb-2">Simpan Profil</button>
+                            <button type="button" class="btn btn-warning w-100 mb-2" onclick="changePassword()">Ganti Password</button>
+                            <button type="button" class="btn btn-danger w-100" onclick="logout()">Keluar</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.getElementById('profileForm').onsubmit = (e) => {
+                e.preventDefault();
+                currentUser.profile = {
+                    name: document.getElementById('profileName').value,
+                    lineId: document.getElementById('profileLineId').value,
+                    whatsapp: document.getElementById('profileWhatsapp').value,
+                    address: document.getElementById('profileAddress').value
+                };
+                const idx = users.findIndex(u => u.username === currentUser.username);
+                users[idx] = currentUser;
+                localStorage.setItem('users', JSON.stringify(users));
+                Swal.fire('Success', 'Profil berhasil diupdate!', 'success');
+            };
+        }
+
+        function changePassword() {
+            Swal.fire({
+                title: 'Ganti Password',
+                html: `<input type="password" id="oldPass" class="swal2-input" placeholder="Password Lama"><input type="password" id="newPass" class="swal2-input" placeholder="Password Baru"><input type="password" id="confirmPass" class="swal2-input" placeholder="Konfirmasi">`,
+                showCancelButton: true, confirmButtonText: 'Ganti',
+                preConfirm: () => {
+                    if (document.getElementById('oldPass').value !== currentUser.password) return Swal.showValidationMessage('Password lama salah!');
+                    if (document.getElementById('newPass').value !== document.getElementById('confirmPass').value) return Swal.showValidationMessage('Password baru tidak cocok!');
+                    if (document.getElementById('newPass').value.length < 3) return Swal.showValidationMessage('Minimal 3 karakter!');
+                    currentUser.password = document.getElementById('newPass').value;
+                    const idx = users.findIndex(u => u.username === currentUser.username);
+                    users[idx] = currentUser;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    Swal.fire('Success', 'Password berhasil diganti!', 'success');
+                }
+            });
+        }
+
+        function logout() { currentUser = null; Swal.fire('Logout', 'Anda telah keluar!', 'success'); showLogin(); }
+
+        function showProducts() {
+            products = JSON.parse(localStorage.getItem('products')) || [];
+            let html = `<div class="products-grid">`;
+            if (products.length === 0) {
+                html += `<div class="empty-message" style="grid-column:1/-1;"><i class="fas fa-box-open fa-3x mb-3"></i><p>Belum ada produk</p></div>`;
+            } else {
+                products.forEach(p => {
+                    const defSize = p.sizes.find(s => s.size === '30ml') || p.sizes[0];
+                    html += `
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                ${p.image ? `<img src="${p.image}" class="product-image">` : `<div class="product-image-placeholder"><i class="fas fa-perfume"></i></div>`}
+                            </div>
+                            <div class="product-name">${p.name}</div>
+                            <select class="size-select" id="size-${p.id}" onchange="updatePrice(${p.id})">
+                                ${p.sizes.map(s => `<option value="${s.size}" data-price="${s.price}" data-stock="${s.stock}">${s.size} - ${s.price} Bath</option>`).join('')}
+                            </select>
+                            <div class="info-row">
+                                <div class="price-tag" id="price-${p.id}">${defSize.price} Bath</div>
+                                <div class="stock-info stock-available"><i class="fas fa-box"></i> Sisa: ${defSize.stock}</div>
+                            </div>
+                            <button class="btn-add-cart" onclick="addToCart(${p.id})"><i class="fas fa-shopping-cart"></i> BELI SEKARANG</button>
+                        </div>
+                    `;
+                });
+            }
+            html += `</div>`;
+            document.getElementById('contentArea').innerHTML = html;
+        }
+
+        function updatePrice(id) {
+            const sel = document.getElementById(`size-${id}`);
+            const opt = sel.options[sel.selectedIndex];
+            document.getElementById(`price-${id}`).textContent = `${opt.getAttribute('data-price')} Bath`;
+        }
+
+        function addToCart(id) {
+            const sel = document.getElementById(`size-${id}`);
+            const size = sel.value;
+            const price = sel.options[sel.selectedIndex].getAttribute('data-price');
+            const stock = parseInt(sel.options[sel.selectedIndex].getAttribute('data-stock'));
+            if (!size) return Swal.fire('Error', 'Pilih ukuran!', 'error');
+            if (stock <= 0) return Swal.fire('Error', 'Stok habis!', 'error');
+            if (!carts[currentUser.username]) carts[currentUser.username] = [];
+            const existing = carts[currentUser.username].find(i => i.productId === id && i.size === size);
+            if (existing) {
+                if (existing.quantity + 1 > stock) return Swal.fire('Error', `Stok hanya ${stock}!`, 'error');
+                existing.quantity++;
+            } else {
+                carts[currentUser.username].push({ productId: id, productName: products.find(p => p.id === id).name, size, price: parseInt(price), quantity: 1, maxStock: stock });
+            }
+            localStorage.setItem('carts', JSON.stringify(carts));
+            Swal.fire({ title: 'Berhasil!', text: 'Ditambahkan ke keranjang!', icon: 'success', timer: 1200, showConfirmButton: false });
+        }
+
+        function showCart() {
+            const cart = carts[currentUser.username] || [];
+            if (cart.length === 0) {
+                document.getElementById('contentArea').innerHTML = `<div class="card"><div class="card-body text-center"><i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i><h5>Keranjang Kosong</h5></div></div>`;
+                return;
+            }
+            let total = 0;
+            let html = `<div class="card"><div class="card-header"><h4><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h4></div><div class="card-body"><div class="list-group">`;
+            cart.forEach((item, i) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                html += `<div class="list-group-item"><div class="row"><div class="col-12"><strong>${item.productName}</strong> (${item.size})</div><div class="col-4">${item.price} Bath</div><div class="col-4"><input type="number" min="1" max="${item.maxStock}" value="${item.quantity}" onchange="updateQty(${i},this.value)" class="form-control form-control-sm"></div><div class="col-2">${subtotal}</div><div class="col-2"><button class="btn btn-danger btn-sm" onclick="removeItem(${i})"><i class="fas fa-trash"></i></button></div></div></div>`;
+            });
+            html += `</div><hr><div class="row"><div class="col-6"><h5>Total: ${total} Bath</h5></div><div class="col-6 text-end"><button class="btn btn-success w-100" onclick="checkout()">Checkout</button></div></div></div></div>`;
+            document.getElementById('contentArea').innerHTML = html;
+        }
+
+        function updateQty(i, qty) { if (qty < 1) qty = 1; const item = carts[currentUser.username][i]; if (qty > item.maxStock) { Swal.fire('Error', `Maksimal ${item.maxStock}!`, 'error'); qty = item.maxStock; } carts[currentUser.username][i].quantity = parseInt(qty); localStorage.setItem('carts', JSON.stringify(carts)); showCart(); }
+        function removeItem(i) { carts[currentUser.username].splice(i, 1); localStorage.setItem('carts', JSON.stringify(carts)); showCart(); }
+
+        function checkout() {
+            const profile = currentUser.profile;
+            if (!profile.name || !profile.whatsapp || !profile.address) { Swal.fire('Error', 'Lengkapi profil dulu!', 'error'); showProfile(); return; }
+            const cart = carts[currentUser.username] || [];
+            if (cart.length === 0) return Swal.fire('Error', 'Keranjang kosong!', 'error');
+            products = JSON.parse(localStorage.getItem('products')) || [];
+            let ok = true;
+            cart.forEach(item => {
+                const p = products.find(pr => pr.id === item.productId);
+                const idx = p.sizes.findIndex(s => s.size === item.size);
+                if (p.sizes[idx].stock >= item.quantity) p.sizes[idx].stock -= item.quantity;
+                else ok = false;
+            });
+            if (!ok) return Swal.fire('Error', 'Stok tidak mencukupi!', 'error');
+            localStorage.setItem('products', JSON.stringify(products));
+            if (!orders[currentUser.username]) orders[currentUser.username] = [];
+            orders[currentUser.username].push({ orderId: Date.now(), date: new Date().toISOString(), items: [...cart], total: cart.reduce((s,i)=>s+(i.price*i.quantity),0), status: 'pending', profile: {...profile}, username: currentUser.username });
+            localStorage.setItem('orders', JSON.stringify(orders));
+            carts[currentUser.username] = [];
+            localStorage.setItem('carts', JSON.stringify(carts));
+            Swal.fire('Success', 'Checkout berhasil!', 'success');
+            showOrders();
+        }
+
+        function showOrders() {
+            const userOrders = orders[currentUser.username] || [];
+            if (userOrders.length === 0) {
+                document.getElementById('contentArea').innerHTML = `<div class="card"><div class="card-body text-center"><i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i><h5>Belum ada pesanan</h5></div></div>`;
+                return;
+            }
+            let html = `<div class="card"><div class="card-header"><h4><i class="fas fa-history"></i> Riwayat Pesanan</h4></div><div class="card-body">`;
+            userOrders.reverse().forEach(o => {
+                const statusColor = o.status === 'pending' ? 'warning' : o.status === 'processed' ? 'info' : 'success';
+                const statusText = o.status === 'pending' ? 'Menunggu' : o.status === 'processed' ? 'Diproses' : 'Selesai';
+                html += `<div class="card mb-2"><div class="card-header" style="background:white;border-bottom:1px solid #ff6b6b;"><strong>Order #${o.orderId}</strong><span class="badge bg-${statusColor} float-end">${statusText}</span></div><div class="card-body"><p>${new Date(o.date).toLocaleString()}</p><p>Total: ${o.total} Bath</p><button class="btn btn-primary btn-sm" onclick="detailOrder(${o.orderId})">Detail</button></div></div>`;
+            });
+            html += `</div></div>`;
+            document.getElementById('contentArea').innerHTML = html;
+        }
+
+        function detailOrder(id) {
+            const order = orders[currentUser.username].find(o => o.orderId === id);
+            let html = `<div class="card"><div class="card-header"><h4>Detail Pesanan #${id}</h4><button class="btn btn-secondary btn-sm mt-2" onclick="showOrders()">Kembali</button></div><div class="card-body"><h6>Produk:</h6><table class="table table-sm"><thead><tr><th>Produk</th><th>Ukuran</th><th>Harga</th><th>Jumlah</th><th>Subtotal</th></tr></thead><tbody>`;
+            order.items.forEach(i => { html += `<tr><td>${i.productName}</td><td>${i.size}</td><td>${i.price}</td><td>${i.quantity}</td><td>${i.price*i.quantity}</td></tr>`; });
+            html += `</tbody><tfoot><tr><th colspan="4">Total:</th><th>${order.total} Bath</th></tr></tfoot></table><h6>Informasi Pengiriman:</h6><p>Nama: ${order.profile.name}</p><p>WhatsApp: ${order.profile.whatsapp}</p><p>Alamat: ${order.profile.address}</p><p>Status: ${order.status === 'pending' ? 'Menunggu' : order.status === 'processed' ? 'Diproses' : 'Selesai'}</p></div></div>`;
+            document.getElementById('contentArea').innerHTML = html;
+        }
+
+        function showContacts() {
+            contacts = JSON.parse(localStorage.getItem('contacts')) || { social: { whatsapp: '', line: '', telegram: '', instagram: '', facebook: '', tiktok: '' }, banks: [] };
+            let html = `<div class="card"><div class="card-header"><h4><i class="fas fa-phone-alt"></i> Kontak Toko</h4></div><div class="card-body"><div class="text-center mb-3"><h6 class="section-title">Media Sosial</h6></div><div class="social-container">`;
+            const socials = [
+                { name: 'WhatsApp', icon: 'fab fa-whatsapp', color: 'whatsapp', key: 'whatsapp' },
+                { name: 'Line', icon: 'fab fa-line', color: 'line', key: 'line' },
+                { name: 'Telegram', icon: 'fab fa-telegram', color: 'telegram', key: 'telegram' },
+                { name: 'Instagram', icon: 'fab fa-instagram', color: 'instagram', key: 'instagram' },
+                { name: 'Facebook', icon: 'fab fa-facebook', color: 'facebook', key: 'facebook' },
+                { name: 'TikTok', icon: 'fab fa-tiktok', color: 'tiktok', key: 'tiktok' }
+            ];
+            let has = false;
+            socials.forEach(s => {
+                if (contacts.social[s.key]) {
+                    has = true;
+                    html += `<div class="social-card" onclick="window.open('${contacts.social[s.key]}','_blank')"><div class="social-icon-wrapper ${s.color}"><i class="${s.icon}"></i></div><div class="social-name">${s.name}</div></div>`;
+                }
+            });
+            if (!has) html += `<div class="empty-message">Belum ada media sosial</div>`;
+            html += `</div><div class="text-center mt-3"><h6 class="section-title">Rekening Bank</h6></div><div class="row">`;
+            if (contacts.banks.length) {
+                contacts.banks.forEach(b => {
+                    html += `<div class="col-12"><div class="bank-card" onclick="copyBank('${b.number}')"><div class="d-flex"><div class="bank-icon"><i class="fas fa-credit-card"></i></div><div><strong>${b.bankName}</strong><br>${b.name}<br><small>${b.number}</small><i class="fas fa-copy copy-icon"></i></div></div></div></div>`;
+                });
+            } else {
+                html += `<div class="empty-message">Belum ada rekening bank</div>`;
+            }
+            html += `</div></div></div>`;
+            document.getElementById('contentArea').innerHTML = html;
+        }
+
+        function copyBank(text) { navigator.clipboard.writeText(text); Swal.fire({ title: 'Berhasil!', text: 'Nomor rekening disalin', icon: 'success', timer: 1500, showConfirmButton: false }); }
+
+        // ========== ADMIN PANEL ==========
+        function showAdminPanel() {
+            if (currentUser.role !== 'admin') return;
+            document.getElementById('contentArea').innerHTML = `
+                <div class="card">
+                    <div class="card-header"><h4><i class="fas fa-cog"></i> Panel Admin</h4></div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="adminTab">
+                            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#productsTab">Kelola Produk</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#ordersTab">Kelola Pesanan</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#contactsTab">Kelola Kontak</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#adminPassTab">Ganti Password</button></li>
+                        </ul>
+                        <div class="tab-content mt-3">
+                            <div class="tab-pane fade show active" id="productsTab"><button class="btn btn-primary mb-3 w-100" onclick="addProduct()"><i class="fas fa-plus"></i> Tambah Produk</button><div id="productList"></div></div>
+                            <div class="tab-pane fade" id="ordersTab"><div id="orderList"></div></div>
+                            <div class="tab-pane fade" id="contactsTab"><div id="contactForm"></div></div>
+                            <div class="tab-pane fade" id="adminPassTab"><div id="adminPassForm"></div></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            loadProductList();
+            loadOrderList();
+            loadContactForm();
+            loadAdminPassForm();
+            // Initialize bootstrap tabs
+            const tabs = document.querySelectorAll('#adminTab button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('#adminTab button').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('show', 'active'));
+                    tab.classList.add('active');
+                    document.querySelector(tab.getAttribute('data-bs-target')).classList.add('show', 'active');
+                });
+            });
+        }
+
+        function loadProductList() {
+            products = JSON.parse(localStorage.getItem('products')) || [];
+            let html = `<div class="table-responsive"><table class="table"><thead><tr><th>ID</th><th>Gambar</th><th>Nama</th><th>Aksi</th></tr></thead><tbody>`;
+            products.forEach(p => {
+                html += `<tr>
+                    <td>${p.id}</td>
+                    <td>${p.image ? `<img src="${p.image}" class="product-image-thumb">` : '<i class="fas fa-perfume fa-2x"></i>'}</td>
+                    <td>${p.name}</td>
+                    <td><button class="btn btn-sm btn-warning me-1" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
+            });
+            html += `</tbody></table></div>`;
+            document.getElementById('productList').innerHTML = html;
+        }
+
+        function addProduct() {
+            const formId = 'addForm_' + Date.now();
+            let sizeHtml = '';
+            defaultSizes.forEach(size => {
+                sizeHtml += `
+                    <div class="mb-2">
+                        <label>${size}</label>
+                        <div class="row">
+                            <div class="col-6"><input type="number" class="form-control price-input" placeholder="Harga" value="${defaultPrices[size]}" data-size="${size}"></div>
+                            <div class="col-6"><input type="number" class="form-control stock-input" placeholder="Stok" value="5" data-size="${size}"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            Swal.fire({
+                title: 'Tambah Produk',
+                html: `
+                    <div id="${formId}">
+                        <input id="prodName_${formId}" class="swal2-input" placeholder="Nama Produk" required>
+                        <div class="mb-2">
+                            <label class="swal2-file-label">Foto Produk</label>
+                            <input type="file" id="prodImage_${formId}" accept="image/*" class="swal2-file">
+                            <div id="imagePreview_${formId}" class="mt-2 text-center"></div>
+                        </div>
+                        <hr>
+                        <h6 class="text-start">Ukuran, Harga & Stok:</h6>
+                        <div id="sizeContainer_${formId}">${sizeHtml}</div>
+                    </div>
+                `,
+                width: '550px',
+                showCancelButton: true,
+                confirmButtonText: 'Simpan',
+                cancelButtonText: 'Batal',
+                confirmButtonColor: '#ff6b6b',
+                didOpen: () => {
+                    setTimeout(() => {
+                        const fileInput = document.getElementById(`prodImage_${formId}`);
+                        if (fileInput) {
+                            fileInput.onchange = (e) => {
+                                const file = e.target.files[0];
+                                if (file) {
+                                    if (file.size > 2 * 1024 * 1024) {
+                                        Swal.fire('Error', 'File maksimal 2MB!', 'error');
+                                        fileInput.value = '';
+                                        return;
+                                    }
+                                    if (!file.type.match('image.*')) {
+                                        Swal.fire('Error', 'Hanya file gambar!', 'error');
+                                        fileInput.value = '';
+                                        return;
+                                    }
+                                    const reader = new FileReader();
+                                    reader.onload = (e) => {
+                                        document.getElementById(`imagePreview_${formId}`).innerHTML = `<img src="${e.target.result}" style="max-width:100%;max-height:100px;border-radius:8px;">`;
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            };
+                        }
+                    }, 100);
+                },
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        const name = document.getElementById(`prodName_${formId}`).value;
+                        const fileInput = document.getElementById(`prodImage_${formId}`);
+                        if (!name) { Swal.showValidationMessage('Nama produk harus diisi!'); resolve(false); return; }
+                        
+                        const sizes = [];
+                        const priceInputs = document.querySelectorAll(`#${formId} .price-input`);
+                        const stockInputs = document.querySelectorAll(`#${formId} .stock-input`);
+                        for (let i = 0; i < priceInputs.length; i++) {
+                            const size = priceInputs[i].getAttribute('data-size');
+                            const price = parseInt(priceInputs[i].value);
+                            const stock = parseInt(stockInputs[i].value);
+                            if (price && !isNaN(price) && price > 0) {
+                                sizes.push({ size, price, stock: stock || 0 });
+                            }
+                        }
+                        if (sizes.length === 0) { Swal.showValidationMessage('Minimal satu ukuran dengan harga valid!'); resolve(false); return; }
+                        
+                        const newId = Date.now();
+                        const newProduct = { id: newId, name: name.trim(), image: null, sizes };
+                        
+                        if (fileInput && fileInput.files && fileInput.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                newProduct.image = e.target.result;
+                                products.push(newProduct);
+                                localStorage.setItem('products', JSON.stringify(products));
+                                Swal.fire({ title: 'Berhasil!', text: 'Produk ditambahkan!', icon: 'success', timer: 1500, showConfirmButton: false });
+                                loadProductList();
+                                window.dispatchEvent(new StorageEvent('storage', { key: 'products', newValue: JSON.stringify(products) }));
+                                resolve(true);
+                            };
+                            reader.onerror = () => { Swal.fire('Error', 'Gagal baca gambar!', 'error'); resolve(false); };
+                            reader.readAsDataURL(fileInput.files[0]);
+                        } else {
+                            products.push(newProduct);
+                            localStorage.setItem('products', JSON.stringify(products));
+                            Swal.fire({ title: 'Berhasil!', text: 'Produk ditambahkan!', icon: 'success', timer: 1500, showConfirmButton: false });
+                            loadProductList();
+                            window.dispatchEvent(new StorageEvent('storage', { key: 'products', newValue: JSON.stringify(products) }));
+                            resolve(true);
+                        }
+                    });
+                }
+            });
+        }
+
+        function editProduct(id) {
+            const product = products.find(p => p.id == id);
+            if (!product) return;
+            const formId = 'editForm_' + Date.now();
+            let sizeHtml = '';
+            product.sizes.forEach(sizeItem => {
+                sizeHtml += `
+                    <div class="mb-2">
+                        <label>${sizeItem.size}</label>
+                        <div class="row">
+                            <div class="col-6"><input type="number" class="form-control price-input" value="${sizeItem.price}" data-size="${sizeItem.size}"></div>
+                            <div class="col-6"><input type="number" class="form-control stock-input" value="${sizeItem.stock}" data-size="${sizeItem.size}"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            Swal.fire({
+                title: 'Edit Produk',
+                html: `
+                    <div id="${formId}">
+                        <input id="prodName_${formId}" class="swal2-input" value="${product.name}" required>
+                        <div class="mb-2">
+                            <label class="swal2-file-label">Foto Produk</label>
+                            <input type="file" id="prodImage_${formId}" accept="image/*" class="swal2-file">
+                            <div id="imagePreview_${formId}" class="mt-2 text-center">
+                                ${product.image ? `<img src="${product.image}" style="max-width:100%;max-height:100px;border-radius:8px;">` : ''}
+                            </div>
+                        </div>
+                        <hr>
+                        <h6 class="text-start">Ukuran, Harga & Stok:</h6>
+                        <div id="sizeContainer_${formId}">${sizeHtml}</div>
+                    </div>
+                `,
+                width: '550px',
+                showCancelButton: true,
+                confirmButtonText: 'Update',
+                cancelButtonText: 'Batal',
+                confirmButtonColor: '#ff6b6b',
+                didOpen: () => {
+                    setTimeout(() => {
+                        const fileInput = document.getElementById(`prodImage_${formId}`);
+                        if (fileInput) {
+                            fileInput.onchange = (e) => {
+                                const file = e.target.files[0];
+                                if (file) {
+                                    if (file.size > 2 * 1024 * 1024) {
+                                        Swal.fire('Error', 'File maksimal 2MB!', 'error');
+                                        fileInput.value = '';
+                                        return;
+                                    }
+                                    if (!file.type.match('image.*')) {
+                                        Swal.fire('Error', 'Hanya file gambar!', 'error');
+                                        fileInput.value = '';
+                                        return;
+                                    }
+                                    const reader = new FileReader();
+                                    reader.onload = (e) => {
+                                        document.getElementById(`imagePreview_${formId}`).innerHTML = `<img src="${e.target.result}" style="max-width:100%;max-height:100px;border-radius:8px;">`;
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            };
+                        }
+                    }, 100);
+                },
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        const name = document.getElementById(`prodName_${formId}`).value;
+                        const fileInput = document.getElementById(`prodImage_${formId}`);
+                        if (!name) { Swal.showValidationMessage('Nama produk harus diisi!'); resolve(false); return; }
+                        
+                        product.name = name.trim();
+                        const priceInputs = document.querySelectorAll(`#${formId} .price-input`);
+                        const stockInputs = document.querySelectorAll(`#${formId} .stock-input`);
+                        for (let i = 0; i < priceInputs.length; i++) {
+                            const size = priceInputs[i].getAttribute('data-size');
+                            const price = parseInt(priceInputs[i].value);
+                            const stock = parseInt(stockInputs[i].value);
+                            const idx = product.sizes.findIndex(s => s.size === size);
+                            if (idx !== -1 && price && !isNaN(price) && price > 0) {
+                                product.sizes[idx].price = price;
+                                product.sizes[idx].stock = stock || 0;
+                            }
+                        }
+                        
+                        if (fileInput && fileInput.files && fileInput.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                product.image = e.target.result;
+                                localStorage.setItem('products', JSON.stringify(products));
+                                Swal.fire({ title: 'Berhasil!', text: 'Produk diupdate!', icon: 'success', timer: 1500, showConfirmButton: false });
+                                loadProductList();
+                                window.dispatchEvent(new StorageEvent('storage', { key: 'products', newValue: JSON.stringify(products) }));
+                                resolve(true);
+                            };
+                            reader.onerror = () => { Swal.fire('Error', 'Gagal baca gambar!', 'error'); resolve(false); };
+                            reader.readAsDataURL(fileInput.files[0]);
+                        } else {
+                            localStorage.setItem('products', JSON.stringify(products));
+                            Swal.fire({ title: 'Berhasil!', text: 'Produk diupdate!', icon: 'success', timer: 1500, showConfirmButton: false });
+                            loadProductList();
+                            window.dispatchEvent(new StorageEvent('storage', { key: 'products', newValue: JSON.stringify(products) }));
+                            resolve(true);
+                        }
+                    });
+                }
+            });
+        }
+
+        function deleteProduct(id) {
+            Swal.fire({ title: 'Yakin hapus?', text: 'Produk akan dihapus permanen!', icon: 'warning', showCancelButton: true, confirmButtonText: 'Hapus', confirmButtonColor: '#dc3545' }).then(result => {
+                if (result.isConfirmed) {
+                    const idx = products.findIndex(p => p.id == id);
+                    if (idx !== -1) {
+                        products.splice(idx, 1);
+                        localStorage.setItem('products', JSON.stringify(products));
+                        Swal.fire('Deleted!', 'Produk dihapus.', 'success');
+                        loadProductList();
+                        window.dispatchEvent(new StorageEvent('storage', { key: 'products', newValue: JSON.stringify(products) }));
+                    }
+                }
+            });
+        }
+
+        function loadOrderList() {
+            orders = JSON.parse(localStorage.getItem('orders')) || {};
+            let html = `<div class="accordion" id="ordersAccordion">`;
+            let idx = 0;
+            for (const [username, userOrders] of Object.entries(orders)) {
+                const user = users.find(u => u.username === username);
+                const userName = user ? user.profile.name : username;
+                userOrders.forEach(order => {
+                    const statusColor = order.status === 'pending' ? 'warning' : order.status === 'processed' ? 'info' : 'success';
+                    const statusText = order.status === 'pending' ? 'Menunggu' : order.status === 'processed' ? 'Diproses' : 'Selesai';
+                    html += `<div class="accordion-item mb-2"><div class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${idx}"><div><strong>Order #${order.orderId}</strong> <span class="badge bg-${statusColor}">${statusText}</span><br><small>${userName} (@${username}) | ${new Date(order.date).toLocaleDateString()}</small></div></button></div><div id="collapse${idx}" class="accordion-collapse collapse"><div class="accordion-body"><h6>Produk:</h6><table class="table table-sm"><thead><tr><th>Produk</th><th>Ukuran</th><th>Harga</th><th>Jumlah</th><th>Subtotal</th></tr></thead><tbody>`;
+                    order.items.forEach(item => { html += `<tr><td>${item.productName}</td><td>${item.size}</td><td>${item.price}</td><td>${item.quantity}</td><td>${item.price * item.quantity}</td></tr>`; });
+                    html += `</tbody><tfoot><tr><th colspan="4">Total:</th><th>${order.total} Bath</th></tr></tfoot></table><h6>Pelanggan:</h6><p>Username: ${order.username || username}<br>Nama: ${order.profile.name}<br>WA: ${order.profile.whatsapp}<br>Line: ${order.profile.lineId || '-'}<br>Alamat: ${order.profile.address}<br>Tanggal: ${new Date(order.date).toLocaleString()}</p><select class="form-select form-select-sm mb-2" id="status-${order.orderId}"><option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Menunggu</option><option value="processed" ${order.status === 'processed' ? 'selected' : ''}>Diproses</option><option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Selesai</option></select><button class="btn btn-primary btn-sm" onclick="updateOrderStat('${username}',${order.orderId})">Update</button><button class="btn btn-danger btn-sm ms-2" onclick="deleteOrder('${username}',${order.orderId})">Hapus</button></div></div></div>`;
+                    idx++;
+                });
+            }
+            if (idx === 0) html = `<div class="empty-message">Belum ada pesanan</div>`;
+            html += `</div>`;
+            document.getElementById('orderList').innerHTML = html;
+        }
+
+        function updateOrderStat(username, orderId) {
+            const sel = document.getElementById(`status-${orderId}`);
+            const newStatus = sel.value;
+            const idx = orders[username].findIndex(o => o.orderId === orderId);
+            if (idx !== -1) { orders[username][idx].status = newStatus; localStorage.setItem('orders', JSON.stringify(orders)); Swal.fire('Success', 'Status diupdate!', 'success'); loadOrderList(); }
+        }
+
+        function deleteOrder(username, orderId) {
+            Swal.fire({ title: 'Hapus pesanan?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Hapus', confirmButtonColor: '#dc3545' }).then(res => {
+                if (res.isConfirmed) {
+                    const idx = orders[username].findIndex(o => o.orderId === orderId);
+                    if (idx !== -1) { orders[username].splice(idx, 1); if (orders[username].length === 0) delete orders[username]; localStorage.setItem('orders', JSON.stringify(orders)); Swal.fire('Deleted!', 'Pesanan dihapus.', 'success'); loadOrderList(); }
+                }
+            });
+        }
+
+        function loadContactForm() {
+            contacts = JSON.parse(localStorage.getItem('contacts')) || { social: { whatsapp: '', line: '', telegram: '', instagram: '', facebook: '', tiktok: '' }, banks: [] };
+            let bankHtml = '';
+            contacts.banks.forEach((b, i) => {
+                bankHtml += `<div class="mb-2 p-2 border rounded"><input type="text" placeholder="Nama Bank" value="${b.bankName}" class="form-control mb-1"><input type="text" placeholder="Nama Pemilik" value="${b.name}" class="form-control mb-1"><input type="text" placeholder="No. Rekening" value="${b.number}" class="form-control mb-1"><button type="button" class="btn btn-sm btn-danger" onclick="removeBank(${i})">Hapus</button></div>`;
+            });
+            document.getElementById('contactForm').innerHTML = `
+                <form id="adminContactForm">
+                    <h6>Media Sosial</h6>
+                    <div class="mb-2"><label>WhatsApp URL</label><input type="url" class="form-control" id="waLink" value="${contacts.social.whatsapp || ''}"></div>
+                    <div class="mb-2"><label>Line URL</label><input type="url" class="form-control" id="lineLink" value="${contacts.social.line || ''}"></div>
+                    <div class="mb-2"><label>Telegram URL</label><input type="url" class="form-control" id="teleLink" value="${contacts.social.telegram || ''}"></div>
+                    <div class="mb-2"><label>Instagram URL</label><input type="url" class="form-control" id="igLink" value="${contacts.social.instagram || ''}"></div>
+                    <div class="mb-2"><label>Facebook URL</label><input type="url" class="form-control" id="fbLink" value="${contacts.social.facebook || ''}"></div>
+                    <div class="mb-2"><label>TikTok URL</label><input type="url" class="form-control" id="ttLink" value="${contacts.social.tiktok || ''}"></div>
+                    <hr><h6>Rekening Bank</h6><div id="bankList">${bankHtml}</div>
+                    <button type="button" class="btn btn-sm btn-secondary mb-2" onclick="addBankField()"><i class="fas fa-plus"></i> Tambah Bank</button>
+                    <hr><button type="submit" class="btn btn-primary w-100">Simpan</button>
+                </form>
+            `;
+            document.getElementById('adminContactForm').onsubmit = (e) => {
+                e.preventDefault();
+                const newContacts = {
+                    social: { whatsapp: document.getElementById('waLink').value, line: document.getElementById('lineLink').value, telegram: document.getElementById('teleLink').value, instagram: document.getElementById('igLink').value, facebook: document.getElementById('fbLink').value, tiktok: document.getElementById('ttLink').value },
+                    banks: []
+                };
+                document.querySelectorAll('#bankList > div').forEach(div => {
+                    const inputs = div.querySelectorAll('input');
+                    if (inputs[0] && inputs[0].value && inputs[1] && inputs[1].value && inputs[2] && inputs[2].value) {
+                        newContacts.banks.push({ bankName: inputs[0].value, name: inputs[1].value, number: inputs[2].value });
+                    }
+                });
+                contacts = newContacts;
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                Swal.fire('Success', 'Kontak diupdate!', 'success');
+                window.dispatchEvent(new StorageEvent('storage', { key: 'contacts', newValue: JSON.stringify(contacts) }));
+            };
+        }
+
+        function addBankField() {
+            const div = document.createElement('div');
+            div.className = 'mb-2 p-2 border rounded';
+            div.innerHTML = `<input type="text" placeholder="Nama Bank" class="form-control mb-1"><input type="text" placeholder="Nama Pemilik" class="form-control mb-1"><input type="text" placeholder="No. Rekening" class="form-control mb-1"><button type="button" class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">Hapus</button>`;
+            document.getElementById('bankList').appendChild(div);
+        }
+
+        function removeBank(idx) {
+            contacts.banks.splice(idx, 1);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            loadContactForm();
+        }
+
+        function loadAdminPassForm() {
+            document.getElementById('adminPassForm').innerHTML = `
+                <form id="adminPassFormSubmit">
+                    <div class="mb-2"><label>Password Baru</label><input type="password" class="form-control" id="newAdminPass" required></div>
+                    <div class="mb-2"><label>Konfirmasi</label><input type="password" class="form-control" id="confirmAdminPass" required></div>
+                    <button type="submit" class="btn btn-primary w-100">Ganti Password</button>
+                </form>
+            `;
+            document.getElementById('adminPassFormSubmit').onsubmit = (e) => {
+                e.preventDefault();
+                const newPass = document.getElementById('newAdminPass').value;
+                const confirm = document.getElementById('confirmAdminPass').value;
+                if (newPass !== confirm) return Swal.fire('Error', 'Password tidak cocok!', 'error');
+                if (newPass.length < 3) return Swal.fire('Error', 'Minimal 3 karakter!', 'error');
+                const idx = users.findIndex(u => u.username === 'admin');
+                users[idx].password = newPass;
+                localStorage.setItem('users', JSON.stringify(users));
+                if (currentUser.username === 'admin') currentUser.password = newPass;
+                Swal.fire('Success', 'Password admin diganti!', 'success');
+            };
+        }
+
+        showLogin();
+        setInterval(() => {
+            if (currentUser && (currentMenu === 'produk' || currentMenu === 'kontak')) {
+                const newProducts = JSON.parse(localStorage.getItem('products')) || [];
+                const newContacts = JSON.parse(localStorage.getItem('contacts')) || {};
+                if (JSON.stringify(newProducts) !== JSON.stringify(products)) { products = newProducts; if (currentMenu === 'produk') showProducts(); }
+                if (JSON.stringify(newContacts) !== JSON.stringify(contacts)) { contacts = newContacts; if (currentMenu === 'kontak') showContacts(); }
+            }
+        }, 3000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
