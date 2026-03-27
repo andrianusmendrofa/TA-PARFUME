@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>TA-PARFUME - Toko Parfume Premium</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background-color: #f5f7fb; color: #1e293b; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .top-bar { background-color: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 0.9rem 0; }
+    .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #2c3e50, #1a2a3a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .logo i { background: none; color: #8b5a2b; margin-right: 6px; }
+    .search-bar { flex: 1; max-width: 500px; display: flex; background: #f1f3f8; border-radius: 2rem; overflow: hidden; border: 1px solid #e2e8f0; }
+    .search-bar input { flex: 1; padding: 0.8rem 1.2rem; border: none; background: transparent; outline: none; }
+    .search-bar button { background: white; border: none; padding: 0 1.2rem; cursor: pointer; color: #8b5a2b; }
+    .nav-icons { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-icons .icon { position: relative; font-size: 1.4rem; color: #334155; cursor: pointer; }
+    .cart-badge { position: absolute; top: -8px; right: -12px; background: #e67e22; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.1rem 0.4rem; border-radius: 20px; min-width: 18px; text-align: center; }
+    .categories { background: white; border-bottom: 1px solid #eef2f6; padding: 0.8rem 0; overflow-x: auto; white-space: nowrap; }
+    .categories-wrapper { display: inline-flex; gap: 1.8rem; padding: 0 1.5rem; }
+    .cat-item { display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 500; color: #475569; cursor: pointer; transition: all 0.2s; }
+    .cat-item i { font-size: 1.4rem; background: #f1f5f9; padding: 8px; border-radius: 50%; width: 40px; text-align: center; }
+    .cat-item.active, .cat-item:hover { color: #8b5a2b; }
+    .cat-item.active i, .cat-item:hover i { background: #f5ede5; color: #8b5a2b; }
+    .admin-submenu { background: #f8fafc; padding: 0.8rem 0; border-bottom: 1px solid #e2e8f0; display: none; }
+    .admin-submenu.show { display: block; }
+    .submenu-wrapper { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .submenu-item { padding: 0.5rem 1.2rem; background: white; border-radius: 2rem; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: #475569; border: 1px solid #e2e8f0; transition: all 0.2s; }
+    .submenu-item.active { background: #e67e22; color: white; border-color: #e67e22; }
+    .products-section { padding: 1rem 0 3rem; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .section-header h2 { font-size: 1.6rem; font-weight: 700; }
+    .btn-primary { background: #e67e22; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 2rem; cursor: pointer; font-weight: 600; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+    .product-card { background: white; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #edf2f7; transition: all 0.2s; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+    .product-img { background: #f8fafc; height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; }
+    .product-img i { font-size: 4rem; color: #94a3b8; }
+    .product-info { padding: 1.2rem; }
+    .product-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; text-align: center; }
+    .product-variant-select { margin: 1rem 0; }
+    .product-variant-select label { display: block; font-size: 0.8rem; color: #64748b; margin-bottom: 0.3rem; }
+    .product-variant-select select { width: 100%; padding: 0.7rem; border: 1px solid #e2e8f0; border-radius: 0.8rem; font-size: 0.9rem; background: white; cursor: pointer; }
+    .price-stock-row { display: flex; justify-content: space-between; align-items: center; margin: 0.8rem 0; padding: 0.5rem 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+    .product-price { font-weight: 800; font-size: 1.3rem; color: #e67e22; }
+    .product-stock { font-size: 0.85rem; color: #64748b; }
+    .product-stock i { margin-right: 0.3rem; }
+    .add-to-cart-btn { background: #f5ede5; border: none; padding: 0.7rem; border-radius: 2rem; width: 100%; cursor: pointer; font-weight: 600; color: #8b5a2b; transition: all 0.2s; margin-top: 0.5rem; }
+    .add-to-cart-btn:hover:not(:disabled) { background: #8b5a2b; color: white; }
+    .add-to-cart-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .product-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; justify-content: center; }
+    .product-actions button { padding: 0.3rem 0.8rem; border-radius: 1rem; border: none; cursor: pointer; font-size: 0.75rem; }
+    .btn-edit { background: #e67e22; color: white; }
+    .btn-delete { background: #ef4444; color: white; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; visibility: hidden; opacity: 0; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+    .modal-overlay.open { visibility: visible; opacity: 1; }
+    .modal-content { background: white; width: 90%; max-width: 600px; max-height: 85vh; border-radius: 1.5rem; overflow-y: auto; }
+    .modal-header { padding: 1.2rem; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; font-weight: 700; }
+    .modal-header i { cursor: pointer; }
+    .modal-body { padding: 1.2rem; }
+    .modal-body input, .modal-body select { width: 100%; padding: 0.7rem; margin-bottom: 1rem; border: 1px solid #e2e8f0; border-radius: 0.8rem; }
+    .size-group { border: 1px solid #e2e8f0; border-radius: 0.8rem; padding: 0.8rem; margin-bottom: 1rem; }
+    .size-group h4 { margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .size-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center; flex-wrap: wrap; }
+    .size-row strong { width: 50px; }
+    .size-row input { flex: 1; margin-bottom: 0; }
+    .image-preview { margin-top: 0.5rem; margin-bottom: 1rem; }
+    .image-preview img { max-width: 150px; max-height: 150px; border-radius: 0.5rem; border: 1px solid #e2e8f0; padding: 0.3rem; }
+    .btn-submit { background: #e67e22; color: white; border: none; padding: 0.7rem; width: 100%; border-radius: 2rem; font-weight: 600; cursor: pointer; margin-top: 1rem; }
+    .orders-table { width: 100%; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 1rem; overflow: hidden; }
+    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #eef2f6; vertical-align: top; }
+    th { background: #f8fafc; font-weight: 600; }
+    .status-badge { padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+    .status-pending { background: #fef3c7; color: #d97706; }
+    .status-process { background: #dbeafe; color: #2563eb; }
+    .status-success { background: #d1fae5; color: #059669; }
+    .status-cancelled { background: #fee2e2; color: #dc2626; }
+    .cart-panel { position: fixed; top: 0; right: 0; width: 100%; max-width: 400px; height: 100%; background: white; box-shadow: -2px 0 20px rgba(0,0,0,0.1); transform: translateX(100%); transition: transform 0.3s; display: flex; flex-direction: column; z-index: 1001; }
+    .cart-overlay.open .cart-panel { transform: translateX(0); }
+    .cart-header { padding: 1.2rem; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; font-weight: bold; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-footer { padding: 1rem; border-top: 1px solid #eee; }
+    .checkout-btn { width: 100%; background: #e67e22; padding: 0.8rem; border: none; border-radius: 2rem; color: white; font-weight: bold; cursor: pointer; }
+    footer { background: #1a2a3a; color: #cbd5e1; padding: 2rem 0; text-align: center; margin-top: 2rem; }
+    .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: white; padding: 0.6rem 1.2rem; border-radius: 40px; z-index: 1100; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+    .contact-settings { background: white; border-radius: 1rem; padding: 1.5rem; }
+    .contact-group { margin-bottom: 1.5rem; border-bottom: 1px solid #eef2f6; padding-bottom: 1rem; }
+    .bank-item { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; align-items: center; }
+    @media (max-width: 768px) { .navbar { flex-direction: column; } .product-grid { gap: 1rem; } }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="container">
+    <div class="navbar">
+      <div class="logo"><i class="fas fa-spray-can-sparkles"></i> TA-PARFUME</div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Cari parfume...">
+        <button id="searchBtn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="nav-icons">
+        <div class="icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span id="cartCountBadge" class="cart-badge">0</span></div>
+        <div class="icon"><i class="far fa-user-circle"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="categories">
+  <div class="categories-wrapper" id="categoryList">
+    <div class="cat-item" data-cat="admin"><i class="fas fa-user-shield"></i><span>Admin</span></div>
+    <div class="cat-item active" data-cat="produk"><i class="fas fa-box-open"></i><span>Produk</span></div>
+    <div class="cat-item" data-cat="riwayat"><i class="fas fa-history"></i><span>Riwayat Pesanan</span></div>
+    <div class="cat-item" data-cat="kontak"><i class="fas fa-store-alt"></i><span>Kontak Toko</span></div>
+  </div>
+</div>
+
+<div id="adminSubmenu" class="admin-submenu">
+  <div class="container">
+    <div class="submenu-wrapper">
+      <div class="submenu-item active" data-sub="kelola-produk">📦 Kelola Produk</div>
+      <div class="submenu-item" data-sub="kelola-pesanan">📋 Kelola Pesanan</div>
+      <div class="submenu-item" data-sub="kelola-kontak">📞 Kelola Kontak</div>
+    </div>
+  </div>
+</div>
+
+<main class="products-section container">
+  <div class="section-header">
+    <h2 id="sectionTitle">📦 Koleksi Parfume Premium</h2>
+    <button id="addProductBtn" class="btn-primary" style="display: none;"><i class="fas fa-plus"></i> Tambah Produk</button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</main>
+
+<footer><div class="container"><p>&copy; 2025 TA-PARFUME — Wewangian Premium untuk Setiap Momen</p></div></footer>
+
+<div id="cartOverlay" class="modal-overlay"><div class="cart-panel"><div class="cart-header"><span>🛒 Keranjang Belanja</span><i id="closeCart" class="fas fa-times" style="cursor:pointer;"></i></div><div class="cart-items" id="cartItemsList"></div><div class="cart-footer"><div style="display:flex; justify-content:space-between; margin-bottom:1rem;"><span>Total</span><span id="cartTotalPrice">฿ 0</span></div><button id="checkoutBtn" class="checkout-btn">Checkout Sekarang</button></div></div></div>
+
+<div id="productModal" class="modal-overlay"><div class="modal-content"><div class="modal-header"><span id="modalTitle">Tambah Produk</span><i class="fas fa-times" id="closeModal" style="cursor:pointer;"></i></div><div class="modal-body" id="modalBody"></div></div></div>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<script>
+  const availableSizes = ["30ml", "35ml", "50ml", "100ml"];
+  let products = [];
+  let nextProductId = 1;
+  let orders = [];
+  let contacts = {
+    whatsapp: "https://wa.me/6281288889999", 
+    line: "https://line.me/ti/p/@taparume", 
+    telegram: "https://t.me/ta_parfume", 
+    instagram: "https://instagram.com/taparume", 
+    facebook: "https://facebook.com/taparume", 
+    tiktok: "https://tiktok.com/@taparume",
+    banks: [{ name: "Bank Central Asia (BCA)", account: "1234567890", owner: "TA PARFUME" }]
+  };
+
+  let cart = [];
+  let currentMenu = "produk";
+  let adminSub = "kelola-produk";
+  let searchKeyword = "";
+  let currentEditingProductId = null;
+
+  // Inisialisasi data default jika localStorage kosong
+  function initializeDefaultData() {
+    if(products.length === 0) {
+      products = [
+        { id: 1, name: "Velvet Noir", imageData: null, variants: [{ size: "30ml", price: 1990, stock: 25 }, { size: "50ml", price: 2990, stock: 15 }, { size: "100ml", price: 4990, stock: 8 }] },
+        { id: 2, name: "Floral Bloom", imageData: null, variants: [{ size: "30ml", price: 1790, stock: 30 }, { size: "50ml", price: 2790, stock: 20 }, { size: "100ml", price: 4590, stock: 10 }] },
+        { id: 3, name: "Amber Oud", imageData: null, variants: [{ size: "30ml", price: 2990, stock: 12 }, { size: "50ml", price: 4990, stock: 8 }, { size: "100ml", price: 7990, stock: 5 }] }
+      ];
+      nextProductId = 4;
+    }
+    
+    if(orders.length === 0) {
+      orders = [
+        { id: "TRX/TA/2025/0001", date: "15 Maret 2025, 14:23 WIB", customer: "Budi Santoso", phone: "+62 812-3456-7890", email: "budi@email.com", address: "Jl. Mawar Melati No. 123, Jakarta", items: "Velvet Noir - 50ml x 1", total: 2990, status: "success", note: "-" },
+        { id: "TRX/TA/2025/0002", date: "18 Maret 2025, 09:47 WIB", customer: "Siti Aisyah", phone: "+62 856-7890-1234", email: "siti@mail.com", address: "Jl. Anggrek No. 45, Bandung", items: "Floral Bloom - 30ml x 2", total: 3580, status: "process", note: "-" }
+      ];
+    }
+  }
+
+  function formatTHB(amount) { return "฿ " + amount.toLocaleString("th-TH"); }
+  
+  function showToast(msg) { 
+    let t = document.getElementById("toastMsg"); 
+    t.innerText = msg; 
+    t.style.opacity = "1"; 
+    setTimeout(() => t.style.opacity = "0", 2000); 
+  }
+  
+  function saveToLocalStorage() { 
+    localStorage.setItem("ta_products", JSON.stringify(products)); 
+    localStorage.setItem("ta_orders", JSON.stringify(orders)); 
+    localStorage.setItem("ta_contacts", JSON.stringify(contacts)); 
+    localStorage.setItem("ta_nextProductId", nextProductId); 
+    console.log("Data saved:", products.length, "products"); // Debug
+  }
+  
+  function loadFromLocalStorage() { 
+    let saved = localStorage.getItem("ta_products"); 
+    if(saved) { 
+      products = JSON.parse(saved);
+      console.log("Loaded products:", products.length);
+    }
+    saved = localStorage.getItem("ta_orders"); 
+    if(saved) orders = JSON.parse(saved); 
+    saved = localStorage.getItem("ta_contacts"); 
+    if(saved) contacts = JSON.parse(saved); 
+    saved = localStorage.getItem("ta_nextProductId"); 
+    if(saved) nextProductId = parseInt(saved); 
+    
+    initializeDefaultData(); // Pastikan ada data default jika kosong
+  }
+
+  function refreshAllDisplays() { 
+    console.log("Refreshing display, currentMenu:", currentMenu, "adminSub:", adminSub);
+    if(currentMenu === "admin" && adminSub === "kelola-produk") {
+      renderAdminProducts();
+    } else if(currentMenu === "admin" && adminSub === "kelola-pesanan") {
+      renderAdminOrders();
+    } else if(currentMenu === "admin" && adminSub === "kelola-kontak") {
+      renderAdminContacts();
+    } else if(currentMenu === "produk") {
+      renderProducts();
+    } else if(currentMenu === "riwayat") {
+      renderOrderHistory();
+    } else if(currentMenu === "kontak") {
+      renderPublicContact();
+    }
+    updateCartUI(); 
+  }
+
+  function renderMain() {
+    if(currentMenu === "admin") {
+      document.getElementById("adminSubmenu").classList.add("show");
+      if(adminSub === "kelola-produk") renderAdminProducts();
+      else if(adminSub === "kelola-pesanan") renderAdminOrders();
+      else if(adminSub === "kelola-kontak") renderAdminContacts();
+      document.getElementById("addProductBtn").style.display = adminSub === "kelola-produk" ? "block" : "none";
+      document.getElementById("sectionTitle").innerHTML = adminSub === "kelola-produk" ? "📦 Kelola Produk" : (adminSub === "kelola-pesanan" ? "📋 Kelola Pesanan" : "📞 Kelola Kontak Toko");
+    } else if(currentMenu === "produk") {
+      document.getElementById("adminSubmenu").classList.remove("show");
+      document.getElementById("addProductBtn").style.display = "none";
+      renderProducts();
+    } else if(currentMenu === "riwayat") {
+      document.getElementById("adminSubmenu").classList.remove("show");
+      document.getElementById("addProductBtn").style.display = "none";
+      renderOrderHistory();
+    } else if(currentMenu === "kontak") {
+      document.getElementById("adminSubmenu").classList.remove("show");
+      document.getElementById("addProductBtn").style.display = "none";
+      renderPublicContact();
+    }
+  }
+
+  function renderProducts() {
+    let filtered = products.filter(p => p.name.toLowerCase().includes(searchKeyword.toLowerCase()));
+    let grid = document.getElementById("productGrid");
+    document.getElementById("sectionTitle").innerHTML = searchKeyword ? `🔍 Hasil: "${searchKeyword}"` : "📦 Koleksi Parfume Premium";
+    
+    if(filtered.length === 0) { 
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">😢 Produk tidak ditemukan</div>`; 
+      return; 
+    }
+    
+    grid.innerHTML = filtered.map(p => {
+      let defaultVariant = p.variants[0];
+      return `<div class="product-card" data-product-id="${p.id}">
+        <div class="product-img">${p.imageData ? `<img src="${p.imageData}" alt="${p.name}">` : `<i class="fas fa-spray-can"></i>`}</div>
+        <div class="product-info">
+          <div class="product-title">${escapeHtml(p.name)}</div>
+          <div class="product-variant-select">
+            <label>📏 Pilih Ukuran</label>
+            <select class="size-select" data-id="${p.id}" id="sizeSelect-${p.id}">
+              ${p.variants.map(v => `<option value='${JSON.stringify(v)}' data-price="${v.price}" data-stock="${v.stock}">${v.size} - ${formatTHB(v.price)} (Stok: ${v.stock})</option>`).join('')}
+            </select>
+          </div>
+          <div class="price-stock-row">
+            <span class="product-price" id="priceDisplay-${p.id}">${formatTHB(defaultVariant.price)}</span>
+            <span class="product-stock" id="stockDisplay-${p.id}"><i class="fas fa-box"></i> Stok: ${defaultVariant.stock}</span>
+          </div>
+          <button class="add-to-cart-btn" data-id="${p.id}" data-size="${defaultVariant.size}" data-price="${defaultVariant.price}" data-stock="${defaultVariant.stock}" ${defaultVariant.stock <= 0 ? 'disabled' : ''}><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Bind event listeners untuk setiap produk
+    products.forEach(p => {
+      let select = document.getElementById(`sizeSelect-${p.id}`);
+      if(select) {
+        select.addEventListener('change', function(e) {
+          let selectedVariant = JSON.parse(this.value);
+          let priceDisplay = document.getElementById(`priceDisplay-${p.id}`);
+          let stockDisplay = document.getElementById(`stockDisplay-${p.id}`);
+          let addBtn = document.querySelector(`.add-to-cart-btn[data-id="${p.id}"]`);
+          if(priceDisplay) priceDisplay.innerText = formatTHB(selectedVariant.price);
+          if(stockDisplay) stockDisplay.innerHTML = `<i class="fas fa-box"></i> Stok: ${selectedVariant.stock}`;
+          if(addBtn) {
+            addBtn.setAttribute('data-size', selectedVariant.size);
+            addBtn.setAttribute('data-price', selectedVariant.price);
+            addBtn.setAttribute('data-stock', selectedVariant.stock);
+            addBtn.disabled = selectedVariant.stock <= 0;
+          }
+        });
+      }
+    });
+
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let id = parseInt(btn.dataset.id);
+        let size = btn.dataset.size;
+        let price = parseInt(btn.dataset.price);
+        let stock = parseInt(btn.dataset.stock);
+        if(stock <= 0) { showToast("⚠️ Stok produk habis!"); return; }
+        addToCart(id, size, price);
+      });
+    });
+  }
+
+  function escapeHtml(str) {
+    if(!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if(m === '&') return '&amp;';
+      if(m === '<') return '&lt;';
+      if(m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function addToCart(productId, size, price) {
+    let product = products.find(p => p.id === productId);
+    if(!product) return;
+    let existing = cart.find(i => i.id === productId && i.size === size);
+    if(existing) existing.quantity++;
+    else cart.push({ id: product.id, name: product.name, size: size, price: price, quantity: 1, image: product.imageData });
+    updateCartUI();
+    showToast(`✅ ${product.name} (${size}) ditambahkan ke keranjang`);
+  }
+
+  function renderAdminProducts() {
+    let grid = document.getElementById("productGrid");
+    if(products.length === 0) { 
+      grid.innerHTML = `<div style="text-align:center; padding:3rem;">Belum ada produk. Klik Tambah Produk</div>`; 
+      return; 
+    }
+    grid.innerHTML = products.map(p => `<div class="product-card"><div class="product-img">${p.imageData ? `<img src="${p.imageData}" style="width:100%;height:100%;object-fit:cover;">` : `<i class="fas fa-spray-can fa-3x"></i>`}</div><div class="product-info"><div class="product-title">${escapeHtml(p.name)}</div>${p.variants.map(v => `<div style="font-size:0.8rem;">${v.size}: ${formatTHB(v.price)} (Stok: ${v.stock})</div>`).join('')}<div class="product-actions"><button class="btn-edit" onclick="openEditProduct(${p.id})">✏️ Edit</button><button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️ Hapus</button></div></div></div>`).join('');
+  }
+
+  window.openAddProduct = () => {
+    currentEditingProductId = null;
+    showProductModal("Tambah Produk", null);
+  };
+  
+  window.openEditProduct = (id) => { 
+    let p = products.find(p => p.id === id); 
+    if(p) {
+      currentEditingProductId = id;
+      showProductModal("Edit Produk", p);
+    }
+  };
+  
+  function showProductModal(title, product) {
+    let modal = document.getElementById("productModal");
+    let modalBody = document.getElementById("modalBody");
+    let sizesHtml = availableSizes.map(size => {
+      let variant = product ? product.variants.find(v => v.size === size) : null;
+      return `<div class="size-row">
+        <strong>${size}</strong>
+        <input type="number" id="price_${size.replace('ml','')}" placeholder="Harga (฿)" value="${variant ? variant.price : ''}" style="width:130px;">
+        <input type="number" id="stock_${size.replace('ml','')}" placeholder="Stok" value="${variant ? variant.stock : ''}" style="width:100px;">
+      </div>`;
+    }).join('');
+    
+    modalBody.innerHTML = `
+      <input type="text" id="productName" placeholder="Nama Produk" value="${product ? escapeHtml(product.name) : ''}">
+      <div style="margin-bottom:1rem;">
+        <label>Foto Produk:</label>
+        <input type="file" id="productImage" accept="image/*">
+        <div id="imagePreview" class="image-preview">${product && product.imageData ? `<img src="${product.imageData}">` : ''}</div>
+      </div>
+      <div class="size-group">
+        <h4>Ukuran, Harga & Stok</h4>
+        ${sizesHtml}
+      </div>
+      <button class="btn-submit" id="saveProductBtn">💾 Simpan</button>
+    `;
+    
+    document.getElementById("modalTitle").innerText = title;
+    modal.classList.add("open");
+    document.getElementById("closeModal").onclick = () => modal.classList.remove("open");
+    
+    // Event preview gambar
+    let fileInput = document.getElementById("productImage");
+    fileInput.onchange = function(e) {
+      let file = e.target.files[0];
+      if(file) {
+        let reader = new FileReader();
+        reader.onload = function(ev) {
+          let preview = document.getElementById("imagePreview");
+          preview.innerHTML = `<img src="${ev.target.result}">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    
+    // Hapus event listener lama jika ada
+    let saveBtn = document.getElementById("saveProductBtn");
+    let newSaveBtn = saveBtn.cloneNode(true);
+    saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
+    newSaveBtn.onclick = () => saveProduct();
+  }
+  
+  function saveProduct() {
+    let name = document.getElementById("productName").value.trim();
+    if(!name) { showToast("Nama produk wajib diisi"); return; }
+    
+    let variants = [];
+    for(let size of availableSizes) {
+      let priceInput = document.getElementById(`price_${size.replace('ml','')}`);
+      let stockInput = document.getElementById(`stock_${size.replace('ml','')}`);
+      let price = parseInt(priceInput.value);
+      let stock = parseInt(stockInput.value) || 0;
+      if(price && !isNaN(price) && price > 0) {
+        variants.push({ size: size, price: price, stock: stock });
+      }
+    }
+    
+    if(variants.length === 0) { 
+      showToast("Minimal satu ukuran harus diisi dengan harga yang valid"); 
+      return; 
+    }
+    
+    let fileInput = document.getElementById("productImage");
+    
+    const finishSave = (finalImageData) => {
+      if(currentEditingProductId !== null) {
+        // Update produk yang sudah ada
+        let index = products.findIndex(p => p.id === currentEditingProductId);
+        if(index !== -1) {
+          products[index] = {
+            ...products[index],
+            name: name,
+            variants: variants,
+            imageData: finalImageData
+          };
+          showToast("✅ Produk berhasil diupdate");
+        }
+      } else {
+        // Tambah produk baru
+        let newProduct = {
+          id: nextProductId++,
+          name: name,
+          variants: variants,
+          imageData: finalImageData
+        };
+        products.push(newProduct);
+        showToast("✅ Produk berhasil ditambahkan");
+      }
+      
+      saveToLocalStorage();
+      document.getElementById("productModal").classList.remove("open");
+      currentEditingProductId = null;
+      
+      // Refresh semua tampilan
+      if(currentMenu === "produk") {
+        renderProducts();
+      } else if(currentMenu === "admin" && adminSub === "kelola-produk") {
+        renderAdminProducts();
+      }
+      
+      // Jika sedang di menu admin, pastikan tampilan admin tetap
+      if(currentMenu === "admin") {
+        renderMain();
+      } else {
+        renderProducts();
+      }
+    };
+    
+    if(fileInput.files && fileInput.files.length > 0) {
+      let file = fileInput.files[0];
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        finishSave(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Jika tidak ada gambar baru, gunakan gambar lama (jika edit) atau null (jika baru)
+      let existingProduct = currentEditingProductId !== null ? products.find(p => p.id === currentEditingProductId) : null;
+      finishSave(existingProduct ? existingProduct.imageData : null);
+    }
+  }
+  
+  window.deleteProduct = (id) => { 
+    if(confirm("Yakin ingin menghapus produk ini?")){ 
+      products = products.filter(p => p.id !== id); 
+      saveToLocalStorage(); 
+      
+      // Refresh berdasarkan menu saat ini
+      if(currentMenu === "produk") {
+        renderProducts();
+      } else if(currentMenu === "admin" && adminSub === "kelola-produk") {
+        renderAdminProducts();
+      }
+      
+      showToast("🗑️ Produk berhasil dihapus"); 
+    } 
+  };
+
+  function renderAdminOrders() {
+    let grid = document.getElementById("productGrid");
+    let statusMap = { pending: "Menunggu", process: "Diproses", success: "Berhasil", cancelled: "Dibatalkan" };
+    grid.innerHTML = `<div class="orders-table"><table>
+<thead>\n<tr><th>ID Pesanan</th><th>Tanggal</th><th>Pelanggan</th><th>Telepon</th><th>Alamat</th><th>Produk</th><th>Total</th><th>Status</th><th>Aksi</th></tr>\n</thead>\n<tbody>${orders.map(o => `<tr>\n<td>${o.id}</td>\n<td>${o.date}</td>\n<td>${o.customer}</td>\n<td>${o.phone}</td>\n<td style="max-width:200px;">${o.address}</td>\n<td style="max-width:150px;">${o.items}</td>\n<td>${formatTHB(o.total)}</td>\n<td><span class="status-badge status-${o.status}">${statusMap[o.status]}</span></td>\n<td><select onchange="updateOrderStatus('${o.id}',this.value)"><option value="pending" ${o.status=='pending'?'selected':''}>Menunggu</option><option value="process" ${o.status=='process'?'selected':''}>Diproses</option><option value="success" ${o.status=='success'?'selected':''}>Berhasil</option><option value="cancelled" ${o.status=='cancelled'?'selected':''}>Dibatalkan</option></select><br><button onclick="deleteOrder('${o.id}')" style="background:#ef4444; color:white; margin-top:0.2rem; padding:0.2rem 0.5rem; border:none; border-radius:0.3rem;">Hapus</button></td>\n</tr>`).join('')}</tbody>\n</table>\n</div>`;
+  }
+
+  function renderAdminContacts() {
+    let grid = document.getElementById("productGrid");
+    grid.innerHTML = `<div class="contact-settings"><h3>🔗 Media Sosial & Kontak Toko</h3>${['whatsapp','line','telegram','instagram','facebook','tiktok'].map(k => `<div class="contact-group"><h4>${k.toUpperCase()}</h4><input type="text" id="${k}Url" value="${contacts[k]}" style="width:100%; padding:0.5rem; margin-bottom:0.5rem;"><button onclick="saveContact('${k}',document.getElementById('${k}Url').value)" style="background:#e67e22; color:white; border:none; padding:0.3rem 1rem; border-radius:0.5rem;">Simpan</button><div style="font-size:0.7rem; color:#666; word-break:break-all; margin-top:0.3rem;">${contacts[k]}</div></div>`).join('')}<div class="contact-group"><h4>🏦 Rekening Bank</h4><div id="banksList"></div><button onclick="addBank()" class="btn-primary" style="margin-top:0.5rem;">+ Tambah Bank</button></div></div>`;
+    renderBanksList();
+  }
+  
+  function renderBanksList() { 
+    let div = document.getElementById("banksList"); 
+    if(div) div.innerHTML = contacts.banks.map((b,idx) => `<div class="bank-item"><input type="text" value="${b.name}" id="bankName${idx}" style="flex:2;"><input type="text" value="${b.account}" id="bankAcc${idx}" style="flex:2;"><input type="text" value="${b.owner}" id="bankOwner${idx}" style="flex:2;"><button onclick="updateBank(${idx})" style="background:#e67e22; color:white;">Update</button><button onclick="deleteBank(${idx})" style="background:#ef4444; color:white;">Hapus</button></div>`).join(''); 
+  }
+  
+  window.saveContact = (k,v) => { contacts[k]=v; saveToLocalStorage(); renderAdminContacts(); showToast("Kontak berhasil disimpan"); };
+  window.addBank = () => { contacts.banks.push({name:"Bank Baru",account:"",owner:""}); saveToLocalStorage(); renderAdminContacts(); };
+  window.updateBank = (idx) => { contacts.banks[idx]={name:document.getElementById(`bankName${idx}`).value,account:document.getElementById(`bankAcc${idx}`).value,owner:document.getElementById(`bankOwner${idx}`).value}; saveToLocalStorage(); showToast("Bank berhasil diupdate"); renderAdminContacts(); };
+  window.deleteBank = (idx) => { contacts.banks.splice(idx,1); saveToLocalStorage(); renderAdminContacts(); };
+  
+  function renderPublicContact() {
+    let grid = document.getElementById("productGrid");
+    document.getElementById("sectionTitle").innerHTML = "🏪 Kontak & Informasi Toko";
+    grid.innerHTML = `<div style="background:white; border-radius:1.5rem; padding:2rem; text-align:center;"><i class="fas fa-spray-can-sparkles" style="font-size:3rem; color:#e67e22;"></i><h3>TA-PARFUME Official Store</h3><div style="background:#f1f5f9; border-radius:1rem; padding:1.5rem; margin-top:1rem; text-align:left;"><p><i class="fab fa-whatsapp"></i> <a href="${contacts.whatsapp}" target="_blank">Chat WhatsApp</a><br><span style="font-size:0.7rem; word-break:break-all;">${contacts.whatsapp}</span></p><p><i class="fab fa-instagram"></i> <a href="${contacts.instagram}" target="_blank">Instagram</a></p><p><i class="fab fa-facebook"></i> <a href="${contacts.facebook}" target="_blank">Facebook</a></p><p><i class="fab fa-tiktok"></i> <a href="${contacts.tiktok}" target="_blank">TikTok</a></p><hr><h4>🏦 Rekening Pembayaran</h4>${contacts.banks.map(b => `<p><strong>${b.name}</strong><br>No. Rek: ${b.account}<br>a.n ${b.owner}</p>`).join('')}</div></div>`;
+  }
+  
+  function renderOrderHistory() {
+    let grid = document.getElementById("productGrid");
+    document.getElementById("sectionTitle").innerHTML = "📜 Riwayat Pesanan Saya";
+    let userOrders = orders.filter(o => o.customer === "Budi Santoso");
+    if(userOrders.length === 0) { grid.innerHTML = `<div style="text-align:center; padding:3rem;">Belum ada pesanan</div>`; return; }
+    let statusMap = { pending: "Menunggu", process: "Diproses", success: "Berhasil", cancelled: "Dibatalkan" };
+    grid.innerHTML = userOrders.map(o => `<div class="product-card"><div class="product-img"><i class="fas fa-receipt fa-3x"></i></div><div class="product-info"><div><strong>${o.id}</strong> - ${o.date}</div><div>${formatTHB(o.total)}</div><div>${o.items}</div><div><span class="status-badge status-${o.status}">${statusMap[o.status]}</span></div></div></div>`).join('');
+  }
+
+  function updateCartUI() {
+    document.getElementById("cartCountBadge").innerText = cart.reduce((s,i)=>s+i.quantity,0);
+    let container = document.getElementById("cartItemsList");
+    if(cart.length === 0) { container.innerHTML = "<div style='text-align:center; padding:1rem;'>🛒 Keranjang kosong</div>"; document.getElementById("cartTotalPrice").innerText = "฿ 0"; return; }
+    let total = 0;
+    container.innerHTML = cart.map((i,idx) => { total += i.price * i.quantity; return `<div style="display:flex; gap:0.8rem; margin-bottom:1rem; padding-bottom:0.8rem; border-bottom:1px solid #eee;"><div style="width:60px; height:60px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center;">${i.image ? `<img src="${i.image}" style="width:100%;height:100%;object-fit:cover;">` : `<i class="fas fa-spray-can"></i>`}</div><div style="flex:1;"><div><strong>${escapeHtml(i.name)}</strong> (${i.size})</div><div>${formatTHB(i.price)}</div><div style="margin-top:5px;"><button onclick="changeQty(${idx},-1)" style="padding:0.2rem 0.6rem; border-radius:0.3rem; border:1px solid #ddd;">-</button> ${i.quantity} <button onclick="changeQty(${idx},1)" style="padding:0.2rem 0.6rem; border-radius:0.3rem; border:1px solid #ddd;">+</button> <button onclick="removeCartItem(${idx})" style="color:red; margin-left:0.5rem;">Hapus</button></div></div></div>`; }).join('');
+    document.getElementById("cartTotalPrice").innerText = formatTHB(total);
+  }
+  
+  window.changeQty = (idx,delta) => { if(cart[idx]){ let newQty = cart[idx].quantity+delta; if(newQty<=0) cart.splice(idx,1); else cart[idx].quantity=newQty; updateCartUI(); } };
+  window.removeCartItem = (idx) => { cart.splice(idx,1); updateCartUI(); };
+  
+  function checkout() {
+    if(cart.length === 0) { showToast("Keranjang kosong!"); return; }
+    let newOrder = { 
+      id: "TRX/TA/2025/"+(orders.length+1001), 
+      date: new Date().toLocaleString('id-ID'), 
+      customer: "Budi Santoso", 
+      phone: "+62 812-3456-7890", 
+      email: "budi@email.com", 
+      address: "Jl. Contoh No.123, Jakarta", 
+      items: cart.map(i=>`${i.name} (${i.size}) x ${i.quantity}`).join(", "), 
+      total: cart.reduce((s,i)=>s+(i.price*i.quantity),0), 
+      status: "pending", 
+      note: "-" 
+    };
+    orders.unshift(newOrder); 
+    cart = []; 
+    updateCartUI(); 
+    saveToLocalStorage(); 
+    document.getElementById("cartOverlay").classList.remove("open"); 
+    showToast(`✅ Pesanan #${newOrder.id} berhasil dibuat`); 
+    renderMain();
+  }
+  
+  window.updateOrderStatus = (id,status) => { 
+    let o = orders.find(o=>o.id===id); 
+    if(o){ 
+      o.status=status; 
+      saveToLocalStorage(); 
+      renderAdminOrders(); 
+      showToast("Status pesanan berhasil diupdate"); 
+    } 
+  };
+  
+  window.deleteOrder = (id) => { 
+    if(confirm("Yakin ingin menghapus pesanan ini?")){ 
+      orders=orders.filter(o=>o.id!==id); 
+      saveToLocalStorage(); 
+      renderAdminOrders(); 
+      showToast("Pesanan berhasil dihapus"); 
+    } 
+  };
+
+  function initMenu() {
+    document.querySelectorAll('.cat-item').forEach(cat => cat.addEventListener('click', () => {
+      document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
+      cat.classList.add('active');
+      currentMenu = cat.dataset.cat;
+      searchKeyword = "";
+      document.getElementById("searchInput").value = "";
+      if(currentMenu === "admin") adminSub = "kelola-produk";
+      renderMain();
+    }));
+    document.querySelectorAll('.submenu-item').forEach(sub => sub.addEventListener('click', () => {
+      document.querySelectorAll('.submenu-item').forEach(s => s.classList.remove('active'));
+      sub.classList.add('active');
+      adminSub = sub.dataset.sub;
+      renderMain();
+    }));
+  }
+  
+  function bindSearch() { 
+    document.getElementById("searchBtn").onclick = () => { 
+      if(currentMenu === "produk"){ 
+        searchKeyword = document.getElementById("searchInput").value; 
+        renderProducts(); 
+      } else showToast("Pencarian hanya tersedia di halaman Produk"); 
+    }; 
+    document.getElementById("searchInput").addEventListener("keypress", (e) => { 
+      if(e.key === "Enter") document.getElementById("searchBtn").click(); 
+    }); 
+  }
+  
+  function cartPanel() { 
+    let overlay = document.getElementById("cartOverlay"); 
+    document.getElementById("cartIcon").onclick = () => { 
+      overlay.classList.add("open"); 
+      updateCartUI(); 
+    }; 
+    document.getElementById("closeCart").onclick = () => overlay.classList.remove("open"); 
+    overlay.onclick = (e) => { 
+      if(e.target === overlay) overlay.classList.remove("open"); 
+    }; 
+    document.getElementById("checkoutBtn").onclick = checkout; 
+  }
+
+  // Inisialisasi
+  loadFromLocalStorage();
+  initMenu();
+  bindSearch();
+  cartPanel();
+  document.getElementById("addProductBtn").onclick = () => window.openAddProduct();
+  renderMain();
+</script>
+</body>
+</html>
