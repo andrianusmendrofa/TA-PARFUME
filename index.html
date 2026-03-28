@@ -172,7 +172,7 @@
             overflow: hidden;
             border: 3px solid #FFD700;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            
+            background: white;
         }
 
         .product-card:hover {
@@ -556,44 +556,63 @@
     </div>
 
     <script>
-        // Data Global - SEMUA DATA DISIMPAN DI LOCALSTORAGE DAN AKAN SINKRON UNTUK SEMUA USER
+        // ==================== DATA GLOBAL ====================
         let currentUser = null;
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        let products = JSON.parse(localStorage.getItem('products')) || [];
-        let carts = JSON.parse(localStorage.getItem('carts')) || {};
-        let orders = JSON.parse(localStorage.getItem('orders')) || {};
-        let contacts = JSON.parse(localStorage.getItem('contacts')) || {
-            social: { whatsapp: '', line: '', telegram: '', instagram: '', facebook: '', tiktok: '' },
-            banks: []
-        };
+        let users = [];
+        let products = [];
+        let carts = {};
+        let orders = {};
+        let contacts = {};
         
-        let currentMenu = 'produk';
-
-        // Inisialisasi data default
-        if (products.length === 0) {
-            products = [
-                { id: 1, name: 'VICTORIA\'S SECRET SCANDALOUS', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] },
-                { id: 2, name: 'DIOR SAUVAGE', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] },
-                { id: 3, name: 'HUGO BOSS XX WOMEN', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] }
-            ];
-            localStorage.setItem('products', JSON.stringify(products));
-        }
-
-        // Admin default
-        const adminUser = { username: 'admin', password: 'admin123', role: 'admin', profile: { name: 'Administrator', lineId: '', whatsapp: '08123456789', address: 'Jakarta' } };
-        if (!users.find(u => u.username === 'admin')) {
-            users.push(adminUser);
-            localStorage.setItem('users', JSON.stringify(users));
-        }
-
-        // Fungsi untuk selalu mengambil data terbaru dari localStorage
-        function refreshData() {
-            products = JSON.parse(localStorage.getItem('products')) || [];
-            contacts = JSON.parse(localStorage.getItem('contacts')) || { social: { whatsapp: '', line: '', telegram: '', instagram: '', facebook: '', tiktok: '' }, banks: [] };
-            orders = JSON.parse(localStorage.getItem('orders')) || {};
+        // Fungsi untuk load semua data dari localStorage
+        function loadAllData() {
             users = JSON.parse(localStorage.getItem('users')) || [];
+            products = JSON.parse(localStorage.getItem('products')) || [];
+            carts = JSON.parse(localStorage.getItem('carts')) || {};
+            orders = JSON.parse(localStorage.getItem('orders')) || {};
+            contacts = JSON.parse(localStorage.getItem('contacts')) || {
+                social: { whatsapp: '', line: '', telegram: '', instagram: '', facebook: '', tiktok: '' },
+                banks: []
+            };
         }
-
+        
+        // Fungsi untuk save semua data ke localStorage
+        function saveAllData() {
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('products', JSON.stringify(products));
+            localStorage.setItem('carts', JSON.stringify(carts));
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+        }
+        
+        // Inisialisasi data default
+        function initDefaultData() {
+            loadAllData();
+            
+            if (products.length === 0) {
+                products = [
+                    { id: 1, name: 'VICTORIA\'S SECRET SCANDALOUS', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] },
+                    { id: 2, name: 'DIOR SAUVAGE', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] },
+                    { id: 3, name: 'HUGO BOSS XX WOMEN', image: null, sizes: [{ size: '30ml', price: 300, stock: 5 }, { size: '35ml', price: 350, stock: 4 }, { size: '50ml', price: 500, stock: 3 }, { size: '100ml', price: 900, stock: 2 }] }
+                ];
+                saveAllData();
+            }
+            
+            // Admin default
+            const adminExists = users.find(u => u.username === 'admin');
+            if (!adminExists) {
+                users.push({ 
+                    username: 'admin', 
+                    password: 'admin123', 
+                    role: 'admin', 
+                    profile: { name: 'Administrator', lineId: '', whatsapp: '08123456789', address: 'Jakarta' } 
+                });
+                saveAllData();
+            }
+            
+            loadAllData();
+        }
+        
         // Session helpers
         function saveSession(user) {
             localStorage.setItem('currentSession', JSON.stringify({
@@ -610,6 +629,7 @@
             if (sessionData) {
                 try {
                     const session = JSON.parse(sessionData);
+                    loadAllData();
                     const user = users.find(u => u.username === session.username && u.password === session.password);
                     if (user) {
                         const sessionAge = Date.now() - (session.timestamp || 0);
@@ -630,18 +650,21 @@
             }
         }
 
+        let currentMenu = 'produk';
+        
         // Navigasi utama
         function showContent(menu) {
             if (!currentUser) { showLogin(); return; }
             currentMenu = menu;
-            refreshData(); // Selalu ambil data terbaru
+            loadAllData(); // Selalu ambil data terbaru
             
+            // Update active class
             document.querySelectorAll('.nav-item-bottom').forEach(item => item.classList.remove('active'));
-            if(event && event.target) {
-                const clicked = event.target.closest('.nav-item-bottom');
-                if(clicked) clicked.classList.add('active');
-            } else {
-                document.querySelector(`.nav-item-bottom[onclick*="${menu}"]`)?.classList.add('active');
+            const clickedNav = event?.target?.closest('.nav-item-bottom');
+            if(clickedNav) clickedNav.classList.add('active');
+            else {
+                const navItem = document.querySelector(`.nav-item-bottom[onclick*="${menu}"]`);
+                if(navItem) navItem.classList.add('active');
             }
             
             switch(menu) {
@@ -659,6 +682,7 @@
 
         // ========== LOGIN & REGISTER ==========
         function showLogin() {
+            loadAllData();
             document.getElementById('welcomeText').innerHTML = '';
             document.getElementById('contentArea').innerHTML = `
                 <div class="row justify-content-center">
@@ -679,7 +703,7 @@
             `;
             document.getElementById('loginForm').onsubmit = (e) => {
                 e.preventDefault();
-                refreshData();
+                loadAllData();
                 const user = users.find(u => u.username === document.getElementById('loginUsername').value && u.password === document.getElementById('loginPassword').value);
                 if (user) {
                     currentUser = user;
@@ -693,6 +717,7 @@
         }
 
         function showRegister() {
+            loadAllData();
             document.getElementById('contentArea').innerHTML = `
                 <div class="row justify-content-center">
                     <div class="col-md-5 col-11">
@@ -715,7 +740,7 @@
             `;
             document.getElementById('registerForm').onsubmit = (e) => {
                 e.preventDefault();
-                refreshData();
+                loadAllData();
                 const username = document.getElementById('regUsername').value.trim();
                 if (username.length < 3) return Swal.fire('Error', 'Username minimal 3 karakter!', 'error');
                 if (users.find(u => u.username === username)) return Swal.fire('Error', 'Username sudah terdaftar!', 'error');
@@ -732,7 +757,7 @@
                     role: 'user', 
                     profile: { name, lineId: '', whatsapp, address } 
                 });
-                localStorage.setItem('users', JSON.stringify(users));
+                saveAllData();
                 Swal.fire('Success', 'Registrasi berhasil! Silakan login.', 'success');
                 showLogin();
             };
@@ -740,6 +765,7 @@
 
         // ========== PROFIL ==========
         function showProfile() {
+            loadAllData();
             const profile = currentUser.profile;
             document.getElementById('contentArea').innerHTML = `
                 <div class="card">
@@ -769,7 +795,7 @@
                 };
                 const idx = users.findIndex(u => u.username === currentUser.username);
                 users[idx] = currentUser;
-                localStorage.setItem('users', JSON.stringify(users));
+                saveAllData();
                 saveSession(currentUser);
                 document.getElementById('welcomeText').innerHTML = `Selamat datang, ${currentUser.profile.name}`;
                 Swal.fire('Success', 'Profil berhasil diupdate!', 'success');
@@ -788,7 +814,7 @@
                     currentUser.password = document.getElementById('newPass').value;
                     const idx = users.findIndex(u => u.username === currentUser.username);
                     users[idx] = currentUser;
-                    localStorage.setItem('users', JSON.stringify(users));
+                    saveAllData();
                     saveSession(currentUser);
                     Swal.fire('Success', 'Password berhasil diganti!', 'success');
                 }
@@ -806,7 +832,7 @@
 
         // ========== PRODUK - TAMPILAN SAMA UNTUK SEMUA USER ==========
         function showProducts() {
-            refreshData();
+            loadAllData();
             let html = `<div class="products-grid">`;
             if (products.length === 0) {
                 html += `<div class="empty-message" style="grid-column:1/-1;"><i class="fas fa-box-open fa-3x mb-3"></i><p>Belum ada produk</p></div>`;
@@ -848,7 +874,7 @@
         }
 
         function addToCart(id) {
-            refreshData();
+            loadAllData();
             const sel = document.getElementById(`size-${id}`);
             const selectedOption = sel.options[sel.selectedIndex];
             const size = selectedOption.value;
@@ -862,13 +888,13 @@
                 if (existing.quantity + 1 > stock) return Swal.fire('Error', `Stok hanya ${stock}!`, 'error');
                 existing.quantity++;
             } else carts[currentUser.username].push({ productId: id, productName: products.find(p => p.id === id).name, size, price, quantity: 1, maxStock: stock });
-            localStorage.setItem('carts', JSON.stringify(carts));
+            saveAllData();
             Swal.fire({ title: 'Berhasil!', text: 'Ditambahkan ke keranjang!', icon: 'success', timer: 1200, showConfirmButton: false });
         }
 
         // ========== KERANJANG ==========
         function showCart() {
-            refreshData();
+            loadAllData();
             const cart = carts[currentUser.username] || [];
             if (cart.length === 0) { 
                 document.getElementById('contentArea').innerHTML = `<div class="card"><div class="card-body text-center"><i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i><h5>Keranjang Kosong</h5></div></div>`; 
@@ -886,6 +912,7 @@
         }
 
         function updateQty(i, qty) { 
+            loadAllData();
             if (qty < 1) qty = 1; 
             const item = carts[currentUser.username][i]; 
             if (qty > item.maxStock) { 
@@ -893,18 +920,19 @@
                 qty = item.maxStock; 
             } 
             carts[currentUser.username][i].quantity = parseInt(qty); 
-            localStorage.setItem('carts', JSON.stringify(carts)); 
+            saveAllData(); 
             showCart(); 
         }
         
         function removeItem(i) { 
+            loadAllData();
             carts[currentUser.username].splice(i, 1); 
-            localStorage.setItem('carts', JSON.stringify(carts)); 
+            saveAllData(); 
             showCart(); 
         }
         
         function checkout() {
-            refreshData();
+            loadAllData();
             const profile = currentUser.profile;
             if (!profile.name || !profile.whatsapp || !profile.address) { 
                 Swal.fire('Error', 'Lengkapi profil dulu!', 'error'); 
@@ -917,12 +945,15 @@
             let ok = true;
             cart.forEach(item => {
                 const p = products.find(pr => pr.id === item.productId);
-                const idx = p.sizes.findIndex(s => s.size === item.size);
-                if (p.sizes[idx].stock >= item.quantity) p.sizes[idx].stock -= item.quantity;
-                else ok = false;
+                if (p) {
+                    const idx = p.sizes.findIndex(s => s.size === item.size);
+                    if (idx !== -1 && p.sizes[idx].stock >= item.quantity) {
+                        p.sizes[idx].stock -= item.quantity;
+                    } else ok = false;
+                } else ok = false;
             });
             if (!ok) return Swal.fire('Error', 'Stok tidak mencukupi!', 'error');
-            localStorage.setItem('products', JSON.stringify(products));
+            saveAllData();
             
             if (!orders[currentUser.username]) orders[currentUser.username] = [];
             orders[currentUser.username].push({ 
@@ -934,23 +965,22 @@
                 profile: {...profile}, 
                 username: currentUser.username 
             });
-            localStorage.setItem('orders', JSON.stringify(orders));
             carts[currentUser.username] = [];
-            localStorage.setItem('carts', JSON.stringify(carts));
+            saveAllData();
             Swal.fire('Success', 'Checkout berhasil!', 'success');
             showOrders();
         }
 
         // ========== PESANAN ==========
         function showOrders() {
-            refreshData();
+            loadAllData();
             const userOrders = orders[currentUser.username] || [];
             if (userOrders.length === 0) { 
                 document.getElementById('contentArea').innerHTML = `<div class="card"><div class="card-body text-center"><i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i><h5>Belum ada pesanan</h5></div></div>`; 
                 return; 
             }
             let html = `<div class="card"><div class="card-header"><h4><i class="fas fa-history"></i> Riwayat Pesanan Saya</h4></div><div class="card-body">`;
-            userOrders.reverse().forEach(o => {
+            userOrders.slice().reverse().forEach(o => {
                 const statusClass = o.status === 'pending' ? 'badge-pending' : o.status === 'processed' ? 'badge-processed' : 'badge-completed';
                 const statusText = o.status === 'pending' ? 'Menunggu' : o.status === 'processed' ? 'Diproses' : 'Selesai';
                 html += `<div class="card mb-2"><div class="card-header" style="background:white;border-bottom:1px solid #ff6b6b;"><strong>Order #${o.orderId}</strong><span class="badge-status ${statusClass} float-end">${statusText}</span></div><div class="card-body"><p>${new Date(o.date).toLocaleString()}</p><p>Total: ${o.total} ฿</p><button class="btn btn-primary btn-sm" onclick="detailOrder(${o.orderId})">Detail</button></div></div>`;
@@ -960,7 +990,7 @@
         }
 
         function detailOrder(id) {
-            refreshData();
+            loadAllData();
             const order = orders[currentUser.username].find(o => o.orderId === id);
             if(!order) return;
             let html = `<div class="card"><div class="card-header"><h4>Detail Pesanan #${id}</h4><button class="btn btn-secondary btn-sm mt-2" onclick="showOrders()">Kembali</button></div><div class="card-body"><h6>Produk:</h6><div class="table-responsive"><table class="table table-sm"><thead><tr><th>Produk</th><th>Ukuran</th><th>Harga</th><th>Jumlah</th><th>Subtotal</th></tr></thead><tbody>`;
@@ -971,7 +1001,7 @@
 
         // ========== KONTAK - TAMPILAN SAMA UNTUK SEMUA USER ==========
         function showContacts() {
-            refreshData();
+            loadAllData();
             let html = `<div class="card"><div class="card-header"><h4><i class="fas fa-phone-alt"></i> Kontak Toko</h4></div><div class="card-body"><div class="text-center mb-3"><h6>Media Sosial</h6></div><div class="social-container">`;
             const socials = [
                 { name: 'WhatsApp', icon: 'fab fa-whatsapp', color: 'whatsapp', key: 'whatsapp' },
@@ -1004,10 +1034,10 @@
             Swal.fire({ title: 'Berhasil!', text: 'Nomor rekening disalin', icon: 'success', timer: 1500, showConfirmButton: false }); 
         }
 
-        // ========== ADMIN PANEL - FUNGSI ADMIN YANG AKAN UPDATE DATA ==========
+        // ========== ADMIN PANEL ==========
         function showAdminPanel() {
             if (currentUser.role !== 'admin') return;
-            refreshData();
+            loadAllData();
             document.getElementById('contentArea').innerHTML = `
                 <div class="card">
                     <div class="card-header"><h4><i class="fas fa-cog"></i> Panel Admin</h4></div>
@@ -1028,7 +1058,6 @@
                 </div>
             `;
             
-            // Load semua data admin
             loadAdminProducts();
             loadAdminOrders();
             loadAdminContacts();
@@ -1047,7 +1076,7 @@
         }
 
         function loadAdminProducts() {
-            refreshData();
+            loadAllData();
             let html = `<button class="btn btn-success mb-3 w-100" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Tambah Produk Baru</button>
                 <div class="table-responsive"><table class="table table-bordered"><thead><tr><th>ID</th><th>Gambar</th><th>Nama Produk</th><th>Ukuran & Harga</th><th>Aksi</th></tr></thead><tbody>`;
             if (products.length === 0) html += `<tr><td colspan="5" class="text-center">Belum ada produk</td></tr>`;
@@ -1128,14 +1157,17 @@
                     if(sizes.length === 0) return Swal.showValidationMessage('Minimal 1 ukuran!');
                     const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
                     products.push({ id: newId, name, image: currentImageBase64, sizes });
-                    localStorage.setItem('products', JSON.stringify(products));
+                    saveAllData();
                     loadAdminProducts();
+                    // Refresh tampilan produk untuk semua user (akan terlihat saat next load)
+                    if(currentMenu === 'produk') showProducts();
                     Swal.fire('Success', 'Produk berhasil ditambahkan!', 'success');
                 }
             });
         }
 
         function openEditProductModal(id) {
+            loadAllData();
             const product = products.find(p => p.id === id);
             if(!product) return;
             let currentImageBase64 = product.image;
@@ -1194,8 +1226,9 @@
                     product.name = name; 
                     product.sizes = sizes; 
                     product.image = currentImageBase64;
-                    localStorage.setItem('products', JSON.stringify(products));
+                    saveAllData();
                     loadAdminProducts();
+                    if(currentMenu === 'produk') showProducts();
                     Swal.fire('Success', 'Produk berhasil diupdate!', 'success');
                 }
             });
@@ -1230,11 +1263,13 @@
         function deleteProductAdmin(id) { 
             Swal.fire({ title: 'Hapus Produk?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Hapus' }).then(result => { 
                 if(result.isConfirmed){ 
+                    loadAllData();
                     const index = products.findIndex(p => p.id === id); 
                     if(index !== -1){ 
                         products.splice(index, 1); 
-                        localStorage.setItem('products', JSON.stringify(products)); 
+                        saveAllData(); 
                         loadAdminProducts(); 
+                        if(currentMenu === 'produk') showProducts();
                         Swal.fire('Terhapus!', 'Produk berhasil dihapus.', 'success'); 
                     } 
                 } 
@@ -1242,12 +1277,14 @@
         }
 
         function loadAdminOrders() {
-            refreshData();
+            loadAllData();
             let allOrders = [];
             for (let username in orders) { 
-                orders[username].forEach(order => { 
-                    allOrders.push({ ...order, customerName: username }); 
-                }); 
+                if(orders[username] && Array.isArray(orders[username])) {
+                    orders[username].forEach(order => { 
+                        allOrders.push({ ...order, customerName: username }); 
+                    }); 
+                }
             }
             allOrders.sort((a,b) => b.orderId - a.orderId);
             if (allOrders.length === 0) { 
@@ -1280,7 +1317,7 @@
         }
         
         function viewOrderDetailAdmin(orderId, username) { 
-            refreshData();
+            loadAllData();
             const order = orders[username]?.find(o => o.orderId === orderId); 
             if(!order) return; 
             let html = `<div><button class="btn btn-secondary btn-sm mb-3" onclick="loadAdminOrders()">← Kembali</button>
@@ -1294,10 +1331,11 @@
         }
         
         function updateOrderStatusAdmin(orderId, username, newStatus) { 
+            loadAllData();
             const orderIndex = orders[username]?.findIndex(o => o.orderId === orderId); 
             if(orderIndex !== undefined && orderIndex !== -1){ 
                 orders[username][orderIndex].status = newStatus; 
-                localStorage.setItem('orders', JSON.stringify(orders)); 
+                saveAllData(); 
                 Swal.fire('Success', 'Status pesanan berhasil diupdate!', 'success'); 
                 loadAdminOrders(); 
             } 
@@ -1306,11 +1344,12 @@
         function deleteOrderAdmin(orderId, username) { 
             Swal.fire({ title: 'Hapus Pesanan?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Hapus' }).then(result => { 
                 if(result.isConfirmed){ 
+                    loadAllData();
                     const orderIndex = orders[username]?.findIndex(o => o.orderId === orderId); 
                     if(orderIndex !== undefined && orderIndex !== -1){ 
                         orders[username].splice(orderIndex, 1); 
                         if(orders[username].length === 0) delete orders[username]; 
-                        localStorage.setItem('orders', JSON.stringify(orders)); 
+                        saveAllData(); 
                         loadAdminOrders(); 
                         Swal.fire('Terhapus!', 'Pesanan berhasil dihapus.', 'success'); 
                     } 
@@ -1319,7 +1358,7 @@
         }
 
         function loadAdminContacts() {
-            refreshData();
+            loadAllData();
             let html = `<div class="card mb-3"><div class="card-header"><h5>Media Sosial</h5></div>
                 <div class="card-body"><form id="socialForm"><div class="row">
                     <div class="col-md-6 mb-2"><label>WhatsApp URL</label><input type="text" class="form-control" id="socialWhatsapp" value="${contacts.social.whatsapp || ''}"></div>
@@ -1335,6 +1374,7 @@
             document.getElementById('adminContactForm').innerHTML = html;
             document.getElementById('socialForm').onsubmit = (e) => { 
                 e.preventDefault(); 
+                loadAllData();
                 contacts.social = { 
                     whatsapp: document.getElementById('socialWhatsapp').value, 
                     line: document.getElementById('socialLine').value, 
@@ -1343,21 +1383,25 @@
                     facebook: document.getElementById('socialFacebook').value, 
                     tiktok: document.getElementById('socialTiktok').value 
                 }; 
-                localStorage.setItem('contacts', JSON.stringify(contacts)); 
+                saveAllData(); 
                 Swal.fire('Success', 'Media sosial berhasil disimpan!', 'success'); 
-                loadAdminContacts(); 
+                loadAdminContacts();
+                if(currentMenu === 'kontak') showContacts();
             };
             displayBankListAdmin();
         }
         
         function displayBankListAdmin() { 
-            refreshData();
-            let html = `<div class="table-responsive"><table class="table table-sm"><thead><tr><th>Nama Bank</th><th>Atas Nama</th><th>Nomor Rekening</th><th>Aksi</th></tr></thead><tbody>`; 
+            loadAllData();
+            let html = `<div class="table-responsive"><table class="table table-sm"><thead><tr><th>Nama Bank</th><th>Atas Nama</th><th>Nomor Rekening</th><th>Aksi</th> </thead><tbody>`; 
             contacts.banks.forEach((bank, idx) => { 
-                html += `<tr><td>${bank.bankName}</td><td>${bank.name}</td><td>${bank.number}</td>
+                html += `汽
+                    <td>${bank.bankName}</td>
+                    <td>${bank.name}</td>
+                    <td>${bank.number}</td>
                     <td><i class="fas fa-edit text-warning me-2" style="cursor:pointer" onclick="editBankAdmin(${idx})"></i>
                     <i class="fas fa-trash text-danger" style="cursor:pointer" onclick="deleteBankAdmin(${idx})"></i></td>
-                 </tr>`; 
+                 `; 
             }); 
             html += `</tbody>}</div>`; 
             if(contacts.banks.length === 0) html = '<div class="empty-message">Belum ada rekening bank</div>'; 
@@ -1376,15 +1420,18 @@
                     const accountName = document.getElementById('accountName').value; 
                     const accountNumber = document.getElementById('accountNumber').value; 
                     if(!bankName || !accountName || !accountNumber) return Swal.showValidationMessage('Semua field harus diisi!'); 
+                    loadAllData();
                     contacts.banks.push({ bankName, name: accountName, number: accountNumber }); 
-                    localStorage.setItem('contacts', JSON.stringify(contacts)); 
+                    saveAllData(); 
                     displayBankListAdmin(); 
+                    if(currentMenu === 'kontak') showContacts();
                     Swal.fire('Success', 'Rekening bank ditambahkan!', 'success');
                 } 
             }); 
         }
         
         function editBankAdmin(index) { 
+            loadAllData();
             const bank = contacts.banks[index]; 
             Swal.fire({ 
                 title: 'Edit Rekening Bank', 
@@ -1398,8 +1445,9 @@
                         name: document.getElementById('accountName').value, 
                         number: document.getElementById('accountNumber').value 
                     }; 
-                    localStorage.setItem('contacts', JSON.stringify(contacts)); 
+                    saveAllData(); 
                     displayBankListAdmin(); 
+                    if(currentMenu === 'kontak') showContacts();
                     Swal.fire('Success', 'Rekening bank diupdate!', 'success');
                 } 
             }); 
@@ -1408,25 +1456,27 @@
         function deleteBankAdmin(index) { 
             Swal.fire({ title: 'Hapus Rekening?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Hapus' }).then(result => { 
                 if(result.isConfirmed){ 
+                    loadAllData();
                     contacts.banks.splice(index, 1); 
-                    localStorage.setItem('contacts', JSON.stringify(contacts)); 
+                    saveAllData(); 
                     displayBankListAdmin(); 
+                    if(currentMenu === 'kontak') showContacts();
                     Swal.fire('Terhapus!', 'Rekening bank dihapus.', 'success'); 
                 } 
             }); 
         }
 
         function loadAdminUsers() {
-            refreshData();
+            loadAllData();
             let html = `<div class="table-responsive"><table class="table table-bordered"><thead> caption<th>Username</th><th>Nama Lengkap</th><th>WhatsApp</th><th>Alamat</th><th>Role</th><th>Aksi</th> </thead><tbody>`;
             users.forEach(user => {
                 const roleBadge = user.role === 'admin' ? '<span class="badge bg-danger">Admin</span>' : '<span class="badge bg-success">Pelanggan</span>';
                 html += `汽
-                    <td><strong>${user.username}</strong> </td>
-                    <td>${user.profile.name || '-'} </td>
-                    <td>${user.profile.whatsapp || '-'} </td>
-                    <td>${user.profile.address ? user.profile.address.substring(0, 30) + (user.profile.address.length > 30 ? '...' : '') : '-'} </td>
-                    <td>${roleBadge} </td>
+                    <td><strong>${user.username}</strong></td>
+                    <td>${user.profile.name || '-'}</td>
+                    <td>${user.profile.whatsapp || '-'}</td>
+                    <td>${user.profile.address ? user.profile.address.substring(0, 30) + (user.profile.address.length > 30 ? '...' : '') : '-'}</td>
+                    <td>${roleBadge}</td>
                     <td class="action-buttons">
                         <button class="btn btn-sm btn-info" onclick="editUserProfile('${user.username}')"><i class="fas fa-edit"></i> Edit</button>
                         <button class="btn btn-sm btn-warning" onclick="changeUserPassword('${user.username}')"><i class="fas fa-key"></i> Ganti Password</button>
@@ -1439,7 +1489,7 @@
         }
         
         function editUserProfile(username) {
-            refreshData();
+            loadAllData();
             const user = users.find(u => u.username === username);
             if (!user) return;
             Swal.fire({
@@ -1458,7 +1508,7 @@
                     user.profile.whatsapp = document.getElementById('editWhatsapp').value;
                     user.profile.address = document.getElementById('editAddress').value;
                     user.role = document.getElementById('editRole').value;
-                    localStorage.setItem('users', JSON.stringify(users));
+                    saveAllData();
                     if (currentUser.username === username) { 
                         currentUser = user; 
                         saveSession(currentUser); 
@@ -1472,7 +1522,7 @@
         }
         
         function changeUserPassword(username) {
-            refreshData();
+            loadAllData();
             const user = users.find(u => u.username === username);
             if (!user) return;
             Swal.fire({
@@ -1486,7 +1536,7 @@
                     if (newPass.length < 3) return Swal.showValidationMessage('Minimal 3 karakter!');
                     if (newPass !== confirmPass) return Swal.showValidationMessage('Konfirmasi password tidak cocok!');
                     user.password = newPass;
-                    localStorage.setItem('users', JSON.stringify(users));
+                    saveAllData();
                     if (currentUser.username === username) { 
                         currentUser = user; 
                         saveSession(currentUser); 
@@ -1500,14 +1550,13 @@
             if(username === 'admin') return Swal.fire('Error', 'Tidak dapat menghapus akun admin!', 'error');
             Swal.fire({ title: 'Hapus Pengguna?', text: `Pengguna "${username}" akan dihapus permanen!`, icon: 'warning', showCancelButton: true, confirmButtonText: 'Hapus' }).then(result => {
                 if(result.isConfirmed){
+                    loadAllData();
                     const index = users.findIndex(u => u.username === username);
                     if(index !== -1){
                         users.splice(index, 1);
-                        localStorage.setItem('users', JSON.stringify(users));
                         delete carts[username];
                         delete orders[username];
-                        localStorage.setItem('carts', JSON.stringify(carts));
-                        localStorage.setItem('orders', JSON.stringify(orders));
+                        saveAllData();
                         loadAdminUsers();
                         Swal.fire('Terhapus!', 'Pengguna berhasil dihapus.', 'success');
                     }
@@ -1542,8 +1591,11 @@
         window.editUserProfile = editUserProfile;
         window.changeUserPassword = changeUserPassword;
         window.deleteUser = deleteUser;
+        window.loadAdminOrders = loadAdminOrders;
+        window.loadAdminProducts = loadAdminProducts;
 
         // Memulai aplikasi
+        initDefaultData();
         const savedSession = loadSession();
         if (savedSession) {
             currentUser = savedSession;
@@ -1551,24 +1603,28 @@
             updateNavVisibility();
             showProducts();
             document.querySelectorAll('.nav-item-bottom').forEach(item => item.classList.remove('active'));
-            document.querySelector('.nav-item-bottom[onclick*="produk"]')?.classList.add('active');
+            const produkNav = document.querySelector('.nav-item-bottom[onclick*="produk"]');
+            if(produkNav) produkNav.classList.add('active');
         } else showLogin();
 
-        // Sinkronisasi real-time (setiap 3 detik refresh jika di menu yang membutuhkan data terbaru)
+        // Sinkronisasi real-time (setiap 2 detik refresh jika di menu yang membutuhkan data terbaru)
         setInterval(() => {
             if (currentUser) {
-                const newProducts = JSON.parse(localStorage.getItem('products')) || [];
-                const newContacts = JSON.parse(localStorage.getItem('contacts')) || { social: {}, banks: [] };
-                if (currentMenu === 'produk' && JSON.stringify(newProducts) !== JSON.stringify(products)) {
-                    products = newProducts;
+                const oldProducts = JSON.stringify(products);
+                const oldContacts = JSON.stringify(contacts);
+                loadAllData();
+                if (currentMenu === 'produk' && JSON.stringify(products) !== oldProducts) {
                     showProducts();
                 }
-                if (currentMenu === 'kontak' && JSON.stringify(newContacts) !== JSON.stringify(contacts)) {
-                    contacts = newContacts;
+                if (currentMenu === 'kontak' && JSON.stringify(contacts) !== oldContacts) {
                     showContacts();
                 }
+                if (currentMenu === 'pesanan' && JSON.stringify(orders) !== oldOrders) {
+                    showOrders();
+                }
             }
-        }, 3000);
+            let oldOrders = '';
+        }, 2000);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
